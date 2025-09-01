@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="styles/portfolio.css" />
   <link rel="stylesheet" href="styles/research.css" />
   <link rel="stylesheet" href="styles/totalistic-reactive.css" />
+  <link rel="stylesheet" href="styles/neoskeuomorphic-cards.css" />
   
   <!-- Performance and Analytics -->
   <script>
@@ -49,6 +50,8 @@
   <!-- Core System Scripts -->
   <script src="scripts/core-engine.js" defer></script>
   <script src="scripts/choreographed-visualizer.js" defer></script>
+  <script src="scripts/card-specific-vib34d-visualizer.js" defer></script>
+  <script src="scripts/card-system-initializer.js" defer></script>
   <script src="scripts/portfolio-system.js" defer></script>
   <script src="scripts/research-system.js" defer></script>
   <script src="scripts/main.js" defer></script>
@@ -130,11 +133,8 @@
   <!-- Hero Section with Integrated VIB34D Engine -->
   <section id="hero" class="hero-section reactive-border" data-theme="polychora" data-scene="hero" data-scene-active="true" data-visualizer-system="polychora">
     <div class="hero-background">
-      <!-- VIB34D Polychora Visualization Background -->
-      <iframe class="hero-visualizer" 
-              src="https://domusgpt.github.io/vib34d-ultimate-viewer/viewer.html?system=polychora" 
-              loading="lazy" 
-              title="Polychora Visualizer"></iframe>
+      <!-- VIB34D Canvas Visualizer Background -->
+      <canvas id="hero-visualizer-canvas" class="hero-visualizer"></canvas>
       <div class="hero-overlay"></div>
     </div>
     
@@ -211,13 +211,9 @@
       
       <div class="tech-grid">
         <!-- Polytopal Projection Engine -->
-        <div class="tech-card reactive-element" data-system="polychora" data-interaction-type="cosmic">
-          <div class="card-visualizer">
-            <iframe class="tech-canvas" 
-                    src="https://domusgpt.github.io/vib34d-ultimate-viewer/viewer.html?system=polychora&quality=medium" 
-                    loading="lazy" 
-                    title="Polychora Technology Visualizer"></iframe>
-          </div>
+        <div id="tech-card-polychora" class="tech-card reactive-element" data-system="polychora" data-interaction-type="cosmic">
+          <div class="card-depth-background"></div>
+          <div class="card-depth-shadow"></div>
           <div class="card-content">
             <div class="card-icon">
               <svg class="icon-polytopal" viewBox="0 0 64 64">
@@ -233,16 +229,14 @@
               <span class="spec">Structure Preservation</span>
             </div>
           </div>
+          <div class="card-depth-highlight"></div>
+          <div class="card-depth-accent"></div>
         </div>
         
         <!-- GPU Shader Systems -->
-        <div class="tech-card reactive-element" data-system="quantum" data-interaction-type="precision">
-          <div class="card-visualizer">
-            <iframe class="tech-canvas" 
-                    src="https://domusgpt.github.io/vib34d-ultimate-viewer/viewer.html?system=quantum&quality=medium" 
-                    loading="lazy" 
-                    title="Quantum GPU Visualizer"></iframe>
-          </div>
+        <div id="tech-card-quantum" class="tech-card reactive-element" data-system="quantum" data-interaction-type="precision">
+          <div class="card-depth-background"></div>
+          <div class="card-depth-shadow"></div>
           <div class="card-content">
             <div class="card-icon">
               <svg class="icon-gpu" viewBox="0 0 64 64">
@@ -261,16 +255,14 @@
               <span class="spec">Parallel Processing</span>
             </div>
           </div>
+          <div class="card-depth-highlight"></div>
+          <div class="card-depth-accent"></div>
         </div>
         
         <!-- Agentic Integration -->
-        <div class="tech-card reactive-element" data-system="holographic" data-interaction-type="creative">
-          <div class="card-visualizer">
-            <iframe class="tech-canvas" 
-                    src="https://domusgpt.github.io/vib34d-ultimate-viewer/viewer.html?system=holographic&quality=medium" 
-                    loading="lazy" 
-                    title="Holographic Intelligence Visualizer"></iframe>
-          </div>
+        <div id="tech-card-holographic" class="tech-card reactive-element" data-system="holographic" data-interaction-type="creative">
+          <div class="card-depth-background"></div>
+          <div class="card-depth-shadow"></div>
           <div class="card-content">
             <div class="card-icon">
               <svg class="icon-agent" viewBox="0 0 64 64">
@@ -288,6 +280,8 @@
               <span class="spec">Autonomous Systems</span>
             </div>
           </div>
+          <div class="card-depth-highlight"></div>
+          <div class="card-depth-accent"></div>
         </div>
       </div>
       
@@ -341,9 +335,10 @@
       
       <div class="portfolio-grid">
         <!-- VIB34D Holographic Engine -->
-        <article class="portfolio-item reactive-element" data-category="interactive research" data-interaction-type="creative">
+        <article id="portfolio-vib34d" class="portfolio-item reactive-element" data-category="interactive research" data-interaction-type="creative">
+          <div class="card-depth-background"></div>
+          <div class="card-depth-shadow"></div>
           <div class="item-visual">
-            <canvas class="portfolio-canvas" data-project="vib34d"></canvas>
             <div class="item-overlay">
               <div class="overlay-content">
                 <h3>VIB34D Holographic Engine</h3>
@@ -374,6 +369,8 @@
               <span class="tech-tag">Interactive Controls</span>
             </div>
           </div>
+          <div class="card-depth-highlight"></div>
+          <div class="card-depth-accent"></div>
         </article>
         
         <!-- Parserator -->
