@@ -453,6 +453,21 @@
   --fluid-viscosity: 0.8;
 }
 
+/* Prevent page-level transforms that cause tilting */
+body, html {
+  transform: none !important;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Ensure scroll container is stable */
+.scroll-container {
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+  position: relative;
+  overflow-x: hidden;
+}
+
 .fluid-background {
   position: fixed;
   top: 0;

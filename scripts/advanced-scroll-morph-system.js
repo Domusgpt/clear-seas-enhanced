@@ -158,6 +158,32 @@ class AdvancedScrollMorphSystem {
     });
   }
   
+  setupScrollListeners() {
+    // Master scroll listener for coordinated morphing
+    let scrollRAF = null;
+    
+    window.addEventListener('scroll', () => {
+      if (scrollRAF) return;
+      
+      scrollRAF = requestAnimationFrame(() => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const normalizedScroll = Math.max(0, Math.min(1, scrollTop / scrollHeight));
+        
+        // Update all visible cards
+        this.cards.forEach((cardData, cardId) => {
+          if (cardData.isVisible) {
+            this.updateCardMorphing(cardData, normalizedScroll);
+          }
+        });
+        
+        scrollRAF = null;
+      });
+    });
+    
+    console.log('📜 Scroll listeners established');
+  }
+  
   initializeCards() {
     // Find all cards
     const techCards = document.querySelectorAll('.tech-card');

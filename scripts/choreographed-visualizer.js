@@ -318,6 +318,35 @@ class ChoreographedVisualizerSystem {
     }
   }
 
+  updateSceneTransition(sceneId, visibility) {
+    // Smooth transition effects based on intersection ratio
+    const scene = this.scenes[sceneId];
+    if (!scene) return;
+
+    // Update scene intensity based on visibility
+    if (this.activeScenes.has(sceneId)) {
+      const sceneData = this.activeScenes.get(sceneId);
+      sceneData.intensity = visibility;
+      this.activeScenes.set(sceneId, sceneData);
+    }
+
+    // Update related visualizers with transition intensity
+    this.visualizers.forEach((visualizer, id) => {
+      if (visualizer.sceneId === sceneId && visualizer.isActive) {
+        const transitionParams = this.calculateReactiveParams(scene, visibility);
+        
+        // Smooth interpolation for transition parameters
+        Object.entries(transitionParams).forEach(([key, targetValue]) => {
+          if (visualizer.currentParams[key] !== undefined) {
+            const currentValue = visualizer.currentParams[key];
+            const lerpFactor = 0.1; // Smooth interpolation
+            visualizer.currentParams[key] = currentValue + (targetValue - currentValue) * lerpFactor;
+          }
+        });
+      }
+    });
+  }
+
   activateVisualizer(visualizer, intensity = 1.0) {
     visualizer.isActive = true;
     

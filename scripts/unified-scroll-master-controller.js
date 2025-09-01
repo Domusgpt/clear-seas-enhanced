@@ -166,6 +166,27 @@ class UnifiedScrollMasterController {
     console.log(`🎭 Discovered ${this.elements.cards.size} cards and ${this.elements.backgrounds.size} sections`);
   }
   
+  createFluidBackgrounds() {
+    // Create fluid background elements if they don't exist
+    const existingFluidBg = document.getElementById('fluid-background');
+    if (!existingFluidBg) {
+      const fluidBg = document.createElement('div');
+      fluidBg.id = 'fluid-background';
+      fluidBg.className = 'fluid-background';
+      document.body.appendChild(fluidBg);
+    }
+    
+    const existingParticleSystem = document.getElementById('particle-system');
+    if (!existingParticleSystem) {
+      const particleSystem = document.createElement('div');
+      particleSystem.id = 'particle-system';
+      particleSystem.className = 'particle-system';
+      document.body.appendChild(particleSystem);
+    }
+    
+    console.log('🌊 Fluid background elements created');
+  }
+  
   updateFluidDynamics() {
     const scroll = this.masterScrollState;
     

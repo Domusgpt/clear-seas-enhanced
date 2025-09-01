@@ -61,14 +61,29 @@ class UnifiedSystemIntegration {
   }
 
   connectScrollEvents() {
-    // Listen for scroll controller updates
+    let lastUpdateTime = 0;
+    let updateRAF = null;
+    
+    // Listen for scroll controller updates with throttling
     document.addEventListener('unifiedScrollUpdate', (event) => {
-      const { scrollState, fluidDynamics, sceneData } = event.detail;
+      const now = performance.now();
       
-      this.updateCardTransformations(scrollState);
-      this.updateVisualizerGeometries(scrollState);
-      this.updateFluidBackground(fluidDynamics);
-      this.handleSceneTransitions(sceneData);
+      // Throttle updates to max 30fps to prevent excessive recalculation
+      if (now - lastUpdateTime < 33) return;
+      
+      if (updateRAF) return;
+      
+      updateRAF = requestAnimationFrame(() => {
+        const { scrollState, fluidDynamics, sceneData } = event.detail;
+        
+        this.updateCardTransformations(scrollState);
+        this.updateVisualizerGeometries(scrollState);
+        this.updateFluidBackground(fluidDynamics);
+        this.handleSceneTransitions(sceneData);
+        
+        lastUpdateTime = now;
+        updateRAF = null;
+      });
     });
   }
 
@@ -89,18 +104,18 @@ class UnifiedSystemIntegration {
       const normalizedDistance = Math.min(distanceFromCenter / maxDistance, 1);
       const focusIntensity = 1 - normalizedDistance;
       
-      // Apply massive scale transformations based on scroll
-      const baseScale = 0.6 + (focusIntensity * 0.8);
-      const scrollScale = 1 + (Math.abs(scrollState.velocity) * 0.001);
+      // Apply more subtle transformations to prevent page tilting
+      const baseScale = 0.85 + (focusIntensity * 0.3);
+      const scrollScale = 1 + (Math.abs(scrollState.velocity) * 0.0002);
       const finalScale = baseScale * scrollScale;
       
-      // Cinematic rotation based on scroll velocity and position
-      const rotationX = (scrollState.velocity * 0.02) + (normalizedDistance * 15);
-      const rotationY = (scrollState.direction * 10) + (index * 3);
-      const rotationZ = scrollState.acceleration * 0.1;
+      // Reduced rotation to prevent excessive tilting
+      const rotationX = (scrollState.velocity * 0.005) + (normalizedDistance * 3);
+      const rotationY = (scrollState.direction * 2) + (index * 1);
+      const rotationZ = scrollState.acceleration * 0.02;
       
-      // Depth transformation for 3D layering
-      const zTranslation = (focusIntensity * 200) - 100;
+      // More subtle depth transformation
+      const zTranslation = (focusIntensity * 50) - 25;
       
       // Apply transformations
       card.style.transform = `
@@ -230,27 +245,39 @@ class UnifiedSystemIntegration {
   }
 
   setupEventListeners() {
-    // Performance monitoring
+    // Simplified performance monitoring - less aggressive
     let frameCount = 0;
     let lastTime = performance.now();
+    let performanceCheckInterval = null;
     
     const updatePerformance = () => {
       frameCount++;
       const now = performance.now();
       
-      if (now - lastTime >= 1000) {
+      if (now - lastTime >= 2000) { // Check every 2 seconds instead of 1
         const fps = Math.round((frameCount * 1000) / (now - lastTime));
-        document.getElementById('fps-counter')?.textContent = `${fps}`;
-        document.getElementById('monitor-fps')?.textContent = `${fps}`;
+        const fpsDisplay = `${fps} FPS`;
+        
+        // Update FPS displays
+        const fpsCounter = document.getElementById('fps-counter');
+        const monitorFps = document.getElementById('monitor-fps');
+        if (fpsCounter) fpsCounter.textContent = fpsDisplay;
+        if (monitorFps) monitorFps.textContent = fpsDisplay;
         
         frameCount = 0;
         lastTime = now;
       }
-      
-      requestAnimationFrame(updatePerformance);
     };
     
-    updatePerformance();
+    // Use interval instead of requestAnimationFrame to reduce load
+    performanceCheckInterval = setInterval(updatePerformance, 100);
+    
+    // Cleanup on unload
+    window.addEventListener('beforeunload', () => {
+      if (performanceCheckInterval) {
+        clearInterval(performanceCheckInterval);
+      }
+    });
   }
 
   startIntegration() {

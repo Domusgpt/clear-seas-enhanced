@@ -232,16 +232,42 @@ class CardSystemController {
   }
   
   setupPerformanceMonitoring() {
+    let performanceCheckCount = 0;
+    let badFrameCount = 0;
+    let goodFrameCount = 0;
+    
     const monitor = () => {
+      performanceCheckCount++;
+      
+      // Only check performance every 60 frames (about once per second at 60fps)
+      if (performanceCheckCount % 60 !== 0) {
+        requestAnimationFrame(monitor);
+        return;
+      }
+      
       // Check performance and adjust quality if needed
       const now = performance.now();
       const frameTime = now - this.lastFrameTime || 16;
       this.lastFrameTime = now;
       
-      if (frameTime > 20) { // >50ms = dropping below 50fps
-        this.reduceQuality();
-      } else if (frameTime < 12) { // <12ms = above 80fps
-        this.increaseQuality();
+      if (frameTime > 35) { // >35ms = dropping below 28fps (more lenient)
+        badFrameCount++;
+        goodFrameCount = 0;
+        
+        // Need multiple bad frames before reducing quality
+        if (badFrameCount >= 3) {
+          this.reduceQuality();
+          badFrameCount = 0;
+        }
+      } else if (frameTime < 18) { // <18ms = above 55fps (more conservative)
+        goodFrameCount++;
+        badFrameCount = 0;
+        
+        // Need multiple good frames before increasing quality
+        if (goodFrameCount >= 5) {
+          this.increaseQuality();
+          goodFrameCount = 0;
+        }
       }
       
       requestAnimationFrame(monitor);
