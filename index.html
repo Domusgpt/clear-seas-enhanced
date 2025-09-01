@@ -143,8 +143,11 @@
   <!-- Hero Section with Integrated VIB34D Engine -->
   <section id="hero" class="hero-section reactive-border scroll-section parallax-container" data-theme="polychora" data-scene="hero" data-scene-active="true" data-visualizer-system="polychora">
     <div class="hero-background">
-      <!-- VIB34D Canvas Visualizer Background -->
-      <canvas id="hero-visualizer-canvas" class="hero-visualizer"></canvas>
+      <!-- VIB34D Polychora Visualization Background -->
+      <iframe class="hero-visualizer" 
+              src="https://domusgpt.github.io/vib34d-ultimate-viewer/viewer.html?system=polychora" 
+              loading="lazy" 
+              title="Polychora Visualizer"></iframe>
       <div class="hero-overlay"></div>
     </div>
     
@@ -349,6 +352,11 @@
           <div class="card-depth-background"></div>
           <div class="card-depth-shadow"></div>
           <div class="item-visual">
+            <!-- VIB34D Live Visualization -->
+            <iframe class="portfolio-canvas" 
+                    src="https://domusgpt.github.io/vib34d-holographic-engine/"
+                    loading="lazy" 
+                    title="VIB34D Holographic Engine Live Demo"></iframe>
             <div class="item-overlay">
               <div class="overlay-content">
                 <h3>VIB34D Holographic Engine</h3>
@@ -386,7 +394,7 @@
         <!-- Parserator -->
         <article class="portfolio-item" data-category="ai-systems">
           <div class="item-visual">
-            <canvas class="portfolio-canvas" data-project="parserator"></canvas>
+            <div class="portfolio-canvas parserator-bg"></div>
             <div class="item-overlay">
               <div class="overlay-content">
                 <h3>Parserator</h3>
@@ -418,7 +426,7 @@
         <!-- FLOWT Maritime Platform -->
         <article class="portfolio-item" data-category="ai-systems robotics">
           <div class="item-visual">
-            <canvas class="portfolio-canvas" data-project="flowt"></canvas>
+            <div class="portfolio-canvas flowt-bg"></div>
             <div class="item-overlay">
               <div class="overlay-content">
                 <h3>FLOWT Maritime Platform</h3>
@@ -451,7 +459,7 @@
         <!-- Robotics Perception System -->
         <article class="portfolio-item" data-category="robotics research">
           <div class="item-visual">
-            <canvas class="portfolio-canvas" data-project="robotics-perception"></canvas>
+            <div class="portfolio-canvas robotics-bg"></div>
             <div class="item-overlay">
               <div class="overlay-content">
                 <h3>Robotics Perception System</h3>

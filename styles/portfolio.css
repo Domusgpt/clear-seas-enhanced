@@ -600,3 +600,78 @@
     border-color: var(--theme-primary);
   }
 }
+
+/* ===== PORTFOLIO CANVAS BACKGROUNDS ===== */
+
+.portfolio-canvas {
+  width: 100%;
+  height: 200px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-medium);
+  transition: all var(--duration-fast) var(--ease-in-out);
+}
+
+/* Project-specific backgrounds */
+.parserator-bg {
+  background: linear-gradient(135deg, 
+    #1a1a2e 0%, 
+    #16213e 25%, 
+    #0f3460 50%, 
+    #533483 75%, 
+    #7209b7 100%);
+  position: relative;
+}
+
+.parserator-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  border-radius: inherit;
+}
+
+.flowt-bg {
+  background: linear-gradient(135deg, 
+    #0c4a6e 0%, 
+    #0369a1 25%, 
+    #0284c7 50%, 
+    #0ea5e9 75%, 
+    #38bdf8 100%);
+  position: relative;
+}
+
+.flowt-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 255, 0.05) 10px,
+    rgba(255, 255, 255, 0.05) 20px
+  );
+  border-radius: inherit;
+}
+
+.robotics-bg {
+  background: linear-gradient(135deg, 
+    #166534 0%, 
+    #15803d 25%, 
+    #16a34a 50%, 
+    #22c55e 75%, 
+    #4ade80 100%);
+  position: relative;
+}
+
+.robotics-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(from 0deg at 50% 50%, 
+    rgba(255, 255, 255, 0.1) 0deg, 
+    transparent 90deg, 
+    rgba(255, 255, 255, 0.05) 180deg, 
+    transparent 270deg);
+  border-radius: inherit;
+}

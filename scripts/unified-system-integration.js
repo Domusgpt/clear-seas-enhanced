@@ -117,24 +117,13 @@ class UnifiedSystemIntegration {
       // More subtle depth transformation
       const zTranslation = (focusIntensity * 50) - 25;
       
-      // Apply transformations
-      card.style.transform = `
-        perspective(1200px)
-        translateZ(${zTranslation}px)
-        translateY(${(1 - focusIntensity) * 50}px)
-        rotateX(${rotationX}deg)
-        rotateY(${rotationY}deg)
-        rotateZ(${rotationZ}deg)
-        scale(${finalScale})
-      `;
+      // DISABLED: Problematic transforms causing page bending/swinging
+      // Only apply minimal, safe transforms
+      card.style.transform = `scale(${Math.min(finalScale, 1.05)})`;
       
-      // Opacity and filter effects
-      card.style.opacity = 0.3 + (focusIntensity * 0.7);
-      card.style.filter = `
-        blur(${(1 - focusIntensity) * 3}px)
-        brightness(${0.7 + (focusIntensity * 0.5)})
-        saturate(${0.5 + (focusIntensity * 1)})
-      `;
+      // Keep opacity and filter effects subtle
+      card.style.opacity = 0.8 + (focusIntensity * 0.2);
+      card.style.filter = `brightness(${0.9 + (focusIntensity * 0.1)})`;
       
       // Update CSS custom properties for visualizers
       card.style.setProperty('--scroll-progress', scrollState.normalized);

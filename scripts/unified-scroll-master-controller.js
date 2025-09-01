@@ -667,11 +667,12 @@ const cinematicCSS = `
 
 document.head.insertAdjacentHTML('beforeend', cinematicCSS);
 
+// DISABLED: Causing page bending and swinging issues
 // Initialize the MASTER system
-window.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => {
-    window.scrollMaster = new UnifiedScrollMasterController();
-  }, 2000);
-});
+// window.addEventListener('DOMContentLoaded', () => {
+//   setTimeout(() => {
+//     window.scrollMaster = new UnifiedScrollMasterController();
+//   }, 2000);
+// });
 
-console.log('🎬 UNIFIED SCROLL MASTER CONTROLLER - Ready for Cinematic Control');
+console.log('🚫 UNIFIED SCROLL MASTER CONTROLLER - DISABLED to prevent page bending');
