@@ -180,13 +180,13 @@ class ClearSeasMainController {
   }
 
   async initializeVisualizers() {
-    console.log('🌟 Initializing VIB34D visualizer integration...');
+    console.log('🌟 Initializing Smart VIB34D visualizer integration...');
     
-    // Wait for VIB34D integration manager to be ready
-    if (!window.vib34dManager) {
+    // Wait for Smart Visualizer Manager to be ready
+    if (!window.smartVisualizerManager) {
       await new Promise(resolve => {
         const checkManager = setInterval(() => {
-          if (window.vib34dManager && window.vib34dManager.isInitialized) {
+          if (window.smartVisualizerManager) {
             clearInterval(checkManager);
             resolve();
           }
@@ -195,7 +195,7 @@ class ClearSeasMainController {
     }
 
     const visualizerSystem = {
-      manager: window.vib34dManager,
+      manager: window.smartVisualizerManager,
       activeInstances: new Set(),
       performanceMode: 'auto', // auto, high, medium, low
       adaptiveQuality: true
@@ -607,8 +607,10 @@ class ClearSeasMainController {
   setupVisualizerThemeSync(visualizerSystem) {
     // Sync visualizer themes with main theme changes
     this.theme.observers.add((newTheme, oldTheme) => {
-      if (visualizerSystem.manager && visualizerSystem.manager.forceThemeUpdate) {
-        visualizerSystem.manager.forceThemeUpdate(newTheme);
+      if (visualizerSystem.manager && visualizerSystem.manager.forceRefresh) {
+        // Smart visualizer will automatically adapt to new theme
+        console.log(`🎨 Theme sync: ${oldTheme} → ${newTheme}`);
+        visualizerSystem.manager.forceRefresh();
       }
     });
   }
@@ -744,6 +746,18 @@ class ClearSeasMainController {
       }
     });
 
+    // Update smart visualizer metrics if available
+    const visualizerSystem = this.systems.get('visualizers');
+    if (visualizerSystem && visualizerSystem.manager) {
+      const smartMetrics = visualizerSystem.manager.getMetrics();
+      
+      // Update visualizer-specific displays
+      const activeVisualizersDisplay = document.querySelector('#monitor-gpu');
+      if (activeVisualizersDisplay) {
+        activeVisualizersDisplay.textContent = `${smartMetrics.activeCount}/${smartMetrics.loadedCount}`;
+      }
+    }
+
     // Update performance color indicators
     const fpsIndicator = document.querySelector('.fps-indicator');
     if (fpsIndicator) {
@@ -856,5 +870,5 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Export for module use
-export { ClearSeasMainController };
+// Global class access for other scripts
+window.ClearSeasMainController = ClearSeasMainController;

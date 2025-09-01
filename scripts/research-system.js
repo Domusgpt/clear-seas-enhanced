@@ -549,5 +549,5 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Export for module use
-export { ResearchSystem };
+// Global class access for other scripts
+window.ResearchSystem = ResearchSystem;

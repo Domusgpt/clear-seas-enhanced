@@ -436,9 +436,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Expose manager creation for manual initialization
-export { VIB34DIntegrationManager };
-
 // Legacy global access
 window.initVIB34DIntegration = () => {
   if (!vib34dManager) {
@@ -446,3 +443,6 @@ window.initVIB34DIntegration = () => {
   }
   return vib34dManager;
 };
+
+// Global class access for other scripts
+window.VIB34DIntegrationManager = VIB34DIntegrationManager;

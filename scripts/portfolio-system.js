@@ -547,5 +547,5 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Export for module use
-export { PortfolioSystem };
+// Global class access for other scripts
+window.PortfolioSystem = PortfolioSystem;
