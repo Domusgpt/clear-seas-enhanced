@@ -444,12 +444,53 @@
   overscroll-behavior-y: contain;
 }
 
+/* ===== UNIFIED SCROLL SYSTEM INTEGRATION ===== */
+
+.fluid-dynamics-container {
+  --fluid-wave-amplitude: 0;
+  --fluid-wave-frequency: 1;
+  --fluid-turbulence: 0;
+  --fluid-viscosity: 0.8;
+}
+
+.fluid-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -10;
+  background: 
+    radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+      rgba(0, 255, 255, calc(var(--fluid-wave-amplitude) * 0.1)) 0%, 
+      transparent 50%);
+  opacity: var(--scroll-progress, 0);
+  transform: 
+    scale(calc(1 + var(--fluid-wave-amplitude) * 0.1))
+    rotate(calc(var(--scroll-velocity) * 0.1deg));
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.particle-system {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -5;
+  opacity: calc(abs(var(--scroll-velocity)) * 0.001);
+}
+
 /* ===== PERFORMANCE OPTIMIZATIONS ===== */
 
 .morph-card,
 .parallax-layer-deep,
 .parallax-layer-mid,
-.parallax-layer-near {
+.parallax-layer-near,
+.fluid-background,
+.particle-system {
   will-change: transform, opacity, filter;
   transform: translateZ(0); /* Force GPU layer */
   backface-visibility: hidden;

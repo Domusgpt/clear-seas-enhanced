@@ -54,6 +54,8 @@
   <script src="scripts/card-specific-vib34d-visualizer.js" defer></script>
   <script src="scripts/advanced-scroll-morph-system.js" defer></script>
   <script src="scripts/ufo-navigation-system.js" defer></script>
+  <script src="scripts/unified-scroll-master-controller.js" defer></script>
+  <script src="scripts/unified-system-integration.js" defer></script>
   <script src="scripts/card-system-initializer.js" defer></script>
   <script src="scripts/portfolio-system.js" defer></script>
   <script src="scripts/research-system.js" defer></script>
@@ -80,7 +82,7 @@
     });
   </script>
 </head>
-<body class="loading reactive-element scroll-container" data-mood="exploration" data-choreographed="true">
+<body class="loading reactive-element scroll-container fluid-dynamics-container" data-mood="exploration" data-choreographed="true" data-scroll-system="unified" data-fluid-dynamics="active">
   
   <!-- Loading Screen with VIB34D Preloader -->
   <div id="loading-screen" class="loading-screen">
@@ -97,6 +99,11 @@
       </div>
     </div>
   </div>
+
+  <!-- Unified Scroll System Elements -->
+  <div id="scroll-indicator" class="scroll-indicator"></div>
+  <div id="fluid-background" class="fluid-background"></div>
+  <div id="particle-system" class="particle-system"></div>
 
   <!-- Enhanced Navigation with Dynamic Themes -->
   <nav id="main-nav" class="nav-container">
