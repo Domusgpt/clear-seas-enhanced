@@ -615,13 +615,13 @@ class AdvancedScrollMorphSystem {
   }
 }
 
-// DISABLED: Contributing to page instability and transforms
-// Initialize when ready
-// document.addEventListener('DOMContentLoaded', () => {
-//   // Wait for visualizer system to load
-//   setTimeout(() => {
-//     window.advancedScrollMorph = new AdvancedScrollMorphSystem();
-//   }, 1000);
-// });
+// RE-ENABLED: Now coordinated with Ultimate Scroll Orchestrator
+// Initialize when ready - AFTER the orchestrator
+document.addEventListener('DOMContentLoaded', () => {
+  // Wait for Ultimate Scroll Orchestrator to load first
+  setTimeout(() => {
+    window.advancedScrollMorph = new AdvancedScrollMorphSystem();
+  }, 1500); // Slightly delayed to load after orchestrator
+});
 
-console.log('🚫 Advanced Scroll Morph System DISABLED to prevent page movement');
+console.log('🎯 Advanced Scroll Morph System RE-ENABLED with coordination');

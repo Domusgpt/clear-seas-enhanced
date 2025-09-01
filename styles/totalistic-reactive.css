@@ -55,9 +55,8 @@ body::before {
 section {
   --section-energy: 0;
   position: relative;
-  /* DISABLED: Causing entire page to swing/move */
-  /* transform: translateY(calc(var(--section-energy) * -5px)); */
-  /* transition: transform var(--reactive-duration-normal) ease; */
+  /* CONTROLLED: Smooth movement with proper bounds via Ultimate Scroll Orchestrator */
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 section::before {
@@ -190,9 +189,8 @@ h1:hover, h2:hover, h3:hover {
     calc(0.8 + var(--nav-energy) * 0.2)
   );
   
-  /* DISABLED: Causing navigation to move and page to feel unstable */
-  /* transform: translateY(calc(var(--scroll-progress) * -5px)); */
-  /* transition: all var(--reactive-duration-normal) ease; */
+  /* CONTROLLED: Smooth navigation movement via Ultimate Scroll Orchestrator */
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .nav-link {
