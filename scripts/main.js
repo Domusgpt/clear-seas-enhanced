@@ -180,31 +180,17 @@ class ClearSeasMainController {
   }
 
   async initializeVisualizers() {
-    console.log('🌟 Initializing Smart VIB34D visualizer integration...');
+    console.log('🌟 Initializing VIB34D iframe visualizers...');
     
-    // Wait for Smart Visualizer Manager to be ready
-    if (!window.smartVisualizerManager) {
-      await new Promise(resolve => {
-        const checkManager = setInterval(() => {
-          if (window.smartVisualizerManager) {
-            clearInterval(checkManager);
-            resolve();
-          }
-        }, 100);
-      });
-    }
-
     const visualizerSystem = {
-      manager: window.smartVisualizerManager,
-      activeInstances: new Set(),
-      performanceMode: 'auto', // auto, high, medium, low
+      iframes: document.querySelectorAll('iframe[src*="vib34d-ultimate-viewer"]'),
+      performanceMode: 'auto',
       adaptiveQuality: true
     };
 
-    // Setup adaptive quality based on performance
-    this.setupAdaptiveQuality(visualizerSystem);
-    
-    // Setup visualizer theme synchronization
+    console.log(`📊 Found ${visualizerSystem.iframes.length} VIB34D visualizer iframes`);
+
+    // Setup theme synchronization for iframes
     this.setupVisualizerThemeSync(visualizerSystem);
 
     this.systems.set('visualizers', visualizerSystem);
@@ -607,11 +593,17 @@ class ClearSeasMainController {
   setupVisualizerThemeSync(visualizerSystem) {
     // Sync visualizer themes with main theme changes
     this.theme.observers.add((newTheme, oldTheme) => {
-      if (visualizerSystem.manager && visualizerSystem.manager.forceRefresh) {
-        // Smart visualizer will automatically adapt to new theme
-        console.log(`🎨 Theme sync: ${oldTheme} → ${newTheme}`);
-        visualizerSystem.manager.forceRefresh();
-      }
+      console.log(`🎨 Theme sync: ${oldTheme} → ${newTheme}`);
+      
+      // Update iframe src with new theme (optional - VIB34D handles themes internally)
+      visualizerSystem.iframes.forEach(iframe => {
+        const currentSrc = iframe.src;
+        if (currentSrc.includes('theme=')) {
+          iframe.src = currentSrc.replace(/theme=[^&]*/, `theme=${newTheme}`);
+        } else {
+          iframe.src = currentSrc + (currentSrc.includes('?') ? '&' : '?') + `theme=${newTheme}`;
+        }
+      });
     });
   }
 
@@ -725,14 +717,10 @@ class ClearSeasMainController {
       }
     });
 
-    // Update visualizer containers
+    // Visualizer iframes handle resize automatically
     const visualizerSystem = this.systems.get('visualizers');
-    if (visualizerSystem && visualizerSystem.manager) {
-      // Trigger resize on all active visualizers
-      visualizerSystem.manager.getActiveVisualizers().forEach(id => {
-        // This would be implemented in the manager
-        // visualizerSystem.manager.resizeVisualizer(id);
-      });
+    if (visualizerSystem && visualizerSystem.iframes) {
+      console.log(`🔄 Resize detected - ${visualizerSystem.iframes.length} visualizer iframes will auto-adjust`);
     }
   }
 
@@ -746,15 +734,12 @@ class ClearSeasMainController {
       }
     });
 
-    // Update smart visualizer metrics if available
+    // Update visualizer iframe count
     const visualizerSystem = this.systems.get('visualizers');
-    if (visualizerSystem && visualizerSystem.manager) {
-      const smartMetrics = visualizerSystem.manager.getMetrics();
-      
-      // Update visualizer-specific displays
+    if (visualizerSystem && visualizerSystem.iframes) {
       const activeVisualizersDisplay = document.querySelector('#monitor-gpu');
       if (activeVisualizersDisplay) {
-        activeVisualizersDisplay.textContent = `${smartMetrics.activeCount}/${smartMetrics.loadedCount}`;
+        activeVisualizersDisplay.textContent = `${visualizerSystem.iframes.length} iframes`;
       }
     }
 

@@ -47,7 +47,6 @@
   
   <!-- Core System Scripts -->
   <script src="scripts/core-engine.js" defer></script>
-  <script src="scripts/smart-visualizer.js" defer></script>
   <script src="scripts/portfolio-system.js" defer></script>
   <script src="scripts/research-system.js" defer></script>
   <script src="scripts/main.js" defer></script>
@@ -130,9 +129,10 @@
   <section id="hero" class="hero-section" data-theme="polychora">
     <div class="hero-background">
       <!-- VIB34D Polychora Visualization Background -->
-      <div class="vib34d-container">
-        <canvas id="hero-vib34d" class="hero-visualizer"></canvas>
-      </div>
+      <iframe class="hero-visualizer" 
+              src="https://domusgpt.github.io/vib34d-ultimate-viewer/viewer.html?system=polychora" 
+              loading="lazy" 
+              title="Polychora Visualizer"></iframe>
       <div class="hero-overlay"></div>
     </div>
     
@@ -211,7 +211,10 @@
         <!-- Polytopal Projection Engine -->
         <div class="tech-card" data-system="polychora">
           <div class="card-visualizer">
-            <canvas class="tech-canvas" data-engine="polychora"></canvas>
+            <iframe class="tech-canvas" 
+                    src="https://domusgpt.github.io/vib34d-ultimate-viewer/viewer.html?system=polychora&quality=medium" 
+                    loading="lazy" 
+                    title="Polychora Technology Visualizer"></iframe>
           </div>
           <div class="card-content">
             <div class="card-icon">
@@ -233,7 +236,10 @@
         <!-- GPU Shader Systems -->
         <div class="tech-card" data-system="quantum">
           <div class="card-visualizer">
-            <canvas class="tech-canvas" data-engine="quantum"></canvas>
+            <iframe class="tech-canvas" 
+                    src="https://domusgpt.github.io/vib34d-ultimate-viewer/viewer.html?system=quantum&quality=medium" 
+                    loading="lazy" 
+                    title="Quantum GPU Visualizer"></iframe>
           </div>
           <div class="card-content">
             <div class="card-icon">
@@ -258,7 +264,10 @@
         <!-- Agentic Integration -->
         <div class="tech-card" data-system="holographic">
           <div class="card-visualizer">
-            <canvas class="tech-canvas" data-engine="holographic"></canvas>
+            <iframe class="tech-canvas" 
+                    src="https://domusgpt.github.io/vib34d-ultimate-viewer/viewer.html?system=holographic&quality=medium" 
+                    loading="lazy" 
+                    title="Holographic Intelligence Visualizer"></iframe>
           </div>
           <div class="card-content">
             <div class="card-icon">
