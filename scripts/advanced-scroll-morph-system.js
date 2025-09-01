@@ -615,12 +615,13 @@ class AdvancedScrollMorphSystem {
   }
 }
 
+// DISABLED: Contributing to page instability and transforms
 // Initialize when ready
-document.addEventListener('DOMContentLoaded', () => {
-  // Wait for visualizer system to load
-  setTimeout(() => {
-    window.advancedScrollMorph = new AdvancedScrollMorphSystem();
-  }, 1000);
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//   // Wait for visualizer system to load
+//   setTimeout(() => {
+//     window.advancedScrollMorph = new AdvancedScrollMorphSystem();
+//   }, 1000);
+// });
 
-console.log('🚀 Advanced Scroll Morph System loaded');
+console.log('🚫 Advanced Scroll Morph System DISABLED to prevent page movement');
