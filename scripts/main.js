@@ -18,7 +18,7 @@ class ClearSeasMainController {
       initialized: false,
       loadTime: 0,
       systemsReady: 0,
-      totalSystems: 5
+      totalSystems: 6
     };
     
     this.theme = {
@@ -44,6 +44,7 @@ class ClearSeasMainController {
       await this.initializeThemeSystem();
       await this.initializePerformanceMonitoring();
       await this.initializeMicroReactivity();
+      await this.initializeChoreographedSystem();
       await this.initializeVisualizers();
       await this.initializeContentSystems();
       
@@ -176,6 +177,32 @@ class ClearSeasMainController {
     this.setupIntersectionReactivity(reactivitySystem);
 
     this.systems.set('reactivity', reactivitySystem);
+    this.incrementSystemReady();
+  }
+
+  async initializeChoreographedSystem() {
+    console.log('🎭 Initializing choreographed reactive visualizer system...');
+    
+    // Check if ChoreographedVisualizerSystem is available
+    if (typeof window.ChoreographedVisualizerSystem === 'undefined') {
+      console.warn('⚠️ ChoreographedVisualizerSystem not found, using fallback');
+      this.incrementSystemReady();
+      return;
+    }
+    
+    try {
+      // Initialize the choreographed system
+      this.choreographedSystem = new window.ChoreographedVisualizerSystem();
+      
+      // Start the system
+      await this.choreographedSystem.start();
+      
+      console.log('✅ Choreographed visualizer system initialized successfully');
+      this.systems.set('choreographed', this.choreographedSystem);
+    } catch (error) {
+      console.error('❌ Failed to initialize choreographed system:', error);
+    }
+    
     this.incrementSystemReady();
   }
 
