@@ -21,6 +21,7 @@ class TactileSnapScrollSystem {
     
     this.visualEffectsActive = false;
     this.snapInProgress = false;
+    this.userHasInteracted = false;
     
     this.init();
   }
@@ -31,6 +32,7 @@ class TactileSnapScrollSystem {
     this.setupSnapBehavior();
     this.setupTactileFeedback();
     this.setupVisualIntegration();
+    this.setupUserInteractionTracking();
     
     console.log('🎯 Tactile Snap Scroll System - Activated with precision control');
   }
@@ -414,10 +416,8 @@ class TactileSnapScrollSystem {
   }
   
   triggerSnapComplete(section) {
-    // Haptic feedback (if supported)
-    if (navigator.vibrate) {
-      navigator.vibrate([50, 30, 50]);
-    }
+    // Haptic feedback (if supported and user has interacted)
+    this.tryHapticFeedback([50, 30, 50]);
     
     // Visual confirmation
     this.showSnapFeedback(section);
@@ -530,6 +530,45 @@ class TactileSnapScrollSystem {
   
   getTotalSections() {
     return this.sections.length;
+  }
+  
+  setupUserInteractionTracking() {
+    // Track user interactions to enable haptic feedback
+    const interactionEvents = ['click', 'touchstart', 'keydown', 'scroll'];
+    
+    const trackInteraction = () => {
+      if (!this.userHasInteracted) {
+        this.userHasInteracted = true;
+        console.log('🎯 User interaction detected - haptic feedback enabled');
+        
+        // Remove listeners after first interaction
+        interactionEvents.forEach(event => {
+          document.removeEventListener(event, trackInteraction);
+        });
+      }
+    };
+    
+    // Add listeners for first interaction
+    interactionEvents.forEach(event => {
+      document.addEventListener(event, trackInteraction, { once: true });
+    });
+  }
+  
+  tryHapticFeedback(pattern) {
+    // Only try haptic feedback if user has interacted and it's supported
+    if (!this.userHasInteracted) {
+      return; // User hasn't interacted yet, vibrate API will be blocked
+    }
+    
+    if (!navigator.vibrate) {
+      return; // Not supported
+    }
+    
+    try {
+      navigator.vibrate(pattern);
+    } catch (error) {
+      console.warn('⚠️ Haptic feedback failed:', error);
+    }
   }
   
   destroy() {

@@ -927,6 +927,70 @@ class CinematicScrollDirector {
       }, 3000);
     }
   }
+  
+  processScrollEvent() {
+    // Process current scroll state and update visual systems
+    const currentScrollY = window.pageYOffset;
+    const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollProgress = Math.min(currentScrollY / documentHeight, 1);
+    
+    this.scrollProgress = scrollProgress;
+    
+    // Find current scene based on scroll progress
+    let currentScene = this.scenes[0];
+    for (const scene of this.scenes) {
+      if (scrollProgress >= scene.scrollRange[0] && scrollProgress <= scene.scrollRange[1]) {
+        currentScene = scene;
+        break;
+      }
+    }
+    
+    // Update current scene if changed
+    if (currentScene !== this.currentSceneData) {
+      this.currentSceneData = currentScene;
+      this.triggerSceneTransition(currentScene);
+    }
+    
+    // Update visual systems based on current scene
+    this.updateVisualizersForScene(currentScene, scrollProgress);
+    
+    console.log(`🎬 Processing scroll event - Progress: ${(scrollProgress * 100).toFixed(1)}%`);
+  }
+  
+  updateVisualizersForScene(scene, scrollProgress) {
+    // Update VIB34D visualizers based on current scene
+    if (window.choreographedVisualizer) {
+      const sceneProgress = (scrollProgress - scene.scrollRange[0]) / (scene.scrollRange[1] - scene.scrollRange[0]);
+      window.choreographedVisualizer.updateFromCinematicDirector(scene, Math.max(0, Math.min(1, sceneProgress)));
+    }
+    
+    // Update geometry based on scene
+    if (window.coreEngine) {
+      window.coreEngine.setGeometry(scene.geometry.primary);
+      window.coreEngine.setMorphFactor(0.5 + sceneProgress * 0.5);
+    }
+    
+    // Update color palette
+    if (window.hypercubeMoireEngine) {
+      const hue = scene.colorPalette.primary.h + (sceneProgress * 60); // Shift hue through scene
+      window.hypercubeMoireEngine.updateColorFromCinematic(hue, scene.colorPalette.primary.s, scene.colorPalette.primary.l);
+    }
+  }
+  
+  triggerSceneTransition(newScene) {
+    // Trigger visual transition effects when changing scenes
+    console.log(`🎭 Scene transition: ${newScene.name}`);
+    
+    // Update card behavior
+    if (window.woahCardMetamorphosis) {
+      window.woahCardMetamorphosis.updateSceneBehavior(newScene.cardBehavior);
+    }
+    
+    // Trigger portal effect for dramatic scene changes
+    if (newScene.name === 'TECHNOLOGICAL_AWAKENING' || newScene.name === 'MASTERY_ACHIEVED') {
+      this.createPortalTransitionEffect(newScene.colorPalette.accent);
+    }
+  }
 }
 
 // Initialize the cinematic scroll system

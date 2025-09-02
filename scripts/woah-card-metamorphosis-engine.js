@@ -132,6 +132,182 @@ class WOAHCardMetamorphosisEngine {
     });
   }
   
+  initializeHolographicBackground() {
+    // Create holographic background canvas
+    this.holographicCanvas = document.createElement('canvas');
+    this.holographicCanvas.id = 'holographic-background-canvas';
+    this.holographicCanvas.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.3;
+    `;
+    
+    document.body.appendChild(this.holographicCanvas);
+    
+    // Setup WebGL context with error handling
+    try {
+      this.holographicGL = this.holographicCanvas.getContext('webgl') || 
+                          this.holographicCanvas.getContext('experimental-webgl');
+                          
+      if (!this.holographicGL) {
+        console.warn('⚠️ WebGL not supported, holographic background disabled');
+        return;
+      }
+      
+      // Resize canvas
+      this.resizeHolographicCanvas();
+      window.addEventListener('resize', () => this.resizeHolographicCanvas());
+      
+      // Initialize simple holographic shader
+      this.initializeHolographicShaders();
+      
+      console.log('✨ Holographic background initialized');
+      
+    } catch (error) {
+      console.warn('⚠️ Failed to initialize holographic background:', error);
+    }
+  }
+  
+  resizeHolographicCanvas() {
+    if (!this.holographicCanvas || !this.holographicGL) return;
+    
+    const dpr = window.devicePixelRatio || 1;
+    const canvas = this.holographicCanvas;
+    const gl = this.holographicGL;
+    
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  
+  initializeHolographicShaders() {
+    if (!this.holographicGL) return;
+    
+    const gl = this.holographicGL;
+    
+    // Simple vertex shader
+    const vertexShaderSource = `
+      attribute vec2 a_position;
+      varying vec2 v_uv;
+      void main() {
+        gl_Position = vec4(a_position, 0.0, 1.0);
+        v_uv = (a_position + 1.0) * 0.5;
+      }
+    `;
+    
+    // Simple holographic fragment shader
+    const fragmentShaderSource = `
+      precision mediump float;
+      uniform float u_time;
+      uniform vec2 u_resolution;
+      varying vec2 v_uv;
+      
+      void main() {
+        vec2 uv = v_uv;
+        float time = u_time * 0.001;
+        
+        // Simple holographic pattern
+        float pattern = sin(uv.x * 20.0 + time) * sin(uv.y * 20.0 + time * 1.3);
+        float shimmer = sin(time * 2.0 + uv.x * 50.0) * 0.1;
+        
+        vec3 color = vec3(0.0, 0.8 + shimmer, 1.0) * (pattern * 0.3 + 0.1);
+        gl_FragColor = vec4(color, 0.2);
+      }
+    `;
+    
+    try {
+      // Create and compile shaders
+      const vertexShader = this.createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+      const fragmentShader = this.createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+      
+      if (!vertexShader || !fragmentShader) {
+        console.warn('⚠️ Failed to compile holographic shaders');
+        return;
+      }
+      
+      // Create program
+      this.holographicProgram = gl.createProgram();
+      gl.attachShader(this.holographicProgram, vertexShader);
+      gl.attachShader(this.holographicProgram, fragmentShader);
+      gl.linkProgram(this.holographicProgram);
+      
+      if (!gl.getProgramParameter(this.holographicProgram, gl.LINK_STATUS)) {
+        console.warn('⚠️ Failed to link holographic program:', gl.getProgramInfoLog(this.holographicProgram));
+        return;
+      }
+      
+      // Get attribute and uniform locations
+      this.holographicAttributes = {
+        position: gl.getAttribLocation(this.holographicProgram, 'a_position')
+      };
+      
+      this.holographicUniforms = {
+        time: gl.getUniformLocation(this.holographicProgram, 'u_time'),
+        resolution: gl.getUniformLocation(this.holographicProgram, 'u_resolution')
+      };
+      
+      // Create vertex buffer for fullscreen quad
+      this.holographicBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, this.holographicBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+        -1, -1,  1, -1,  -1, 1,
+        -1, 1,   1, -1,   1, 1
+      ]), gl.STATIC_DRAW);
+      
+      // Start render loop
+      this.renderHolographicBackground();
+      
+    } catch (error) {
+      console.warn('⚠️ Error setting up holographic shaders:', error);
+    }
+  }
+  
+  createShader(gl, type, source) {
+    const shader = gl.createShader(type);
+    gl.shaderSource(shader, source);
+    gl.compileShader(shader);
+    
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+      console.warn('⚠️ Shader compile error:', gl.getShaderInfoLog(shader));
+      gl.deleteShader(shader);
+      return null;
+    }
+    
+    return shader;
+  }
+  
+  renderHolographicBackground() {
+    if (!this.holographicGL || !this.holographicProgram) return;
+    
+    const gl = this.holographicGL;
+    
+    // Clear and setup
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.useProgram(this.holographicProgram);
+    
+    // Set uniforms
+    gl.uniform1f(this.holographicUniforms.time, performance.now());
+    gl.uniform2f(this.holographicUniforms.resolution, gl.canvas.width, gl.canvas.height);
+    
+    // Bind vertex buffer and draw
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.holographicBuffer);
+    gl.enableVertexAttribArray(this.holographicAttributes.position);
+    gl.vertexAttribPointer(this.holographicAttributes.position, 2, gl.FLOAT, false, 0, 0);
+    
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+    
+    // Continue animation
+    requestAnimationFrame(() => this.renderHolographicBackground());
+  }
+  
   createTransformMatrix() {
     return {
       position: { x: 0, y: 0, z: 0 },
