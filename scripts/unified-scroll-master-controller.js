@@ -97,8 +97,11 @@ class UnifiedScrollMasterController {
       // Acceleration
       const acceleration = smoothVelocity - this.masterScrollState.velocity;
       
-      // Update master state
+      // Update master state with proper section tracking
       const previousNormalized = this.masterScrollState.normalized;
+      const newActiveSection = this.determineActiveScene(normalized);
+      const previousActiveSection = this.masterScrollState.activeSection;
+      
       this.masterScrollState = {
         raw: rawScroll,
         normalized: normalized,
@@ -108,8 +111,8 @@ class UnifiedScrollMasterController {
         momentum: Math.abs(smoothVelocity),
         phase: normalized,
         sectionPhase: this.calculateSectionPhase(normalized),
-        activeSection: this.determineActiveScene(normalized),
-        previousSection: this.masterScrollState.activeSection,
+        activeSection: newActiveSection,
+        previousSection: previousActiveSection,
         isTransitioning: Math.abs(normalized - previousNormalized) > 0.001,
         transitionProgress: this.calculateTransitionProgress(normalized)
       };
@@ -259,9 +262,13 @@ class UnifiedScrollMasterController {
     // PARTICLE SYSTEMS
     this.updateParticles(scroll);
     
-    // SCENE TRANSITIONS
-    if (scroll.activeSection !== scroll.previousSection) {
-      this.triggerSceneTransition(scroll.activeSection, scroll.previousSection);
+    // SCENE TRANSITIONS (with debouncing to prevent spam)
+    if (scroll.activeSection !== scroll.previousSection && scroll.previousSection !== -1) {
+      // Only trigger if we have a real section change (not initial load)
+      if (!this.lastSceneTransition || (Date.now() - this.lastSceneTransition > 500)) {
+        this.triggerSceneTransition(scroll.activeSection, scroll.previousSection);
+        this.lastSceneTransition = Date.now();
+      }
     }
   }
   

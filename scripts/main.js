@@ -194,13 +194,12 @@ class ClearSeasMainController {
       // Initialize the choreographed system
       this.choreographedSystem = new window.ChoreographedVisualizerSystem();
       
-      // Start the system
-      await this.choreographedSystem.start();
-      
+      // System initializes automatically in constructor, no start() method needed
       console.log('✅ Choreographed visualizer system initialized successfully');
       this.systems.set('choreographed', this.choreographedSystem);
     } catch (error) {
       console.error('❌ Failed to initialize choreographed system:', error);
+      console.error('Error details:', error.message, error.stack);
     }
     
     this.incrementSystemReady();

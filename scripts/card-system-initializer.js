@@ -235,42 +235,56 @@ class CardSystemController {
     let performanceCheckCount = 0;
     let badFrameCount = 0;
     let goodFrameCount = 0;
+    let frameTimeHistory = [];
     
     const monitor = () => {
       performanceCheckCount++;
       
-      // Only check performance every 60 frames (about once per second at 60fps)
-      if (performanceCheckCount % 60 !== 0) {
+      // Only check performance every 120 frames (about twice per second at 60fps)
+      if (performanceCheckCount % 120 !== 0) {
         requestAnimationFrame(monitor);
         return;
       }
       
       // Check performance and adjust quality if needed
       const now = performance.now();
-      const frameTime = now - this.lastFrameTime || 16;
+      const frameTime = now - this.lastFrameTime || 16.67; // Default to 60fps
       this.lastFrameTime = now;
       
-      if (frameTime > 35) { // >35ms = dropping below 28fps (more lenient)
+      // Use moving average for more stable performance detection
+      frameTimeHistory.push(frameTime);
+      if (frameTimeHistory.length > 10) {
+        frameTimeHistory.shift();
+      }
+      
+      const avgFrameTime = frameTimeHistory.reduce((a, b) => a + b, 0) / frameTimeHistory.length;
+      
+      // More lenient thresholds to reduce quality cycling
+      if (avgFrameTime > 50) { // >50ms = dropping below 20fps (very lenient)
         badFrameCount++;
-        goodFrameCount = 0;
+        goodFrameCount = Math.max(0, goodFrameCount - 1);
         
-        // Need multiple bad frames before reducing quality
-        if (badFrameCount >= 3) {
+        // Need 5 consecutive bad measurements before reducing quality
+        if (badFrameCount >= 5 && this.performanceMonitor.performanceMode !== 'low') {
           this.reduceQuality();
           badFrameCount = 0;
+          frameTimeHistory = []; // Reset history after change
         }
-      } else if (frameTime < 18) { // <18ms = above 55fps (more conservative)
+      } else if (avgFrameTime < 20) { // <20ms = above 50fps (conservative)
         goodFrameCount++;
-        badFrameCount = 0;
+        badFrameCount = Math.max(0, badFrameCount - 1);
         
-        // Need multiple good frames before increasing quality
-        if (goodFrameCount >= 5) {
+        // Need 8 consecutive good measurements before increasing quality
+        if (goodFrameCount >= 8 && this.performanceMonitor.performanceMode !== 'high') {
           this.increaseQuality();
           goodFrameCount = 0;
+          frameTimeHistory = []; // Reset history after change
         }
       }
       
-      requestAnimationFrame(monitor);
+      // Throttle monitoring frequency when performance is stable
+      const nextCheckDelay = (badFrameCount === 0 && goodFrameCount < 3) ? 2000 : 500;
+      setTimeout(() => requestAnimationFrame(monitor), nextCheckDelay);
     };
     
     monitor();

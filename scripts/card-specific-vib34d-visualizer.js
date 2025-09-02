@@ -7,35 +7,72 @@
 
 class WebGLContextManager {
   static contexts = new Map();
-  static maxContexts = 16; // Browser limit consideration
+  static contextUsage = new Map(); // Track last used time for LRU cleanup
+  static maxContexts = 12; // Reduced for better performance
   
   static getContext(canvas) {
+    // Check if context already exists for this canvas
+    if (this.contexts.has(canvas)) {
+      this.contextUsage.set(canvas, Date.now());
+      return this.contexts.get(canvas);
+    }
+    
+    // Clean up oldest contexts if we're at the limit
     if (this.contexts.size >= this.maxContexts) {
-      // Force cleanup of oldest context
-      const oldestCanvas = this.contexts.keys().next().value;
-      this.releaseContext(oldestCanvas);
+      this.cleanupOldestContexts(3); // Clean 3 oldest contexts at once
     }
     
     const gl = canvas.getContext('webgl', {
       antialias: false, // Performance optimization
       alpha: true,
       premultipliedAlpha: false,
-      preserveDrawingBuffer: false
+      preserveDrawingBuffer: false,
+      powerPreference: 'high-performance'
     });
     
     if (gl) {
       this.contexts.set(canvas, gl);
+      this.contextUsage.set(canvas, Date.now());
+      
+      // Set up common WebGL state for performance
+      gl.disable(gl.DEPTH_TEST);
+      gl.disable(gl.CULL_FACE);
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
     }
     
     return gl;
   }
   
+  static cleanupOldestContexts(count = 1) {
+    // Sort contexts by usage time and remove oldest
+    const sortedContexts = Array.from(this.contextUsage.entries())
+      .sort((a, b) => a[1] - b[1])
+      .slice(0, count);
+    
+    for (const [canvas, time] of sortedContexts) {
+      this.releaseContext(canvas);
+    }
+    
+    console.log(`🧹 Cleaned up ${count} oldest WebGL contexts`);
+  }
+  
   static releaseContext(canvas) {
     const gl = this.contexts.get(canvas);
     if (gl) {
-      // Clean up WebGL resources
-      gl.getExtension('WEBGL_lose_context')?.loseContext();
+      // Clean up WebGL resources properly
+      const loseContext = gl.getExtension('WEBGL_lose_context');
+      if (loseContext) {
+        loseContext.loseContext();
+      }
       this.contexts.delete(canvas);
+      this.contextUsage.delete(canvas);
+    }
+  }
+  
+  static updateUsage(canvas) {
+    if (this.contexts.has(canvas)) {
+      this.contextUsage.set(canvas, Date.now());
     }
   }
 }
@@ -424,12 +461,24 @@ class CardSpecificVIB34DVisualizer {
   }
   
   createShader(type, source) {
+    if (!this.gl || !source) {
+      console.error('Missing WebGL context or shader source');
+      return null;
+    }
+    
     const shader = this.gl.createShader(type);
+    if (!shader) {
+      console.error('Failed to create shader');
+      return null;
+    }
+    
     this.gl.shaderSource(shader, source);
     this.gl.compileShader(shader);
     
     if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS)) {
-      console.error('Shader compile error:', this.gl.getShaderInfoLog(shader));
+      const error = this.gl.getShaderInfoLog(shader);
+      console.error('Shader compile error:', error);
+      console.error('Shader source:', source);
       this.gl.deleteShader(shader);
       return null;
     }
@@ -532,6 +581,9 @@ class CardSpecificVIB34DVisualizer {
   
   render() {
     if (!this.active || !this.gl || !this.program) return;
+    
+    // Update context usage for LRU management
+    WebGLContextManager.updateUsage(this.canvas);
     
     const time = Date.now() - this.startTime;
     const morphTime = time * this.behaviorProfile.geometryMorphSpeed;
