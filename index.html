@@ -47,6 +47,9 @@
   <!-- IMMERSIVE ZONE PRESENTATIONS -->
   <link rel="stylesheet" href="styles/immersive-zone-presentation.css" />
   
+  <!-- UNIFIED EXPERIENCE ENGINE STYLES -->
+  <link rel="stylesheet" href="styles/unified-experience-engine.css" />
+  
   <!-- Performance and Analytics -->
   <script>
     // Performance monitoring setup
@@ -60,36 +63,26 @@
     };
   </script>
   
-  <!-- MASTER CONDUCTOR SYSTEM - Unified Coordination Architecture -->
-  <script src="scripts/master-conductor.js" defer></script>
+  <!-- UNIFIED EXPERIENCE ENGINE - Single RAF, Single Source of Truth -->
+  <script src="scripts/unified-experience-engine.js" defer></script>
   
-  <!-- COORDINATED SUBSYSTEMS - Working with MasterConductor -->
-  <script src="scripts/coordinated-scroll-master.js" defer></script>
-  <script src="scripts/coordinated-choreographed-visualizer.js" defer></script>
-  <script src="scripts/coordinated-zone-pacing-controller.js" defer></script>
-  <script src="scripts/smooth-snap-controller.js" defer></script>
-  
-  <!-- SUPPORTING SYSTEMS - For coordinated subsystems -->
+  <!-- SUPPORTING SYSTEMS - CSS-driven, no RAF conflicts -->
   <script src="scripts/zone-visualizers.js" defer></script>
-  <script src="scripts/mobile-touch-optimizer.js" defer></script>
   <script src="scripts/mobile-navigation-injector.js" defer></script>
-  <script src="scripts/intelligent-scroll-indicator.js" defer></script>
-
-  <!-- LEGACY SYSTEMS (REPLACED BY MASTER CONDUCTOR) -->
-  <!-- <script src="scripts/core-engine.js" defer></script> -->
-  <!-- <script src="scripts/choreographed-visualizer.js" defer></script> -->
-  <!-- <script src="scripts/card-specific-vib34d-visualizer.js" defer></script> -->
-  <!-- <script src="scripts/advanced-scroll-morph-system.js" defer></script> -->
-  <!-- <script src="scripts/ufo-navigation-system.js" defer></script> -->
-  <!-- <script src="scripts/ultimate-scroll-orchestrator.js" defer></script> -->
-  <!-- <script src="scripts/cinematic-scroll-director.js" defer></script> -->
-  <!-- <script src="scripts/woah-card-metamorphosis-engine.js" defer></script> -->
-  <!-- <script src="scripts/hypercube-moire-effect-engine.js" defer></script> -->
-  <!-- <script src="scripts/tetrahedron-lattice-core.js" defer></script> -->
-  <!-- <script src="scripts/glitch-chromatic-processor.js" defer></script> -->
-  <!-- <script src="scripts/zone-pacing-controller.js" defer></script> -->
-  <!-- <script src="scripts/intelligent-scroll-master.js" defer></script> -->
-  <!-- <script src="scripts/tactile-snap-scroll-system.js" defer></script> -->
+  
+  <!-- ARCHIVED: Multiple conflicting systems with 10+ RAF loops -->
+  <!-- 
+  THESE SYSTEMS CAUSED THE "TWO SCROLL BARS" AND RAF CONFLICTS:
+  - master-conductor.js (tried to coordinate conflicts instead of fixing them)
+  - ultimate-scroll-orchestrator.js (RAF + setInterval conflicts)
+  - advanced-scroll-morph-system.js (RAF + intersection observer conflicts) 
+  - tactile-snap-scroll-system.js (RAF + multiple event listeners)
+  - cinematic-scroll-director.js (6 RAF loops + nested animations)
+  - woah-card-metamorphosis-engine.js (RAF + WebGL + observers)
+  - choreographed-visualizer.js (6 RAF loops fighting each other)
+  - intelligent-scroll-master.js (RAF + aggressive system killing)
+  - zone-pacing-controller.js (Multiple RAF + setInterval)
+  -->
   
   <script src="scripts/unified-system-integration.js" defer></script>
   <script src="scripts/card-system-initializer.js" defer></script>
@@ -145,7 +138,10 @@
   <div id="particle-system" class="particle-system"></div>
 
   <!-- Enhanced Navigation with Dynamic Themes -->
-  <nav id="main-nav" class="nav-container">
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-progress-indicator"></div>
+
+  <nav id="main-nav" class="nav-container scroll-reactive">
     <div class="nav-content">
       <div class="nav-brand">
         <div class="brand-logo">
@@ -180,7 +176,7 @@
   </nav>
 
   <!-- Hero Section with Integrated VIB34D Engine -->
-  <section id="hero" class="hero-section reactive-border scroll-section parallax-container" data-theme="polychora" data-scene="hero" data-scene-active="true" data-visualizer-system="polychora">
+  <section id="hero" class="hero-section zone-section scroll-reactive energy-reactive" data-theme="polychora" data-scene="hero" data-scene-active="true" data-visualizer-system="polychora">
     <div class="hero-background">
       <!-- VIB34D Polychora Visualization Background -->
       <iframe class="hero-visualizer" 
@@ -251,7 +247,7 @@
   </section>
 
   <!-- Technology Section with Interactive Demonstrations -->
-  <section id="technology" class="tech-section reactive-border scroll-section parallax-container" data-theme="quantum" data-scene="technology" data-visualizer-system="quantum">
+  <section id="technology" class="tech-section zone-section scroll-reactive energy-reactive" data-theme="quantum" data-scene="technology" data-visualizer-system="quantum">
     <div class="section-container">
       <header class="section-header">
         <h2 class="section-title">Core Technology</h2>
@@ -263,7 +259,7 @@
       
       <div class="tech-grid">
         <!-- Polytopal Projection Engine -->
-        <div id="tech-card-polychora" class="tech-card reactive-element morph-card parallax-layer-mid" data-system="polychora" data-interaction-type="cosmic" data-entrance="bottom">
+        <div id="tech-card-polychora" class="tech-card card-scroll-reactive mouse-reactive energy-reactive" data-system="polychora" data-interaction-type="cosmic" data-entrance="bottom">
           <div class="card-depth-background"></div>
           <div class="card-depth-shadow"></div>
           <div class="card-content">
@@ -286,7 +282,7 @@
         </div>
         
         <!-- GPU Shader Systems -->
-        <div id="tech-card-quantum" class="tech-card reactive-element morph-card parallax-layer-near" data-system="quantum" data-interaction-type="precision" data-entrance="bottom">
+        <div id="tech-card-quantum" class="tech-card card-scroll-reactive mouse-reactive energy-reactive" data-system="quantum" data-interaction-type="precision" data-entrance="bottom">
           <div class="card-depth-background"></div>
           <div class="card-depth-shadow"></div>
           <div class="card-content">
@@ -312,7 +308,7 @@
         </div>
         
         <!-- Agentic Integration -->
-        <div id="tech-card-holographic" class="tech-card reactive-element morph-card parallax-layer-deep" data-system="holographic" data-interaction-type="creative" data-entrance="bottom">
+        <div id="tech-card-holographic" class="tech-card card-scroll-reactive mouse-reactive energy-reactive" data-system="holographic" data-interaction-type="creative" data-entrance="bottom">
           <div class="card-depth-background"></div>
           <div class="card-depth-shadow"></div>
           <div class="card-content">
@@ -367,7 +363,7 @@
   </section>
 
   <!-- Portfolio Section -->
-  <section id="portfolio" class="portfolio-section reactive-border scroll-section parallax-container" data-theme="faceted" data-scene="portfolio" data-visualizer-system="faceted">
+  <section id="portfolio" class="portfolio-section zone-section scroll-reactive energy-reactive" data-theme="faceted" data-scene="portfolio" data-visualizer-system="faceted">
     <div class="section-container">
       <header class="section-header">
         <h2 class="section-title">Portfolio</h2>
@@ -387,7 +383,7 @@
       
       <div class="portfolio-grid">
         <!-- VIB34D Holographic Engine -->
-        <article id="portfolio-vib34d" class="portfolio-item reactive-element morph-card parallax-layer-mid" data-category="interactive research" data-interaction-type="creative" data-entrance="bottom">
+        <article id="portfolio-vib34d" class="portfolio-item card-scroll-reactive mouse-reactive energy-reactive" data-category="interactive research" data-interaction-type="creative" data-entrance="bottom">
           <div class="card-depth-background"></div>
           <div class="card-depth-shadow"></div>
           <div class="item-visual">
@@ -552,7 +548,7 @@
   </section>
 
   <!-- Research & Publications Section -->
-  <section id="research" class="research-section reactive-border scroll-section parallax-container" data-theme="holographic" data-scene="research" data-visualizer-system="holographic">
+  <section id="research" class="research-section zone-section scroll-reactive energy-reactive" data-theme="holographic" data-scene="research" data-visualizer-system="holographic">
     <div class="section-container">
       <header class="section-header">
         <h2 class="section-title">Research & Publications</h2>

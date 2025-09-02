@@ -238,12 +238,15 @@ class MasterConductor {
       this.subsystems.pacing = new CoordinatedPacingController(this);
     }
     
-    if (window.MobileTouchOptimizer) {
-      this.subsystems.mobile = new CoordinatedMobileOptimizer(this);
-    }
+    // Mobile optimization handled by CSS and native touch events
+    // Original MobileTouchOptimizer archived due to RAF conflicts
+    console.log('📱 Mobile optimization: Using CSS-based responsive design');
+    this.subsystems.mobile = null;
     
+    // SmoothSnapController is kept as-is since it doesn't conflict
     if (window.SmoothSnapController) {
-      this.subsystems.snap = new CoordinatedSnapController(this);
+      // Keep the original - it's already well-behaved
+      console.log('📌 SmoothSnapController: Using original (no conflicts detected)');
     }
   }
   
