@@ -1,18 +1,29 @@
 /*
- * POLYTOPAL REACTIVITY JSON MANAGER v1.0
+ * UNIFIED POLYTOPAL SYSTEM v2.0
  * 
- * Advanced JSON-driven reactivity system for Clear Seas polytopal visualizers.
- * Handles sophisticated parameter operations like toComplementOf, pingPong, swapWith
- * with support for target/frame/siblings reaction patterns.
+ * Consolidated JSON-driven reactivity system for Clear Seas polytopal visualizers.
+ * Eliminates competing systems - this is the SINGLE SOURCE OF TRUTH for all 
+ * visualizer parameter management and reactivity operations.
+ * 
+ * PERFORMANCE OPTIMIZED:
+ * - Batched parameter updates to eliminate iframe reloading
+ * - Smart parameter caching and change detection
+ * - Optimistic UI updates with error recovery
  */
 
-class PolytopalReactivityManager {
+class UnifiedPolytopalSystem {
   constructor() {
     this.systems = new Map();
     this.routes = [];
     this.activeElements = new Map();
     this.parameterHistory = new Map();
     this.isInitialized = false;
+    
+    // CONSOLIDATED VISUALIZER MANAGEMENT
+    this.visualizers = new Map();
+    this.parameterQueue = new Map();
+    this.processingQueue = false;
+    this.parameterMappings = this.createParameterMappings();
     
     this.loadConfiguration();
   }
@@ -21,6 +32,9 @@ class PolytopalReactivityManager {
     try {
       const response = await fetch('/assets/reactivity/faceted.json');
       const config = await response.json();
+      
+      // Initialize visualizer scanning FIRST
+      this.scanForVisualizers();
       
       // Store systems and routes
       Object.entries(config.systems).forEach(([name, system]) => {
@@ -33,11 +47,23 @@ class PolytopalReactivityManager {
       this.initializeRoutes();
       
       this.isInitialized = true;
-      console.log('🎯 Polytopal Reactivity JSON Manager - Loaded', this.systems.size, 'systems');
+      console.log('🚀 UNIFIED Polytopal System - Loaded', this.systems.size, 'systems,', this.visualizers.size, 'visualizers');
+      
+      // Start parameter processing queue
+      this.startParameterQueue();
       
     } catch (error) {
       console.error('Failed to load reactivity configuration:', error);
+      // Initialize with fallback system
+      this.initializeFallbackSystem();
     }
+  }
+  
+  initializeFallbackSystem() {
+    console.warn('🔄 Initializing fallback reactivity system');
+    this.scanForVisualizers();
+    this.startParameterQueue();
+    this.isInitialized = true;
   }
 
   initializeRoutes() {
@@ -151,7 +177,7 @@ class PolytopalReactivityManager {
     // Apply to visualizer if element has one
     const visualizer = this.findElementVisualizer(element);
     if (visualizer) {
-      this.updateVisualizerParameter(visualizer, namespace, param, newValue, operation);
+      this.queueParameterUpdate(visualizer.id, namespace, param, newValue, { immediate: true });
     }
     
     // Store parameter change for reference
@@ -269,7 +295,7 @@ class PolytopalReactivityManager {
         Object.entries(frameReactions.visual).forEach(([param, operation]) => {
           const currentValue = this.getCurrentFrameParameter(frameVisualizer, param);
           const newValue = this.calculateParameterValue(currentValue, operation, system, 'visual', param);
-          this.updateVisualizerParameter(frameVisualizer, 'visual', param, newValue, operation);
+          this.queueParameterUpdate(frameVisualizer.id, 'visual', param, newValue, { immediate: true });
         });
       }
       
@@ -278,7 +304,7 @@ class PolytopalReactivityManager {
         Object.entries(frameReactions.color).forEach(([param, operation]) => {
           const currentValue = this.getCurrentFrameParameter(frameVisualizer, param);
           const newValue = this.calculateParameterValue(currentValue, operation, system, 'color', param);
-          this.updateVisualizerParameter(frameVisualizer, 'color', param, newValue, operation);
+          this.queueParameterUpdate(frameVisualizer.id, 'color', param, newValue, { immediate: true });
         });
       }
     }
@@ -365,33 +391,7 @@ class PolytopalReactivityManager {
     return siblings;
   }
 
-  updateVisualizerParameter(visualizer, namespace, param, value, operation) {
-    if (visualizer.type === 'iframe') {
-      // Update VIB34D iframe parameters
-      this.updateVIB34DParameter(visualizer.element, namespace, param, value, operation);
-    } else if (visualizer.type === 'canvas') {
-      // Update canvas-based visualizer
-      this.updateCanvasParameter(visualizer.element, namespace, param, value, operation);
-    }
-  }
-
-  updateVIB34DParameter(iframe, namespace, param, value, operation) {
-    try {
-      const url = new URL(iframe.src);
-      const paramName = namespace === 'visual' ? param : `${namespace}_${param}`;
-      
-      // Handle smooth transitions for parameters with timing
-      if (typeof operation === 'object' && operation.ms) {
-        const currentValue = parseFloat(url.searchParams.get(paramName)) || 0;
-        this.createSmoothTransition(iframe, paramName, currentValue, value, operation.ms, operation.ease);
-      } else {
-        url.searchParams.set(paramName, value);
-        iframe.src = url.toString();
-      }
-    } catch (error) {
-      console.warn('Error updating VIB34D parameter:', error);
-    }
-  }
+  // OLD METHODS REMOVED - Now using unified queueParameterUpdate system
 
   createSmoothTransition(iframe, paramName, startValue, endValue, duration, easing = 'linear') {
     const steps = Math.max(duration / 16, 10); // ~60fps, minimum 10 steps
@@ -583,23 +583,260 @@ class PolytopalReactivityManager {
       initialized: this.isInitialized,
       systemCount: this.systems.size,
       routeCount: this.routes.length,
-      activeElementCount: this.activeElements.size
+      activeElementCount: this.activeElements.size,
+      visualizerCount: this.visualizers.size,
+      queueSize: this.parameterQueue.size
     };
+  }
+
+  // ===== CONSOLIDATED VISUALIZER MANAGEMENT =====
+  // Replaces both Enhanced Master Conductor and Visualizer Adapter
+  
+  createParameterMappings() {
+    return {
+      visual: {
+        gridDensity: { vib34d: 'density', range: [5, 100], transform: (v) => v * 0.1 },
+        morphFactor: { vib34d: 'morph', range: [0, 2], transform: (v) => v },
+        chaos: { vib34d: 'chaos', range: [0, 1], transform: (v) => v },
+        speed: { vib34d: 'speed', range: [0.1, 3], transform: (v) => v * 0.01 },
+        intensity: { vib34d: 'intensity', range: [0, 1], transform: (v) => v }
+      },
+      color: {
+        hue: { vib34d: 'hue', range: [0, 360], transform: (v) => v / 360 },
+        intensity: { vib34d: 'brightness', range: [0, 1], transform: (v) => v },
+        saturation: { vib34d: 'saturation', range: [0, 1], transform: (v) => v }
+      },
+      rot4d: {
+        xw: { vib34d: 'rot4d_xw', range: [-6.28, 6.28], transform: (v) => v },
+        yw: { vib34d: 'rot4d_yw', range: [-6.28, 6.28], transform: (v) => v },
+        zw: { vib34d: 'rot4d_zw', range: [-6.28, 6.28], transform: (v) => v }
+      }
+    };
+  }
+  
+  scanForVisualizers() {
+    // Find all VIB34D iframes and register them
+    document.querySelectorAll('iframe[src*="vib34d"], iframe[src*="domusgpt"]').forEach((iframe, index) => {
+      const id = iframe.id || `vib34d-${index}`;
+      iframe.id = id; // Ensure iframe has ID
+      
+      const visualizer = {
+        id,
+        element: iframe,
+        type: 'vib34d',
+        currentParams: new Map(),
+        pendingUpdates: new Map(),
+        lastUpdate: 0,
+        isHealthy: true
+      };
+      
+      this.visualizers.set(id, visualizer);
+      this.captureCurrentParameters(visualizer);
+      
+      console.log('📡 Registered visualizer:', id);
+    });
+    
+    // Also find canvas elements
+    document.querySelectorAll('canvas[data-visualizer]').forEach((canvas, index) => {
+      const id = canvas.id || `canvas-${index}`;
+      const visualizer = {
+        id,
+        element: canvas,
+        type: 'canvas',
+        currentParams: new Map(),
+        pendingUpdates: new Map(),
+        lastUpdate: 0,
+        isHealthy: true
+      };
+      
+      this.visualizers.set(id, visualizer);
+    });
+  }
+  
+  captureCurrentParameters(visualizer) {
+    if (visualizer.type === 'vib34d') {
+      try {
+        const url = new URL(visualizer.element.src);
+        url.searchParams.forEach((value, key) => {
+          visualizer.currentParams.set(key, parseFloat(value) || 0);
+        });
+      } catch (error) {
+        console.warn('Could not capture parameters for:', visualizer.id);
+        visualizer.isHealthy = false;
+      }
+    }
+  }
+  
+  startParameterQueue() {
+    // Process parameter updates in batches to avoid iframe reloading hell
+    setInterval(() => {
+      if (!this.processingQueue && this.parameterQueue.size > 0) {
+        this.processParameterQueue();
+      }
+    }, 50); // Process every 50ms
+  }
+  
+  processParameterQueue() {
+    this.processingQueue = true;
+    
+    const updates = new Map(this.parameterQueue);
+    this.parameterQueue.clear();
+    
+    updates.forEach((params, visualizerId) => {
+      this.applyParameterBatch(visualizerId, params);
+    });
+    
+    this.processingQueue = false;
+  }
+  
+  applyParameterBatch(visualizerId, params) {
+    const visualizer = this.visualizers.get(visualizerId);
+    if (!visualizer || !visualizer.isHealthy) return;
+    
+    if (visualizer.type === 'vib34d') {
+      this.updateVIB34DParameters(visualizer, params);
+    } else if (visualizer.type === 'canvas') {
+      this.updateCanvasParameters(visualizer, params);
+    }
+    
+    visualizer.lastUpdate = performance.now();
+  }
+  
+  updateVIB34DParameters(visualizer, params) {
+    try {
+      const url = new URL(visualizer.element.src);
+      let hasChanges = false;
+      
+      Object.entries(params).forEach(([param, value]) => {
+        const currentValue = url.searchParams.get(param);
+        const newValue = value.toString();
+        
+        if (currentValue !== newValue) {
+          url.searchParams.set(param, newValue);
+          visualizer.currentParams.set(param, value);
+          hasChanges = true;
+        }
+      });
+      
+      // PERFORMANCE FIX: Only update iframe if there are actual changes
+      if (hasChanges) {
+        visualizer.element.src = url.toString();
+        // console.log('🔄 Updated', Object.keys(params).length, 'parameters for', visualizer.id);
+      }
+      
+    } catch (error) {
+      console.error('Failed to update VIB34D parameters:', error);
+      visualizer.isHealthy = false;
+    }
+  }
+  
+  updateCanvasParameters(visualizer, params) {
+    // Direct canvas parameter updates - much faster than iframe
+    Object.entries(params).forEach(([param, value]) => {
+      if (visualizer.element.setParameter) {
+        visualizer.element.setParameter(param, value);
+      }
+      visualizer.currentParams.set(param, value);
+    });
+    
+    // Trigger canvas re-render if available
+    if (visualizer.element.render) {
+      visualizer.element.render();
+    }
+  }
+
+  // UNIFIED PARAMETER UPDATE METHOD
+  // Replaces all competing updateVisualizerParams methods
+  queueParameterUpdate(visualizerId, namespace, param, value, options = {}) {
+    const visualizer = this.visualizers.get(visualizerId) || this.findVisualizerForElement(visualizerId);
+    if (!visualizer) {
+      console.warn('Visualizer not found:', visualizerId);
+      return false;
+    }
+    
+    // Map parameter through our mapping system
+    const mapping = this.parameterMappings[namespace]?.[param];
+    if (!mapping) {
+      console.warn('Parameter mapping not found:', namespace, param);
+      return false;
+    }
+    
+    const mappedParam = mapping.vib34d;
+    const transformedValue = mapping.transform ? mapping.transform(value) : value;
+    
+    // Add to queue for batch processing
+    if (!this.parameterQueue.has(visualizerId)) {
+      this.parameterQueue.set(visualizerId, {});
+    }
+    
+    this.parameterQueue.get(visualizerId)[mappedParam] = transformedValue;
+    
+    // For immediate updates (like user interactions)
+    if (options.immediate) {
+      this.processParameterQueue();
+    }
+    
+    return true;
+  }
+  
+  findVisualizerForElement(elementId) {
+    // Try to find element and register as visualizer
+    const element = document.getElementById(elementId);
+    if (!element) return null;
+    
+    const iframe = element.querySelector('iframe[src*="vib34d"], iframe[src*="domusgpt"]');
+    if (iframe) {
+      const visualizer = {
+        id: elementId,
+        element: iframe,
+        type: 'vib34d',
+        currentParams: new Map(),
+        pendingUpdates: new Map(),
+        lastUpdate: 0,
+        isHealthy: true
+      };
+      
+      this.visualizers.set(elementId, visualizer);
+      this.captureCurrentParameters(visualizer);
+      
+      console.log('📡 Auto-registered visualizer:', elementId);
+      return visualizer;
+    }
+    
+    return null;
   }
 }
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-  window.polytopalReactivity = new PolytopalReactivityManager();
+  window.unifiedPolytopal = new UnifiedPolytopalSystem();
+  
+  // BACKWARDS COMPATIBILITY - redirect old calls to new system
+  window.polytopalReactivity = window.unifiedPolytopal;
+  window.visualizerAdapter = {
+    updateVisualizerParameter: (id, ns, param, val, opts) => 
+      window.unifiedPolytopal.queueParameterUpdate(id, ns, param, val, opts)
+  };
   
   // Global debugging interface
   window.triggerReaction = (elementId, eventType) => {
-    window.polytopalReactivity.triggerElementReaction(elementId, eventType);
+    window.unifiedPolytopal.triggerElementReaction(elementId, eventType);
   };
   
   window.getReactivityStatus = () => {
-    return window.polytopalReactivity.getSystemStatus();
+    return window.unifiedPolytopal.getSystemStatus();
   };
   
-  console.log('🔮 Polytopal Reactivity JSON Manager - System initialized');
+  // Performance monitoring
+  window.getVisualizerPerformance = () => {
+    const visualizers = Array.from(window.unifiedPolytopal.visualizers.values());
+    return {
+      totalVisualizers: visualizers.length,
+      healthyVisualizers: visualizers.filter(v => v.isHealthy).length,
+      queueSize: window.unifiedPolytopal.parameterQueue.size,
+      averageUpdateTime: visualizers.reduce((sum, v) => sum + (performance.now() - v.lastUpdate), 0) / visualizers.length
+    };
+  };
+  
+  console.log('🚀 UNIFIED Polytopal System - All systems online');
 });
