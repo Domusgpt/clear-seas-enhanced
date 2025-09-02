@@ -39,6 +39,7 @@ class IntelligentScrollMaster {
     this.setupPerformanceMonitoring();
     this.setupGestureDetection();
     this.createScrollIndicator();
+    this.setupMobileOptimizer();
     
     console.log('🧠 Intelligent Scroll Master - Initialized with zone-based control');
   }
@@ -308,6 +309,11 @@ class IntelligentScrollMaster {
   
   handleZoneTransition(oldZone, newZone) {
     console.log(`🌊 Zone transition: ${oldZone?.id || 'none'} → ${newZone?.id || 'none'}`);
+    
+    // Enhanced mobile zone transitions
+    if (this.mobileOptimizer) {
+      this.mobileOptimizer.enhanceZoneTransition(oldZone, newZone);
+    }
     
     // Gracefully shut down old zone
     if (oldZone) {
@@ -636,6 +642,13 @@ class IntelligentScrollMaster {
   createScrollIndicator() {
     // Initialize the intelligent scroll indicator
     this.scrollIndicator = new IntelligentScrollIndicator(this);
+  }
+  
+  setupMobileOptimizer() {
+    // Initialize mobile touch optimizer
+    if (window.MobileTouchOptimizer) {
+      this.mobileOptimizer = new MobileTouchOptimizer(this);
+    }
   }
   
   updateScrollIndicator(scrollY) {
