@@ -595,28 +595,28 @@ class UnifiedPolytopalSystem {
   createParameterMappings() {
     return {
       visual: {
-        gridDensity: { vib34d: 'density', range: [5, 100], transform: (v) => v * 0.1 },
-        morphFactor: { vib34d: 'morph', range: [0, 2], transform: (v) => v },
+        gridDensity: { vib34d: 'gridDensity', range: [5, 100], transform: (v) => v },
+        morphFactor: { vib34d: 'morphFactor', range: [0, 2], transform: (v) => v },
         chaos: { vib34d: 'chaos', range: [0, 1], transform: (v) => v },
-        speed: { vib34d: 'speed', range: [0.1, 3], transform: (v) => v * 0.01 },
+        speed: { vib34d: 'speed', range: [0.1, 3], transform: (v) => v },
         intensity: { vib34d: 'intensity', range: [0, 1], transform: (v) => v }
       },
       color: {
-        hue: { vib34d: 'hue', range: [0, 360], transform: (v) => v / 360 },
-        intensity: { vib34d: 'brightness', range: [0, 1], transform: (v) => v },
+        hue: { vib34d: 'hue', range: [0, 360], transform: (v) => v },
+        intensity: { vib34d: 'intensity', range: [0, 1], transform: (v) => v },
         saturation: { vib34d: 'saturation', range: [0, 1], transform: (v) => v }
       },
       rot4d: {
-        xw: { vib34d: 'rot4d_xw', range: [-6.28, 6.28], transform: (v) => v },
-        yw: { vib34d: 'rot4d_yw', range: [-6.28, 6.28], transform: (v) => v },
-        zw: { vib34d: 'rot4d_zw', range: [-6.28, 6.28], transform: (v) => v }
+        xw: { vib34d: 'rot4dXW', range: [-6.28, 6.28], transform: (v) => v },
+        yw: { vib34d: 'rot4dYW', range: [-6.28, 6.28], transform: (v) => v },
+        zw: { vib34d: 'rot4dZW', range: [-6.28, 6.28], transform: (v) => v }
       }
     };
   }
   
   scanForVisualizers() {
-    // Find all VIB34D iframes and register them
-    document.querySelectorAll('iframe[src*="vib34d"], iframe[src*="domusgpt"]').forEach((iframe, index) => {
+    // Find all VIB34D iframes and register them - FIXED to include crystal-grimoire
+    document.querySelectorAll('iframe[src*="vib34d"], iframe[src*="domusgpt"], iframe[src*="crystal-grimoire"]').forEach((iframe, index) => {
       const id = iframe.id || `vib34d-${index}`;
       iframe.id = id; // Ensure iframe has ID
       
@@ -657,9 +657,19 @@ class UnifiedPolytopalSystem {
     if (visualizer.type === 'vib34d') {
       try {
         const url = new URL(visualizer.element.src);
-        url.searchParams.forEach((value, key) => {
-          visualizer.currentParams.set(key, parseFloat(value) || 0);
-        });
+        
+        // Handle crystal-grimoire hash-based parameters  
+        if (url.hostname.includes('crystal-grimoire')) {
+          const hashParams = new URLSearchParams(url.hash.substring(1));
+          hashParams.forEach((value, key) => {
+            visualizer.currentParams.set(key, parseFloat(value) || 0);
+          });
+        } else {
+          // Standard query parameters
+          url.searchParams.forEach((value, key) => {
+            visualizer.currentParams.set(key, parseFloat(value) || 0);
+          });
+        }
       } catch (error) {
         console.warn('Could not capture parameters for:', visualizer.id);
         visualizer.isHealthy = false;
@@ -707,21 +717,42 @@ class UnifiedPolytopalSystem {
       const url = new URL(visualizer.element.src);
       let hasChanges = false;
       
-      Object.entries(params).forEach(([param, value]) => {
-        const currentValue = url.searchParams.get(param);
-        const newValue = value.toString();
+      // Handle crystal-grimoire hash-based parameters
+      if (url.hostname.includes('crystal-grimoire')) {
+        const currentHash = url.hash.substring(1); // Remove #
+        const hashParams = new URLSearchParams(currentHash);
         
-        if (currentValue !== newValue) {
-          url.searchParams.set(param, newValue);
-          visualizer.currentParams.set(param, value);
-          hasChanges = true;
+        Object.entries(params).forEach(([param, value]) => {
+          const currentValue = hashParams.get(param);
+          const newValue = value.toString();
+          
+          if (currentValue !== newValue) {
+            hashParams.set(param, newValue);
+            visualizer.currentParams.set(param, value);
+            hasChanges = true;
+          }
+        });
+        
+        if (hasChanges) {
+          url.hash = hashParams.toString();
+          visualizer.element.src = url.toString();
         }
-      });
-      
-      // PERFORMANCE FIX: Only update iframe if there are actual changes
-      if (hasChanges) {
-        visualizer.element.src = url.toString();
-        // console.log('🔄 Updated', Object.keys(params).length, 'parameters for', visualizer.id);
+      } else {
+        // Standard query parameter handling for other VIB34D instances
+        Object.entries(params).forEach(([param, value]) => {
+          const currentValue = url.searchParams.get(param);
+          const newValue = value.toString();
+          
+          if (currentValue !== newValue) {
+            url.searchParams.set(param, newValue);
+            visualizer.currentParams.set(param, value);
+            hasChanges = true;
+          }
+        });
+        
+        if (hasChanges) {
+          visualizer.element.src = url.toString();
+        }
       }
       
     } catch (error) {
