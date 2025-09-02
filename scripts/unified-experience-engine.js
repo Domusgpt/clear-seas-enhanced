@@ -638,5 +638,5 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 100);
 });
 
-// Export for other modules
+// Make available globally
 window.UnifiedExperienceEngine = UnifiedExperienceEngine;

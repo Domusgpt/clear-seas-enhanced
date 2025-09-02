@@ -1,6 +1,6 @@
 /*
  * SYSTEM VERIFICATION TOOL
- * Validates that the Master Conductor system is working correctly
+ * Validates that the Unified Experience Engine system is working correctly
  * Provides diagnostic information and performance metrics
  */
 
@@ -11,10 +11,10 @@ class SystemVerification {
   }
 
   async runVerification() {
-    console.log('🔍 Starting Master Conductor System Verification...');
+    console.log('🔍 Starting Unified Experience Engine System Verification...');
     
-    // Test 1: Check if MasterConductor is available
-    this.testMasterConductorAvailability();
+    // Test 1: Check if UnifiedExperienceEngine is available
+    this.testUnifiedEngineAvailability();
     
     // Test 2: Check coordinated subsystems
     this.testCoordinatedSubsystems();
@@ -32,49 +32,55 @@ class SystemVerification {
     this.generateReport();
   }
 
-  testMasterConductorAvailability() {
-    console.log('📋 Test 1: Master Conductor Availability');
+  testUnifiedEngineAvailability() {
+    console.log('📋 Test 1: Unified Experience Engine Availability');
     
-    this.results.masterConductor = {
-      available: typeof window.masterConductor !== 'undefined',
-      instance: window.masterConductor ? true : false,
-      isActive: window.masterConductor ? window.masterConductor.isActive : false,
-      timing: window.masterConductor ? window.masterConductor.timing : null
+    this.results.unifiedEngine = {
+      classAvailable: typeof window.UnifiedExperienceEngine !== 'undefined',
+      instanceAvailable: typeof window.unifiedEngine !== 'undefined',
+      isActive: window.unifiedEngine ? window.unifiedEngine.isActive : false,
+      state: window.unifiedEngine ? window.unifiedEngine.getState() : null
     };
     
-    if (this.results.masterConductor.available) {
-      console.log('✅ MasterConductor is available and initialized');
-      console.log('📊 Current timing state:', this.results.masterConductor.timing);
+    if (this.results.unifiedEngine.classAvailable && this.results.unifiedEngine.instanceAvailable) {
+      console.log('✅ UnifiedExperienceEngine is available and initialized');
+      console.log('📊 Current engine state:', {
+        scroll: this.results.unifiedEngine.state?.scroll,
+        performance: this.results.unifiedEngine.state?.performance
+      });
+    } else if (this.results.unifiedEngine.classAvailable) {
+      console.log('⚠️ UnifiedExperienceEngine class available but not initialized');
     } else {
-      console.log('❌ MasterConductor is not available');
+      console.log('❌ UnifiedExperienceEngine is not available');
     }
   }
 
   testCoordinatedSubsystems() {
-    console.log('📋 Test 2: Coordinated Subsystems');
+    console.log('📋 Test 2: Unified Engine Components');
     
-    const expectedSubsystems = [
-      'CoordinatedScrollMaster',
-      'CoordinatedChoreographedVisualizerSystem', 
-      'CoordinatedZonePacingController'
-    ];
+    if (!window.unifiedEngine) {
+      console.log('❌ Cannot test components - UnifiedEngine not available');
+      this.results.components = { available: false };
+      return;
+    }
     
-    this.results.coordinated = {};
-    expectedSubsystems.forEach(system => {
-      const available = typeof window[system] !== 'undefined';
-      this.results.coordinated[system] = available;
-      
-      if (available) {
-        console.log(`✅ ${system} available`);
-      } else {
-        console.log(`❌ ${system} not available`);
-      }
-    });
-
-    // Check if systems are registered with conductor
-    if (window.masterConductor && window.masterConductor.systems) {
-      console.log('📊 Registered systems:', Object.keys(window.masterConductor.systems));
-      this.results.registeredSystems = Object.keys(window.masterConductor.systems);
+    const engine = window.unifiedEngine;
+    this.results.components = {
+      available: true,
+      zones: engine.zones ? engine.zones.size : 0,
+      visualizers: engine.visualizers ? engine.visualizers.size : 0,
+      isActive: engine.isActive,
+      rafId: engine.rafId !== null
+    };
+    
+    console.log(`✅ Zones defined: ${this.results.components.zones}`);
+    console.log(`✅ Visualizers registered: ${this.results.components.visualizers}`);
+    console.log(`✅ Engine active: ${this.results.components.isActive ? 'Yes' : 'No'}`);
+    console.log(`✅ RAF loop running: ${this.results.components.rafId ? 'Yes' : 'No'}`);
+    
+    // List active zones
+    if (engine.zones) {
+      console.log('📊 Available zones:', Array.from(engine.zones.keys()));
     }
   }
 
@@ -118,45 +124,60 @@ class SystemVerification {
     console.log('📋 Test 4: System Coordination');
     
     return new Promise((resolve) => {
-      if (!window.masterConductor) {
-        console.log('❌ Cannot test coordination - MasterConductor not available');
+      if (!window.unifiedEngine) {
+        console.log('❌ Cannot test coordination - UnifiedEngine not available');
         this.results.coordination = { available: false };
         resolve();
         return;
       }
 
-      // Test coordination by triggering a scroll event
-      const originalScroll = window.scrollY;
-      let coordinationEvents = 0;
+      // Test coordination by checking engine state changes
+      const engine = window.unifiedEngine;
+      const initialState = {
+        scrollY: engine.state.scroll.y,
+        zone: engine.state.scroll.zone?.id || null
+      };
       
-      // Monitor coordination events
-      const originalLog = console.log;
-      console.log = function(...args) {
-        if (args[0] && args[0].includes('Coordinated')) {
-          coordinationEvents++;
+      let stateChanges = 0;
+      const originalScroll = window.scrollY;
+      
+      // Monitor state changes
+      const checkStateChange = () => {
+        const currentState = {
+          scrollY: engine.state.scroll.y,
+          zone: engine.state.scroll.zone?.id || null
+        };
+        
+        if (currentState.scrollY !== initialState.scrollY || currentState.zone !== initialState.zone) {
+          stateChanges++;
         }
-        return originalLog.apply(console, args);
       };
       
       // Trigger a small scroll
-      window.scrollTo({ top: 100, behavior: 'smooth' });
+      window.scrollTo({ top: Math.max(100, originalScroll + 50), behavior: 'smooth' });
+      
+      // Check state changes multiple times
+      const checkInterval = setInterval(checkStateChange, 100);
       
       setTimeout(() => {
+        clearInterval(checkInterval);
         // Restore original scroll position
         window.scrollTo({ top: originalScroll, behavior: 'auto' });
-        console.log = originalLog;
         
         this.results.coordination = {
           available: true,
-          events: coordinationEvents,
-          working: coordinationEvents > 0
+          stateChanges: stateChanges,
+          working: stateChanges > 0,
+          engineActive: engine.isActive
         };
         
-        if (coordinationEvents > 0) {
-          console.log(`✅ System coordination working (${coordinationEvents} coordination events)`);
+        if (stateChanges > 0) {
+          console.log(`✅ System coordination working (${stateChanges} state changes detected)`);
         } else {
-          console.log('⚠️ No coordination events detected during scroll test');
+          console.log('⚠️ No state changes detected during scroll test');
         }
+        
+        console.log(`📊 Engine active: ${engine.isActive}, RAF running: ${engine.rafId !== null}`);
         
         resolve();
       }, 1000);
@@ -195,12 +216,13 @@ class SystemVerification {
     const endTime = performance.now();
     const totalTime = endTime - this.startTime;
     
-    console.log('\n🎯 MASTER CONDUCTOR VERIFICATION REPORT');
+    console.log('\n🎯 UNIFIED EXPERIENCE ENGINE VERIFICATION REPORT');
     console.log('='*50);
     
     // Overall status
     const overallHealthy = 
-      this.results.masterConductor?.available &&
+      this.results.unifiedEngine?.classAvailable &&
+      this.results.unifiedEngine?.instanceAvailable &&
       this.results.rafLoop?.unified &&
       (this.results.coordination?.working ?? true);
     
@@ -209,10 +231,9 @@ class SystemVerification {
     
     // Detailed results
     console.log('📊 Detailed Results:');
-    console.log('Master Conductor:', this.results.masterConductor?.available ? '✅' : '❌');
-    console.log('Coordinated Systems:', 
-      Object.values(this.results.coordinated || {}).filter(Boolean).length, '/', 
-      Object.keys(this.results.coordinated || {}).length);
+    console.log('Unified Engine Available:', this.results.unifiedEngine?.instanceAvailable ? '✅' : '❌');
+    console.log('Engine Components:', 
+      `Zones: ${this.results.components?.zones || 0}, Visualizers: ${this.results.components?.visualizers || 0}`);
     console.log('RAF Loop Unified:', this.results.rafLoop?.unified ? '✅' : '⚠️');
     console.log('System Coordination:', this.results.coordination?.working ? '✅' : '⚠️');
     
@@ -222,17 +243,22 @@ class SystemVerification {
     
     // Recommendations
     console.log('\n💡 Recommendations:');
-    if (!this.results.masterConductor?.available) {
-      console.log('- Check that master-conductor.js is loaded properly');
+    if (!this.results.unifiedEngine?.instanceAvailable) {
+      console.log('- Check that unified-experience-engine.js is loaded properly');
+      console.log('- Verify no syntax errors are preventing initialization');
     }
     if (!this.results.rafLoop?.unified) {
-      console.log('- Multiple RAF loops detected - check for uncoordinated animations');
+      console.log('- Multiple RAF loops detected - legacy systems may still be running');
     }
     if (!this.results.coordination?.working) {
-      console.log('- System coordination may not be working - check console for errors');
+      console.log('- Engine coordination may not be working - check console for errors');
+    }
+    if (this.results.components?.zones === 0) {
+      console.log('- No zones detected - check section elements have proper IDs');
     }
     if (overallHealthy) {
-      console.log('- System is operating correctly! 🎉');
+      console.log('- Unified Experience Engine is operating correctly! 🎉');
+      console.log('- All scroll conflicts should be resolved');
     }
     
     console.log('\n' + '='*50);
@@ -257,7 +283,7 @@ if (typeof document !== 'undefined') {
       };
       
       console.log('🔧 System Verification Tool loaded.');
-      console.log('💻 Run "runVerification()" in console to test the Master Conductor system.');
+      console.log('💻 Run "runVerification()" in console to test the Unified Experience Engine.');
     }, 2000);
   });
 }
