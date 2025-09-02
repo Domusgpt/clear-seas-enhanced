@@ -3,15 +3,23 @@
  * Extended section heights with zone-based styling
  */
 
-/* Extended Section Heights - Each section is now 500vh for immersive experience */
+/* Optimized Section Heights with scroll-snap */
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
 .scroll-section {
-  min-height: 500vh !important; /* Force 500vh height for extended presentation */
+  min-height: 100vh !important; /* Single viewport height for snap focus */
+  height: 100vh;
   position: relative;
   overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   
   /* Zone-based background gradients */
   background-attachment: fixed;
-  background-size: 100% 300vh;
+  background-size: 100% 100vh;
   
   /* Performance optimizations */
   will-change: transform, opacity;
@@ -21,9 +29,9 @@
   /* Container for zone content */
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  padding: 50vh 2rem 50vh 2rem; /* Center content vertically */
+  padding: 2rem; /* Reasonable padding */
 }
 
 /* Zone-specific styling */
@@ -80,10 +88,10 @@
   padding: 0;
   margin: 0 auto;
   
-  /* Content animations based on scroll position */
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Content animations - immediate */
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* Content visible when in zone */

@@ -90,6 +90,7 @@
   <script src="scripts/zone-pacing-controller.js" defer></script>
   <script src="scripts/intelligent-scroll-indicator.js" defer></script>
   <script src="scripts/intelligent-scroll-master.js" defer></script>
+  <script src="scripts/smooth-snap-controller.js" defer></script>
   
   <!-- LEGACY SYSTEMS (DISABLED BY INTELLIGENT SCROLL MASTER) -->
   <!-- <script src="scripts/tactile-snap-scroll-system.js" defer></script> -->
@@ -970,6 +971,21 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Initialize all systems when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize smooth snap controller for immediate response
+      window.smoothSnapController = new SmoothSnapController();
+      
+      // Initialize scroll master after a brief delay
+      setTimeout(() => {
+        if (typeof IntelligentScrollMaster !== 'undefined') {
+          window.scrollMaster = new IntelligentScrollMaster();
+        }
+      }, 100);
+    });
+  </script>
 
 </body>
 </html>

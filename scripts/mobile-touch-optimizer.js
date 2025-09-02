@@ -19,12 +19,12 @@ class MobileTouchOptimizer {
     };
     
     this.mobileSettings = {
-      scrollMultiplier: this.isMobile ? 0.4 : 1.0, // Much slower on mobile
-      minSwipeDistance: 30,
+      scrollMultiplier: this.isMobile ? 1.0 : 1.0, // Normal speed for snap scrolling
+      minSwipeDistance: 50,
       maxSwipeTime: 300,
-      momentumDecay: 0.92,
-      bounceThreshold: 100,
-      zAxisSensitivity: 0.3
+      momentumDecay: 0.95,
+      bounceThreshold: 50,
+      zAxisSensitivity: 0.5
     };
     
     this.init();

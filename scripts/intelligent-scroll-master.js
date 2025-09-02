@@ -47,7 +47,7 @@ class IntelligentScrollMaster {
   defineScrollZones() {
     // Each zone is much longer for immersive presentation - 500vh per section
     const sectionOrder = ['hero', 'technology', 'portfolio', 'research', 'about', 'contact'];
-    const zoneHeight = window.innerHeight * 5; // 500vh per section for extended presentation
+    const zoneHeight = window.innerHeight; // 100vh per section for snap scrolling
     
     sectionOrder.forEach((sectionId, index) => {
       const startY = index * zoneHeight;

@@ -13,8 +13,8 @@ class ZonePacingController {
       transitionStartTime: 0,
       currentSubZone: null,
       zoneEnterTime: 0,
-      minimumZoneTime: 3000, // 3 seconds minimum in each zone
-      transitionCooldown: 1500, // 1.5 seconds between zone transitions
+      minimumZoneTime: 500, // Quick 500ms minimum
+      transitionCooldown: 200, // Fast 200ms cooldown
       lastTransitionTime: 0
     };
     
@@ -26,14 +26,14 @@ class ZonePacingController {
       smoothScrollRAF: null
     };
     
-    // Zone-specific presentation timings
+    // Fast presentation timings - immediate response
     this.zonePresentationTimes = {
-      hero: { entry: 2000, development: 4000, flourish: 3000, transition: 1500 },
-      technology: { entry: 1500, development: 5000, flourish: 2500, transition: 1000 },
-      portfolio: { entry: 1200, development: 4500, flourish: 3000, transition: 1200 },
-      research: { entry: 1800, development: 6000, flourish: 4000, transition: 1500 },
-      about: { entry: 1000, development: 3000, flourish: 2000, transition: 800 },
-      contact: { entry: 1200, development: 3500, flourish: 2500, transition: 1000 }
+      hero: { entry: 200, development: 600, flourish: 400, transition: 200 },
+      technology: { entry: 150, development: 500, flourish: 350, transition: 150 },
+      portfolio: { entry: 200, development: 550, flourish: 400, transition: 200 },
+      research: { entry: 180, development: 650, flourish: 450, transition: 180 },
+      about: { entry: 100, development: 400, flourish: 300, transition: 100 },
+      contact: { entry: 150, development: 450, flourish: 350, transition: 150 }
     };
     
     this.init();
