@@ -638,4 +638,5 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 100);
 });
 
-export default UnifiedExperienceEngine;
+// Export for other modules
+window.UnifiedExperienceEngine = UnifiedExperienceEngine;

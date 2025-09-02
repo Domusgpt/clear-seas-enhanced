@@ -141,6 +141,9 @@
   <!-- Scroll Progress Indicator -->
   <div class="scroll-progress-indicator"></div>
 
+  <!-- Debug Info (will be hidden in production) -->
+  <div class="debug-info" id="debug-info" style="display: none;"></div>
+
   <nav id="main-nav" class="nav-container scroll-reactive">
     <div class="nav-content">
       <div class="nav-brand">
@@ -968,32 +971,31 @@
   </div>
 
   <script>
-    // Initialize Master Conductor System when DOM is loaded
+    // Initialize Unified Experience Engine when DOM is loaded
     document.addEventListener('DOMContentLoaded', () => {
-      console.log('🎭 Initializing Master Conductor System...');
+      console.log('🎯 Initializing Unified Experience Engine...');
       
-      // Initialize Master Conductor - This will coordinate all subsystems
-      if (typeof MasterConductor !== 'undefined') {
-        window.masterConductor = new MasterConductor();
-        console.log('🎯 Master Conductor System initialized successfully!');
+      // Check if Unified Experience Engine is available
+      if (typeof UnifiedExperienceEngine !== 'undefined') {
+        console.log('✅ Unified Experience Engine available - coordinated system ready!');
         
-        // Optional: Initialize smooth snap controller if needed independently
-        if (typeof SmoothSnapController !== 'undefined') {
-          window.smoothSnapController = new SmoothSnapController();
-        }
-      } else {
-        console.error('❌ MasterConductor not available - falling back to legacy initialization');
-        
-        // Fallback initialization
-        if (typeof SmoothSnapController !== 'undefined') {
-          window.smoothSnapController = new SmoothSnapController();
-        }
-        
+        // The engine initializes itself, just confirm it's working
         setTimeout(() => {
-          if (typeof IntelligentScrollMaster !== 'undefined') {
-            window.scrollMaster = new IntelligentScrollMaster();
+          if (window.unifiedEngine) {
+            console.log('🚀 Unified Experience Engine successfully initialized!');
+          } else {
+            console.warn('⚠️ Unified Engine may still be initializing...');
           }
-        }, 100);
+        }, 200);
+        
+      } else {
+        console.error('❌ Unified Experience Engine not available - check script loading');
+        
+        // Fallback: Try to initialize any remaining legacy systems
+        if (typeof SmoothSnapController !== 'undefined') {
+          window.smoothSnapController = new SmoothSnapController();
+          console.log('📌 Fallback: SmoothSnapController initialized');
+        }
       }
     });
   </script>
