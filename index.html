@@ -60,39 +60,35 @@
     };
   </script>
   
-  <!-- Core System Scripts -->
-  <script src="scripts/core-engine.js" defer></script>
-  <script src="scripts/choreographed-visualizer.js" defer></script>
-  <script src="scripts/card-specific-vib34d-visualizer.js" defer></script>
-  <script src="scripts/advanced-scroll-morph-system.js" defer></script>
-  <script src="scripts/ufo-navigation-system.js" defer></script>
-  <script src="scripts/ultimate-scroll-orchestrator.js" defer></script>
+  <!-- MASTER CONDUCTOR SYSTEM - Unified Coordination Architecture -->
+  <script src="scripts/master-conductor.js" defer></script>
   
-  <!-- CINEMATIC MOVIE DIRECTOR SYSTEM -->
-  <script src="scripts/cinematic-scroll-director.js" defer></script>
+  <!-- COORDINATED SUBSYSTEMS - Working with MasterConductor -->
+  <script src="scripts/coordinated-scroll-master.js" defer></script>
+  <script src="scripts/coordinated-choreographed-visualizer.js" defer></script>
+  <script src="scripts/coordinated-zone-pacing-controller.js" defer></script>
+  <script src="scripts/smooth-snap-controller.js" defer></script>
   
-  <!-- WOAH CARD METAMORPHOSIS ENGINE -->
-  <script src="scripts/woah-card-metamorphosis-engine.js" defer></script>
-  
-  <!-- HYPERCUBE MOIRE EFFECT ENGINE -->
-  <script src="scripts/hypercube-moire-effect-engine.js" defer></script>
-  
-  <!-- TETRAHEDRON LATTICE CORE -->
-  <script src="scripts/tetrahedron-lattice-core.js" defer></script>
-  
-  <!-- GLITCH CHROMATIC PROCESSOR -->
-  <script src="scripts/glitch-chromatic-processor.js" defer></script>
-  
-  <!-- INTELLIGENT SCROLL MASTER SYSTEM -->
+  <!-- SUPPORTING SYSTEMS - For coordinated subsystems -->
   <script src="scripts/zone-visualizers.js" defer></script>
   <script src="scripts/mobile-touch-optimizer.js" defer></script>
   <script src="scripts/mobile-navigation-injector.js" defer></script>
-  <script src="scripts/zone-pacing-controller.js" defer></script>
   <script src="scripts/intelligent-scroll-indicator.js" defer></script>
-  <script src="scripts/intelligent-scroll-master.js" defer></script>
-  <script src="scripts/smooth-snap-controller.js" defer></script>
-  
-  <!-- LEGACY SYSTEMS (DISABLED BY INTELLIGENT SCROLL MASTER) -->
+
+  <!-- LEGACY SYSTEMS (REPLACED BY MASTER CONDUCTOR) -->
+  <!-- <script src="scripts/core-engine.js" defer></script> -->
+  <!-- <script src="scripts/choreographed-visualizer.js" defer></script> -->
+  <!-- <script src="scripts/card-specific-vib34d-visualizer.js" defer></script> -->
+  <!-- <script src="scripts/advanced-scroll-morph-system.js" defer></script> -->
+  <!-- <script src="scripts/ufo-navigation-system.js" defer></script> -->
+  <!-- <script src="scripts/ultimate-scroll-orchestrator.js" defer></script> -->
+  <!-- <script src="scripts/cinematic-scroll-director.js" defer></script> -->
+  <!-- <script src="scripts/woah-card-metamorphosis-engine.js" defer></script> -->
+  <!-- <script src="scripts/hypercube-moire-effect-engine.js" defer></script> -->
+  <!-- <script src="scripts/tetrahedron-lattice-core.js" defer></script> -->
+  <!-- <script src="scripts/glitch-chromatic-processor.js" defer></script> -->
+  <!-- <script src="scripts/zone-pacing-controller.js" defer></script> -->
+  <!-- <script src="scripts/intelligent-scroll-master.js" defer></script> -->
   <!-- <script src="scripts/tactile-snap-scroll-system.js" defer></script> -->
   
   <script src="scripts/unified-system-integration.js" defer></script>
@@ -100,6 +96,9 @@
   <script src="scripts/portfolio-system.js" defer></script>
   <script src="scripts/research-system.js" defer></script>
   <script src="scripts/main.js" defer></script>
+  
+  <!-- SYSTEM VERIFICATION TOOL -->
+  <script src="scripts/system-verification.js" defer></script>
   
   <!-- System Status and Error Handling -->
   <script>
@@ -973,17 +972,33 @@
   </div>
 
   <script>
-    // Initialize all systems when DOM is loaded
+    // Initialize Master Conductor System when DOM is loaded
     document.addEventListener('DOMContentLoaded', () => {
-      // Initialize smooth snap controller for immediate response
-      window.smoothSnapController = new SmoothSnapController();
+      console.log('🎭 Initializing Master Conductor System...');
       
-      // Initialize scroll master after a brief delay
-      setTimeout(() => {
-        if (typeof IntelligentScrollMaster !== 'undefined') {
-          window.scrollMaster = new IntelligentScrollMaster();
+      // Initialize Master Conductor - This will coordinate all subsystems
+      if (typeof MasterConductor !== 'undefined') {
+        window.masterConductor = new MasterConductor();
+        console.log('🎯 Master Conductor System initialized successfully!');
+        
+        // Optional: Initialize smooth snap controller if needed independently
+        if (typeof SmoothSnapController !== 'undefined') {
+          window.smoothSnapController = new SmoothSnapController();
         }
-      }, 100);
+      } else {
+        console.error('❌ MasterConductor not available - falling back to legacy initialization');
+        
+        // Fallback initialization
+        if (typeof SmoothSnapController !== 'undefined') {
+          window.smoothSnapController = new SmoothSnapController();
+        }
+        
+        setTimeout(() => {
+          if (typeof IntelligentScrollMaster !== 'undefined') {
+            window.scrollMaster = new IntelligentScrollMaster();
+          }
+        }, 100);
+      }
     });
   </script>
 
