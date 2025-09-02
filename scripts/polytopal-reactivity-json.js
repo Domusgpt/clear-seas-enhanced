@@ -615,8 +615,8 @@ class UnifiedPolytopalSystem {
   }
   
   scanForVisualizers() {
-    // Find all VIB34D iframes and register them - FIXED to include crystal-grimoire
-    document.querySelectorAll('iframe[src*="vib34d"], iframe[src*="domusgpt"], iframe[src*="crystal-grimoire"]').forEach((iframe, index) => {
+    // Find all VIB34D iframes and register them - YOUR ULTIMATE VIEWER
+    document.querySelectorAll('iframe[src*="vib34d"], iframe[src*="domusgpt"]').forEach((iframe, index) => {
       const id = iframe.id || `vib34d-${index}`;
       iframe.id = id; // Ensure iframe has ID
       
@@ -658,18 +658,10 @@ class UnifiedPolytopalSystem {
       try {
         const url = new URL(visualizer.element.src);
         
-        // Handle crystal-grimoire hash-based parameters  
-        if (url.hostname.includes('crystal-grimoire')) {
-          const hashParams = new URLSearchParams(url.hash.substring(1));
-          hashParams.forEach((value, key) => {
-            visualizer.currentParams.set(key, parseFloat(value) || 0);
-          });
-        } else {
-          // Standard query parameters
-          url.searchParams.forEach((value, key) => {
-            visualizer.currentParams.set(key, parseFloat(value) || 0);
-          });
-        }
+        // Standard query parameters for YOUR VIB34D Ultimate Viewer
+        url.searchParams.forEach((value, key) => {
+          visualizer.currentParams.set(key, parseFloat(value) || 0);
+        });
       } catch (error) {
         console.warn('Could not capture parameters for:', visualizer.id);
         visualizer.isHealthy = false;
@@ -717,42 +709,21 @@ class UnifiedPolytopalSystem {
       const url = new URL(visualizer.element.src);
       let hasChanges = false;
       
-      // Handle crystal-grimoire hash-based parameters
-      if (url.hostname.includes('crystal-grimoire')) {
-        const currentHash = url.hash.substring(1); // Remove #
-        const hashParams = new URLSearchParams(currentHash);
+      // Standard query parameter handling for YOUR VIB34D Ultimate Viewer
+      Object.entries(params).forEach(([param, value]) => {
+        const currentValue = url.searchParams.get(param);
+        const newValue = value.toString();
         
-        Object.entries(params).forEach(([param, value]) => {
-          const currentValue = hashParams.get(param);
-          const newValue = value.toString();
-          
-          if (currentValue !== newValue) {
-            hashParams.set(param, newValue);
-            visualizer.currentParams.set(param, value);
-            hasChanges = true;
-          }
-        });
-        
-        if (hasChanges) {
-          url.hash = hashParams.toString();
-          visualizer.element.src = url.toString();
+        if (currentValue !== newValue) {
+          url.searchParams.set(param, newValue);
+          visualizer.currentParams.set(param, value);
+          hasChanges = true;
         }
-      } else {
-        // Standard query parameter handling for other VIB34D instances
-        Object.entries(params).forEach(([param, value]) => {
-          const currentValue = url.searchParams.get(param);
-          const newValue = value.toString();
-          
-          if (currentValue !== newValue) {
-            url.searchParams.set(param, newValue);
-            visualizer.currentParams.set(param, value);
-            hasChanges = true;
-          }
-        });
-        
-        if (hasChanges) {
-          visualizer.element.src = url.toString();
-        }
+      });
+      
+      // PERFORMANCE FIX: Only update iframe if there are actual changes
+      if (hasChanges) {
+        visualizer.element.src = url.toString();
       }
       
     } catch (error) {
