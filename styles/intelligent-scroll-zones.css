@@ -3,9 +3,9 @@
  * Extended section heights with zone-based styling
  */
 
-/* Extended Section Heights - Each section is now 300vh */
+/* Extended Section Heights - Each section is now 500vh for immersive experience */
 .scroll-section {
-  min-height: 300vh !important; /* Force 300vh height */
+  min-height: 500vh !important; /* Force 500vh height for extended presentation */
   position: relative;
   overflow: hidden;
   

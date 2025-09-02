@@ -8,7 +8,7 @@
   
   /* SECTION HEIGHT OPTIMIZATION FOR MOBILE */
   .scroll-section {
-    min-height: 120vh !important; /* Much shorter on mobile - 120vh instead of 300vh */
+    min-height: 200vh !important; /* Extended mobile sections - 200vh for better presentation */
     padding: 10vh 1rem 10vh 1rem; /* Reduced padding */
     
     /* Mobile-specific transforms for depth */

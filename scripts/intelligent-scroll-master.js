@@ -45,9 +45,9 @@ class IntelligentScrollMaster {
   }
   
   defineScrollZones() {
-    // Each zone is 300vh with specific sub-zones
+    // Each zone is much longer for immersive presentation - 500vh per section
     const sectionOrder = ['hero', 'technology', 'portfolio', 'research', 'about', 'contact'];
-    const zoneHeight = window.innerHeight * 3; // 300vh per section
+    const zoneHeight = window.innerHeight * 5; // 500vh per section for extended presentation
     
     sectionOrder.forEach((sectionId, index) => {
       const startY = index * zoneHeight;
@@ -648,6 +648,11 @@ class IntelligentScrollMaster {
     // Initialize mobile touch optimizer
     if (window.MobileTouchOptimizer) {
       this.mobileOptimizer = new MobileTouchOptimizer(this);
+    }
+    
+    // Initialize zone pacing controller
+    if (window.ZonePacingController) {
+      this.zonePacingController = new ZonePacingController(this);
     }
   }
   

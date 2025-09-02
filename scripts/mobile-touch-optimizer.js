@@ -172,14 +172,14 @@ class MobileTouchOptimizer {
     const sections = document.querySelectorAll('.scroll-section');
     sections.forEach((section, index) => {
       if (this.isMobile) {
-        // Special mobile heights
+        // Extended mobile heights for better presentation
         const mobileHeights = {
-          0: '100vh',  // Hero - full screen
-          1: '120vh',  // Technology
-          2: '120vh',  // Portfolio
-          3: '120vh',  // Research
-          4: '100vh',  // About
-          5: '100vh'   // Contact
+          0: '150vh',  // Hero - extended intro
+          1: '200vh',  // Technology - full presentation  
+          2: '200vh',  // Portfolio - showcase space
+          3: '200vh',  // Research - detailed content
+          4: '150vh',  // About - personal section
+          5: '150vh'   // Contact - interaction space
         };
         
         section.style.minHeight = mobileHeights[index] || '120vh';
