@@ -224,12 +224,17 @@ class WOAHCardMetamorphosisEngine {
     `;
     
     try {
-      // Create and compile shaders
+      // Create and compile shaders with better error handling
       const vertexShader = this.createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
       const fragmentShader = this.createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
       
-      if (!vertexShader || !fragmentShader) {
-        console.warn('⚠️ Failed to compile holographic shaders');
+      if (!vertexShader) {
+        console.warn('⚠️ Failed to compile vertex shader for holographic background');
+        return;
+      }
+      
+      if (!fragmentShader) {
+        console.warn('⚠️ Failed to compile fragment shader for holographic background');
         return;
       }
       
@@ -271,17 +276,42 @@ class WOAHCardMetamorphosisEngine {
   }
   
   createShader(gl, type, source) {
-    const shader = gl.createShader(type);
-    gl.shaderSource(shader, source);
-    gl.compileShader(shader);
-    
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-      console.warn('⚠️ Shader compile error:', gl.getShaderInfoLog(shader));
-      gl.deleteShader(shader);
+    try {
+      // Check if WebGL context is valid
+      if (!gl || gl.isContextLost()) {
+        console.warn('⚠️ WebGL context is invalid or lost');
+        return null;
+      }
+      
+      // Check if source is valid
+      if (!source || typeof source !== 'string' || source.trim() === '') {
+        console.warn('⚠️ Invalid shader source provided');
+        return null;
+      }
+      
+      const shader = gl.createShader(type);
+      if (!shader) {
+        console.warn('⚠️ Failed to create shader object');
+        return null;
+      }
+      
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        const errorLog = gl.getShaderInfoLog(shader);
+        const shaderTypeName = type === gl.VERTEX_SHADER ? 'vertex' : 'fragment';
+        console.warn(`⚠️ ${shaderTypeName} shader compile error:`, errorLog);
+        console.warn('Shader source:', source);
+        gl.deleteShader(shader);
+        return null;
+      }
+      
+      return shader;
+    } catch (error) {
+      console.warn('⚠️ Exception in createShader:', error);
       return null;
     }
-    
-    return shader;
   }
   
   renderHolographicBackground() {
@@ -619,6 +649,93 @@ class WOAHCardMetamorphosisEngine {
     
     return new Promise(resolve => setTimeout(resolve, 1000));
   }
+
+  async createHolographicMerge(cardData, rect) {
+    try {
+      // Create holographic merge effect where card becomes part of the background
+      const mergeContainer = document.createElement('div');
+      mergeContainer.style.cssText = `
+        position: fixed;
+        top: ${rect.top - 50}px;
+        left: ${rect.left - 50}px;
+        width: ${rect.width + 100}px;
+        height: ${rect.height + 100}px;
+        border-radius: 20px;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 998;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(0, 255, 255, 0.4) 0%,
+          rgba(255, 0, 255, 0.3) 30%,
+          rgba(0, 255, 255, 0.2) 60%,
+          transparent 100%
+        );
+        filter: blur(10px);
+        transition: all 1.5s ease-out;
+      `;
+      
+      this.stage.appendChild(mergeContainer);
+      
+      // Create holographic particles that merge with the card
+      const particles = [];
+      for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        const size = Math.random() * 6 + 2;
+        particle.style.cssText = `
+          position: absolute;
+          width: ${size}px;
+          height: ${size}px;
+          background: rgba(0, 255, 255, 0.8);
+          border-radius: 50%;
+          top: ${Math.random() * rect.height}px;
+          left: ${Math.random() * rect.width}px;
+          opacity: 0;
+          transition: all 2s ease-out;
+        `;
+        
+        mergeContainer.appendChild(particle);
+        particles.push(particle);
+      }
+      
+      // Animate the merge effect
+      requestAnimationFrame(() => {
+        mergeContainer.style.opacity = '1';
+        mergeContainer.style.filter = 'blur(0px)';
+        
+        particles.forEach((particle, index) => {
+          setTimeout(() => {
+            particle.style.opacity = '1';
+            particle.style.transform = `
+              translateX(${(Math.random() - 0.5) * 200}px)
+              translateY(${(Math.random() - 0.5) * 200}px)
+              scale(${1 + Math.random()})
+            `;
+          }, index * 50);
+        });
+        
+        // Merge with holographic background
+        if (this.holographicContainer) {
+          this.holographicContainer.style.opacity = '0.8';
+          this.holographicContainer.style.background = `
+            linear-gradient(
+              45deg,
+              rgba(0, 255, 255, 0.2) 0%,
+              rgba(255, 0, 255, 0.3) 25%,
+              rgba(0, 255, 255, 0.2) 50%,
+              rgba(255, 0, 255, 0.3) 75%,
+              rgba(0, 255, 255, 0.2) 100%
+            )
+          `;
+        }
+      });
+      
+      return new Promise(resolve => setTimeout(resolve, 2000));
+    } catch (error) {
+      console.warn('⚠️ Holographic merge effect failed:', error);
+      return Promise.resolve();
+    }
+  }
   
   async createChromaticOcclusion(cardData, rect) {
     // Create chromatic aberration and occlusion effects
@@ -756,20 +873,36 @@ class WOAHCardMetamorphosisEngine {
     card.style.boxShadow = 'none';
     card.style.opacity = '1';
     
-    // Clean up metamorphosis artifacts
-    cardData.chromaticLayers.forEach(layer => {
-      layer.style.opacity = '0';
-      setTimeout(() => layer.remove(), 1000);
-    });
+    // Clean up metamorphosis artifacts with null safety
+    if (cardData.chromaticLayers) {
+      cardData.chromaticLayers.forEach(layer => {
+        if (layer) {
+          layer.style.opacity = '0';
+          setTimeout(() => {
+            if (layer && layer.parentNode) {
+              layer.remove();
+            }
+          }, 1000);
+        }
+      });
+    }
     
     if (cardData.mirrorHalf1) {
       cardData.mirrorHalf1.style.opacity = '0';
-      setTimeout(() => cardData.mirrorHalf1.remove(), 1000);
+      setTimeout(() => {
+        if (cardData.mirrorHalf1 && cardData.mirrorHalf1.parentNode) {
+          cardData.mirrorHalf1.remove();
+        }
+      }, 1000);
     }
     
     if (cardData.mirrorHalf2) {
       cardData.mirrorHalf2.style.opacity = '0';
-      setTimeout(() => cardData.mirrorHalf2.remove(), 1000);
+      setTimeout(() => {
+        if (cardData.mirrorHalf2 && cardData.mirrorHalf2.parentNode) {
+          cardData.mirrorHalf2.remove();
+        }
+      }, 1000);
     }
     
     // Fade holographic background

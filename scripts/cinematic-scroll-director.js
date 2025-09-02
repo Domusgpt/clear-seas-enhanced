@@ -958,21 +958,24 @@ class CinematicScrollDirector {
   }
   
   updateVisualizersForScene(scene, scrollProgress) {
+    // Calculate scene progress for all updates
+    const sceneProgress = (scrollProgress - scene.scrollRange[0]) / (scene.scrollRange[1] - scene.scrollRange[0]);
+    const clampedSceneProgress = Math.max(0, Math.min(1, sceneProgress));
+    
     // Update VIB34D visualizers based on current scene
     if (window.choreographedVisualizer) {
-      const sceneProgress = (scrollProgress - scene.scrollRange[0]) / (scene.scrollRange[1] - scene.scrollRange[0]);
-      window.choreographedVisualizer.updateFromCinematicDirector(scene, Math.max(0, Math.min(1, sceneProgress)));
+      window.choreographedVisualizer.updateFromCinematicDirector(scene, clampedSceneProgress);
     }
     
     // Update geometry based on scene
     if (window.coreEngine) {
       window.coreEngine.setGeometry(scene.geometry.primary);
-      window.coreEngine.setMorphFactor(0.5 + sceneProgress * 0.5);
+      window.coreEngine.setMorphFactor(0.5 + clampedSceneProgress * 0.5);
     }
     
     // Update color palette
     if (window.hypercubeMoireEngine) {
-      const hue = scene.colorPalette.primary.h + (sceneProgress * 60); // Shift hue through scene
+      const hue = scene.colorPalette.primary.h + (clampedSceneProgress * 60); // Shift hue through scene
       window.hypercubeMoireEngine.updateColorFromCinematic(hue, scene.colorPalette.primary.s, scene.colorPalette.primary.l);
     }
   }

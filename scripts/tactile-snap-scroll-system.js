@@ -570,6 +570,66 @@ class TactileSnapScrollSystem {
       console.warn('⚠️ Haptic feedback failed:', error);
     }
   }
+
+  triggerVisualEffects() {
+    try {
+      // Get current scroll progress
+      const scrollProgress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      const currentSection = this.getCurrentSection();
+      
+      // Trigger visual effects on different systems
+      if (window.woahCardSystem) {
+        window.woahCardSystem.updateVisualEffects({
+          scrollProgress,
+          currentSection,
+          timestamp: Date.now()
+        });
+      }
+      
+      if (window.cinematicScrollDirector) {
+        window.cinematicScrollDirector.updateVisualState({
+          progress: scrollProgress,
+          section: currentSection,
+          velocity: this.scrollVelocity
+        });
+      }
+      
+      // Trigger holographic effects if available
+      if (window.holographicSystem) {
+        window.holographicSystem.updateEffects({
+          intensity: Math.min(Math.abs(this.scrollVelocity) * 0.1, 1.0),
+          progress: scrollProgress,
+          section: currentSection
+        });
+      }
+      
+    } catch (error) {
+      console.warn('⚠️ Visual effects trigger failed:', error);
+    }
+  }
+  
+  getCurrentSection() {
+    const sections = document.querySelectorAll('section, .section, [data-section]');
+    const currentY = window.scrollY + (window.innerHeight / 2);
+    
+    for (let i = 0; i < sections.length; i++) {
+      const section = sections[i];
+      const rect = section.getBoundingClientRect();
+      const sectionTop = rect.top + window.scrollY;
+      const sectionBottom = sectionTop + rect.height;
+      
+      if (currentY >= sectionTop && currentY <= sectionBottom) {
+        return {
+          index: i,
+          element: section,
+          progress: (currentY - sectionTop) / rect.height,
+          id: section.id || `section-${i}`
+        };
+      }
+    }
+    
+    return { index: 0, element: sections[0], progress: 0, id: 'default' };
+  }
   
   destroy() {
     // Clean up event listeners and elements

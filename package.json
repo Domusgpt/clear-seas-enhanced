@@ -1,0 +1,25 @@
+{
+  "name": "clear-seas-enhanced",
+  "version": "1.0.0",
+  "description": "This is the enhanced, production-ready website for Clear Seas Solutions LLC, featuring cutting-edge VIB34D visualizer integration, micro-reactive systems, and professional presentation designed to make \"an impact beyond anything ever done.\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Domusgpt/clear-seas-enhanced.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Domusgpt/clear-seas-enhanced/issues"
+  },
+  "homepage": "https://github.com/Domusgpt/clear-seas-enhanced#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "playwright": "^1.55.0"
+  }
+}
