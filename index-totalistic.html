@@ -861,9 +861,9 @@
                         saturation: parseFloat(container.dataset.saturation) || 0.7
                     };
                     
-                    // Create layered visualizer for this container
+                    // Create multi-layer visualizer for this container
                     const visualizerId = `visualizer-${container.id || Math.random().toString(36).substr(2, 9)}`;
-                    await window.contextPool.createLayeredVisualizer(visualizerId, system, params, container);
+                    await window.contextPool.createMultiLayerVisualizer(visualizerId, system, container);
                     
                     console.log(`✨ Created layered ${system} visualizer: ${visualizerId}`);
                 }

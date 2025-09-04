@@ -516,6 +516,29 @@ class ExperienceChoreographer {
         });
     }
 
+    getCardBaseSize(card) {
+        // Get the base size of a card for transformation calculations
+        const rect = card.getBoundingClientRect();
+        const computedStyle = window.getComputedStyle(card);
+        
+        return {
+            width: rect.width,
+            height: rect.height,
+            padding: {
+                top: parseFloat(computedStyle.paddingTop) || 0,
+                right: parseFloat(computedStyle.paddingRight) || 0, 
+                bottom: parseFloat(computedStyle.paddingBottom) || 0,
+                left: parseFloat(computedStyle.paddingLeft) || 0
+            },
+            margin: {
+                top: parseFloat(computedStyle.marginTop) || 0,
+                right: parseFloat(computedStyle.marginRight) || 0,
+                bottom: parseFloat(computedStyle.marginBottom) || 0, 
+                left: parseFloat(computedStyle.marginLeft) || 0
+            }
+        };
+    }
+
     destroy() {
         // Clean up all event listeners
         Object.entries(this.boundEvents).forEach(([event, handler]) => {
