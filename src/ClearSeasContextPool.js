@@ -43,6 +43,7 @@ class ClearSeasContextPool {
         }
         
         this.startRenderLoop();
+        this.startPeriodicCleanup();
         this.isInitialized = true;
         
         console.log(`✅ Context Pool ready: ${preWarmCount} pre-warmed contexts`);
@@ -79,12 +80,19 @@ class ClearSeasContextPool {
             return contextInfo;
         }
         
+        // Check if visualizer is in viewport before allocating
+        const visualizer = this.visualizers.get(visualizerId);
+        if (visualizer && !this.isVisualizerInViewport(visualizer.container)) {
+            console.log(`⏸️ Skipping context allocation for off-screen visualizer: ${contextId}`);
+            return null;
+        }
+        
         // Try to allocate new context
         if (this.activeContexts.size < this.maxContexts) {
             return await this.createNewContext(contextId, priority, visualizerId, layerType);
         }
         
-        // Pool is full - try to evict lower priority context
+        // Pool is full - try to evict lower priority context (prefer off-screen)
         const victimContext = this.findEvictionCandidate(priority);
         if (victimContext) {
             await this.evictContext(victimContext.id);
@@ -399,17 +407,45 @@ class ClearSeasContextPool {
     }
 
     findEvictionCandidate(requiredPriority) {
-        let candidate = null;
-        let oldestTime = Infinity;
+        let bestCandidate = null;
+        let bestScore = -Infinity;
         
         for (const contextInfo of this.activeContexts.values()) {
-            if (contextInfo.priority < requiredPriority && contextInfo.lastUsed < oldestTime) {
-                candidate = contextInfo;
-                oldestTime = contextInfo.lastUsed;
+            if (contextInfo.priority >= requiredPriority) continue;
+            
+            // Calculate eviction score (higher = more suitable for eviction)
+            let score = 0;
+            
+            // Priority factor: lower priority = higher eviction score
+            score += (requiredPriority - contextInfo.priority) * 100;
+            
+            // Age factor: older contexts get higher eviction score
+            const age = performance.now() - contextInfo.lastUsed;
+            score += Math.min(age / 1000, 50); // Cap at 50 points for age
+            
+            // Viewport factor: off-screen contexts get significantly higher score
+            const visualizer = this.visualizers.get(contextInfo.visualizerId);
+            if (visualizer && !this.isVisualizerInViewport(visualizer.container)) {
+                score += 200; // Strong preference for off-screen contexts
+            }
+            
+            // Layer importance factor: prefer evicting background/shadow over content/highlight
+            const layerWeights = {
+                'background': 20,
+                'shadow': 15,
+                'content': 0,     // Don't prefer evicting content
+                'highlight': 0,   // Don't prefer evicting highlight  
+                'accent': 5
+            };
+            score += layerWeights[contextInfo.layerType] || 0;
+            
+            if (score > bestScore) {
+                bestCandidate = contextInfo;
+                bestScore = score;
             }
         }
         
-        return candidate;
+        return bestCandidate;
     }
 
     async evictContext(contextId) {
@@ -560,6 +596,57 @@ class ClearSeasContextPool {
         }
     }
 
+    isVisualizerInViewport(container) {
+        if (!container) return false;
+        
+        const bounds = container.getBoundingClientRect();
+        const viewport = {
+            top: -100, // 100px buffer above viewport
+            left: -100, // 100px buffer left of viewport
+            bottom: window.innerHeight + 100, // 100px buffer below viewport
+            right: window.innerWidth + 100 // 100px buffer right of viewport
+        };
+        
+        return !(bounds.bottom < viewport.top || 
+                bounds.top > viewport.bottom || 
+                bounds.right < viewport.left || 
+                bounds.left > viewport.right);
+    }
+
+    startPeriodicCleanup() {
+        // Clean up off-screen contexts every 5 seconds
+        this.cleanupInterval = setInterval(() => {
+            this.cleanupOffScreenContexts();
+        }, 5000);
+    }
+
+    cleanupOffScreenContexts() {
+        const contextsToEvict = [];
+        
+        for (const contextInfo of this.activeContexts.values()) {
+            const visualizer = this.visualizers.get(contextInfo.visualizerId);
+            if (visualizer && !this.isVisualizerInViewport(visualizer.container)) {
+                // Only evict if context hasn't been used recently
+                const timeSinceLastUse = performance.now() - contextInfo.lastUsed;
+                if (timeSinceLastUse > 10000) { // 10 seconds
+                    contextsToEvict.push(contextInfo.id);
+                }
+            }
+        }
+        
+        // Evict contexts but maintain minimum context count for responsiveness
+        const minContextsToKeep = Math.max(4, this.maxContexts * 0.3);
+        const maxToEvict = this.activeContexts.size - minContextsToKeep;
+        
+        for (let i = 0; i < Math.min(contextsToEvict.length, maxToEvict); i++) {
+            this.evictContext(contextsToEvict[i]);
+        }
+        
+        if (contextsToEvict.length > 0) {
+            console.log(`🧹 Cleaned up ${Math.min(contextsToEvict.length, maxToEvict)} off-screen contexts`);
+        }
+    }
+
     getPoolStats() {
         return {
             maxContexts: this.maxContexts,
@@ -572,6 +659,10 @@ class ClearSeasContextPool {
     destroy() {
         if (this.frameId) {
             cancelAnimationFrame(this.frameId);
+        }
+        
+        if (this.cleanupInterval) {
+            clearInterval(this.cleanupInterval);
         }
         
         // Clean up all contexts

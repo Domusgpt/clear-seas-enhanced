@@ -844,29 +844,80 @@
                 window.contextPool = new window.ClearSeasContextPool();
                 await window.contextPool.initialize();
                 
-                // Scan for all layered visualizer containers and initialize them
+                // Setup lazy loading with Intersection Observer
                 const containers = document.querySelectorAll('.layered-vib34d-container');
-                console.log(`🌊 Found ${containers.length} layered visualizer containers`);
+                console.log(`🌊 Found ${containers.length} layered visualizer containers - setting up lazy loading`);
                 
-                for (const container of containers) {
-                    const system = container.dataset.vibSystem;
-                    const params = {
-                        geometry: parseInt(container.dataset.geometry) || 0,
-                        gridDensity: parseInt(container.dataset.gridDensity) || 20,
-                        morphFactor: parseFloat(container.dataset.morphFactor) || 1.0,
-                        chaos: parseFloat(container.dataset.chaos) || 0.25,
-                        speed: parseFloat(container.dataset.speed) || 0.8,
-                        hue: parseInt(container.dataset.hue) || 200,
-                        intensity: parseFloat(container.dataset.intensity) || 0.9,
-                        saturation: parseFloat(container.dataset.saturation) || 0.7
-                    };
-                    
-                    // Create multi-layer visualizer for this container
-                    const visualizerId = `visualizer-${container.id || Math.random().toString(36).substr(2, 9)}`;
-                    await window.contextPool.createMultiLayerVisualizer(visualizerId, system, container);
-                    
-                    console.log(`✨ Created layered ${system} visualizer: ${visualizerId}`);
-                }
+                // Create intersection observer for lazy loading
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '100px', // Start loading 100px before visible
+                    threshold: 0.1 // Load when 10% visible
+                };
+                
+                const lazyLoadObserver = new IntersectionObserver(async (entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting) {
+                            const container = entry.target;
+                            
+                            // Skip if already initialized
+                            if (container.dataset.initialized === 'true') continue;
+                            
+                            const system = container.dataset.vibSystem;
+                            const visualizerId = `visualizer-${container.id || Math.random().toString(36).substr(2, 9)}`;
+                            
+                            console.log(`🎯 Lazy loading ${system} visualizer: ${visualizerId}`);
+                            
+                            try {
+                                await window.contextPool.createMultiLayerVisualizer(visualizerId, system, container);
+                                container.dataset.initialized = 'true';
+                                container.dataset.visualizerId = visualizerId;
+                                console.log(`✨ Lazy loaded ${system} visualizer: ${visualizerId}`);
+                            } catch (error) {
+                                console.error(`❌ Failed to lazy load visualizer:`, error);
+                            }
+                            
+                            // Stop observing this container
+                            lazyLoadObserver.unobserve(container);
+                        }
+                    }
+                }, observerOptions);
+                
+                // Setup viewport exit observer for smart destruction
+                const exitObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (!entry.isIntersecting) {
+                            const container = entry.target;
+                            const visualizerId = container.dataset.visualizerId;
+                            
+                            if (visualizerId && window.contextPool.visualizers.has(visualizerId)) {
+                                // Mark for potential cleanup (but don't destroy immediately)
+                                setTimeout(() => {
+                                    const bounds = container.getBoundingClientRect();
+                                    const isStillOffScreen = bounds.bottom < 0 || bounds.top > window.innerHeight;
+                                    
+                                    if (isStillOffScreen && window.contextPool.visualizers.has(visualizerId)) {
+                                        console.log(`🗑️ Smart cleanup: destroying off-screen visualizer ${visualizerId}`);
+                                        const visualizer = window.contextPool.visualizers.get(visualizerId);
+                                        visualizer.destroy();
+                                        window.contextPool.visualizers.delete(visualizerId);
+                                        container.dataset.initialized = 'false';
+                                        container.dataset.visualizerId = '';
+                                        
+                                        // Re-observe for potential re-entry
+                                        lazyLoadObserver.observe(container);
+                                    }
+                                }, 2000); // 2 second delay before cleanup
+                            }
+                        }
+                    }
+                }, { threshold: 0 });
+                
+                // Start observing all containers
+                containers.forEach(container => {
+                    lazyLoadObserver.observe(container);
+                    exitObserver.observe(container);
+                });
                 
                 // Start the render loop
                 window.contextPool.startRenderLoop();
