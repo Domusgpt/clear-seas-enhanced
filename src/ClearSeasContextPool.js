@@ -249,7 +249,7 @@ class ClearSeasContextPool {
 
     getLayerSpecificShaderCode(layerType, systemType) {
         const systemMath = {
-            'FACETED': 'abs(fract(p * 0.1) - 0.5)',
+            'FACETED': 'length(abs(fract(p * 0.1) - 0.5))',
             'QUANTUM': 'max(max(abs(p.x), abs(p.y)), abs(p.z)) - 0.3', 
             'HOLOGRAPHIC': 'length(fract(p * 0.08) - 0.5) - 0.25',
             'POLYCHORA': 'length(p) - 0.4'
