@@ -505,8 +505,8 @@ class ClearSeasContextPool {
             
             gl.uniform1f(uniforms.intensity, layerParams.intensity);
             gl.uniform1f(uniforms.layerMix, layerParams.layerMix);
-            gl.uniform3fv(uniforms.primaryColor, layerParams.primaryColor);
-            gl.uniform3fv(uniforms.secondaryColor, layerParams.secondaryColor);
+            gl.uniform3fv(uniforms.primaryColor, layerParams.primary || [1.0, 1.0, 1.0]);
+            gl.uniform3fv(uniforms.secondaryColor, layerParams.secondary || [0.5, 0.5, 0.5]);
             gl.uniform1f(uniforms.morphProgress, layerParams.morphProgress);
         }
         

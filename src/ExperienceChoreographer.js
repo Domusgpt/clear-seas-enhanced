@@ -539,6 +539,33 @@ class ExperienceChoreographer {
         };
     }
 
+    updateVisualizerForCard(cardId, transformState) {
+        // Update visualizer parameters based on card transformation state
+        const card = transformState.element;
+        if (!card) return;
+        
+        // Find visualizer container within the card
+        const visualizerContainer = card.querySelector('.layered-vib34d-container');
+        if (!visualizerContainer || !window.contextPool) return;
+        
+        // Get the visualizer ID from the container's associated visualizer
+        const visualizerId = visualizerContainer.dataset.visualizerId;
+        if (!visualizerId) return;
+        
+        // Update visualizer parameters based on transformation state
+        const visualizer = window.contextPool.visualizers.get(visualizerId);
+        if (visualizer) {
+            const intensity = 1.0 + (transformState.currentTransform.scale - 1.0) * 0.5;
+            const morphProgress = Math.abs(transformState.currentTransform.rotationX) / 30.0;
+            
+            visualizer.updateParameters({
+                background: { intensity: intensity * 0.8, morphProgress: morphProgress },
+                content: { intensity: intensity, morphProgress: morphProgress },
+                highlight: { intensity: intensity * 1.2, morphProgress: morphProgress }
+            });
+        }
+    }
+
     destroy() {
         // Clean up all event listeners
         Object.entries(this.boundEvents).forEach(([event, handler]) => {
