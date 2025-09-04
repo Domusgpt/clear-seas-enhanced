@@ -250,18 +250,17 @@ class ClearSeasContextPool {
     getLayerSpecificShaderCode(layerType, systemType) {
         const systemMath = {
             'FACETED': 'abs(fract(p * 0.1) - 0.5)',
-            'QUANTUM': 'max(max(abs(q.x), abs(q.y)), abs(q.z)) - 0.3', 
+            'QUANTUM': 'max(max(abs(p.x), abs(p.y)), abs(p.z)) - 0.3', 
             'HOLOGRAPHIC': 'length(fract(p * 0.08) - 0.5) - 0.25',
-            'POLYCHORA': 'length(q) - 0.4'
+            'POLYCHORA': 'length(p) - 0.4'
         };
 
         const layerEffects = {
             'background': `
                 vec4 calculateLayerColor(vec2 uv) {
                     vec3 p = vec3(uv, u_time * 0.0001);
-                    vec3 q = ${systemMath[systemType] || systemMath['FACETED']};
+                    float d = ${systemMath[systemType] || systemMath['FACETED']};
                     
-                    float d = length(q) - 0.4;
                     float intensity = 1.0 / (1.0 + abs(d) * 8.0);
                     
                     vec3 color = mix(u_primaryColor, u_secondaryColor, sin(u_time * 0.001) * 0.5 + 0.5);
@@ -271,9 +270,8 @@ class ClearSeasContextPool {
             'shadow': `
                 vec4 calculateLayerColor(vec2 uv) {
                     vec3 p = vec3(uv + vec2(0.02), u_time * 0.0005);
-                    vec3 q = ${systemMath[systemType] || systemMath['FACETED']};
+                    float d = ${systemMath[systemType] || systemMath['FACETED']};
                     
-                    float d = length(q) - 0.35;
                     float intensity = 1.0 / (1.0 + abs(d) * 12.0);
                     
                     return vec4(vec3(0.0), intensity * 0.6);
@@ -282,10 +280,9 @@ class ClearSeasContextPool {
             'content': `
                 vec4 calculateLayerColor(vec2 uv) {
                     vec3 p = vec3(uv, u_time * 0.002);
-                    p *= rotate2D(u_time * 0.0008) * vec2(1.0, 1.0).xyxy;
+                    p.xy = rotate2D(u_time * 0.0008) * uv;
                     
-                    vec3 q = ${systemMath[systemType] || systemMath['FACETED']};
-                    float d = length(q) - 0.3;
+                    float d = ${systemMath[systemType] || systemMath['FACETED']};
                     
                     float intensity = 1.0 / (1.0 + abs(d) * 15.0);
                     intensity = pow(intensity, 1.8);
@@ -302,8 +299,7 @@ class ClearSeasContextPool {
                     vec2 rotated = rotate2D(u_time * 0.001) * uv;
                     p.xy = rotated;
                     
-                    vec3 q = ${systemMath[systemType] || systemMath['FACETED']};
-                    float d = length(q) - 0.25;
+                    float d = ${systemMath[systemType] || systemMath['FACETED']};
                     
                     float intensity = 1.0 / (1.0 + abs(d) * 20.0);
                     intensity = pow(intensity, 2.5);
@@ -320,8 +316,7 @@ class ClearSeasContextPool {
                     float spiral = atan(uv.y, uv.x) + length(uv) * 8.0 + u_time * 0.01;
                     p.xy *= rotate2D(spiral * 0.1);
                     
-                    vec3 q = ${systemMath[systemType] || systemMath['FACETED']};
-                    float d = length(q) - 0.2;
+                    float d = ${systemMath[systemType] || systemMath['FACETED']} - 0.2;
                     
                     float intensity = 1.0 / (1.0 + abs(d) * 25.0);
                     intensity = pow(intensity, 3.0);
