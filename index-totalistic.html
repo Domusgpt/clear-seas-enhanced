@@ -851,8 +851,8 @@
                 // Create intersection observer for lazy loading
                 const observerOptions = {
                     root: null,
-                    rootMargin: '100px', // Start loading 100px before visible
-                    threshold: 0.1 // Load when 10% visible
+                    rootMargin: '50px', // Start loading 50px before visible (reduced)
+                    threshold: 0.3 // Load when 30% visible (more restrictive)
                 };
                 
                 const lazyLoadObserver = new IntersectionObserver(async (entries) => {
@@ -913,7 +913,39 @@
                     }
                 }, { threshold: 0 });
                 
-                // Start observing all containers
+                // Determine which containers are initially visible
+                const initiallyVisibleContainers = [];
+                containers.forEach((container, index) => {
+                    const rect = container.getBoundingClientRect();
+                    const isVisible = rect.top < window.innerHeight && 
+                                     rect.bottom > 0 && 
+                                     rect.left < window.innerWidth && 
+                                     rect.right > 0;
+                    
+                    if (isVisible) {
+                        initiallyVisibleContainers.push({ container, index });
+                        console.log(`📍 Initially visible container ${index}: ${container.dataset.vibSystem}`);
+                    }
+                });
+                
+                // Load only the first initially visible container immediately
+                // to avoid overwhelming the WebGL context limit at startup
+                if (initiallyVisibleContainers.length > 0) {
+                    const { container } = initiallyVisibleContainers[0];
+                    const system = container.dataset.vibSystem;
+                    const visualizerId = `visualizer-${Math.random().toString(36).substr(2, 9)}`;
+                    
+                    try {
+                        console.log(`🎯 Loading primary visible visualizer: ${system}`);
+                        await window.contextPool.createMultiLayerVisualizer(visualizerId, system, container);
+                        container.dataset.initialized = 'true';
+                        container.dataset.visualizerId = visualizerId;
+                    } catch (error) {
+                        console.error(`❌ Failed to load primary visualizer:`, error);
+                    }
+                }
+                
+                // Start observing all containers for lazy loading
                 containers.forEach(container => {
                     lazyLoadObserver.observe(container);
                     exitObserver.observe(container);
