@@ -1,0 +1,47 @@
+{
+  "timestamp": "2025-09-04T08:10:02.252Z",
+  "url": "http://localhost:8149/index-totalistic.html",
+  "systemStatus": {
+    "choreographer": {
+      "exists": true,
+      "isInitialized": false,
+      "sectionsCount": 2,
+      "transformationStatesCount": 0
+    },
+    "layeredVIB34D": {
+      "exists": true,
+      "isInitialized": false,
+      "visualizersCount": 9
+    },
+    "visualizers": {
+      "layerStacks": 9,
+      "layers": 45,
+      "workingWebGL": 45
+    },
+    "cards": {
+      "total": 7,
+      "withVisualizerContainers": 0
+    }
+  },
+  "finalStatus": {
+    "totalLayers": 45,
+    "renderingLayers": 16,
+    "experienceSystemActive": false,
+    "layeredVisualizersActive": false,
+    "hasFlowingVisualizers": true,
+    "choreographyActive": false
+  },
+  "testResults": {
+    "experienceChoreographerLoaded": true,
+    "choreographerInitialized": false,
+    "layeredVIB34DLoaded": true,
+    "layeredVIB34DInitialized": false,
+    "hasWorkingVisualizers": true,
+    "hasLayeredSystem": true,
+    "hasCardChoreography": false,
+    "scrollChoreographyWorks": false,
+    "noIframeEmbeds": true
+  },
+  "successRate": "5/9",
+  "successPercentage": 56
+}

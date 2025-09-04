@@ -1,0 +1,140 @@
+{
+  "timestamp": "2025-09-04T02:21:10.232Z",
+  "url": "http://localhost:8149/index-totalistic.html",
+  "vib34dIntegration": {
+    "realVIB34DExists": true,
+    "isInitialized": true,
+    "visualizerCount": 3,
+    "visualizerIds": [
+      "hero-primary",
+      "hero-secondary",
+      ""
+    ],
+    "systems": [
+      {
+        "id": "hero-primary",
+        "system": "FACETED",
+        "src": "https://domusgpt.github.io/vib34d-ultimate-viewer?geometry=0&gridDensity=17&morphFactor=1.1306890404180727&chaos=0.2&speed=1.0653445202090364&hue=287&intensity=0.8&saturation=0.6&system=faceted&embed=true&controls=hidden&ui=minimal"
+      },
+      {
+        "id": "hero-secondary",
+        "system": "HOLOGRAPHIC",
+        "src": "https://domusgpt.github.io/vib34d-ultimate-viewer?geometry=2&gridDensity=17&morphFactor=1.5743372503676514&chaos=0.35&speed=0.7871686251838257&hue=148&intensity=0.9&saturation=0.7&system=holographic&embed=true&controls=hidden&ui=minimal"
+      },
+      {
+        "id": "vib34d-8",
+        "system": "POLYCHORA",
+        "src": "https://domusgpt.github.io/vib34d-ultimate-viewer?geometry=7&gridDensity=32&morphFactor=1.9335237069647007&chaos=0.5&speed=1.5667618534823502&hue=208&intensity=1.2&saturation=1&system=polychora&embed=true&controls=hidden&ui=minimal"
+      }
+    ]
+  },
+  "iframes": [
+    {
+      "id": "hero-primary",
+      "src": "https://domusgpt.github.io/vib34d-ultimate-viewer?geometry=0&gridDensity=17&morphFactor=1.1306890404...",
+      "loaded": false,
+      "visible": true,
+      "width": 1200,
+      "height": 243,
+      "system": "faceted"
+    },
+    {
+      "id": "hero-secondary",
+      "src": "https://domusgpt.github.io/vib34d-ultimate-viewer?geometry=2&gridDensity=17&morphFactor=1.5743372503...",
+      "loaded": false,
+      "visible": true,
+      "width": 1200,
+      "height": 243,
+      "system": "holographic"
+    },
+    {
+      "id": "vib34d-2",
+      "src": "https://domusgpt.github.io/vib34d-ultimate-viewer?geometry=0&gridDensity=12&morphFactor=0.8857664533...",
+      "loaded": false,
+      "visible": true,
+      "width": 1201,
+      "height": 200,
+      "system": "faceted"
+    },
+    {
+      "id": "vib34d-3",
+      "src": "https://domusgpt.github.io/vib34d-ultimate-viewer?geometry=3&gridDensity=19.992&morphFactor=1.501&ch...",
+      "loaded": false,
+      "visible": true,
+      "width": 1201,
+      "height": 200,
+      "system": "quantum"
+    },
+    {
+      "id": "vib34d-4",
+      "src": "https://domusgpt.github.io/vib34d-ultimate-viewer?geometry=2&gridDensity=18&morphFactor=1.6439948018...",
+      "loaded": false,
+      "visible": true,
+      "width": 1201,
+      "height": 200,
+      "system": "holographic"
+    },
+    {
+      "id": "vib34d-5",
+      "src": "https://domusgpt.github.io/vib34d-ultimate-viewer?geometry=7&gridDensity=28&morphFactor=1.7379885624...",
+      "loaded": false,
+      "visible": true,
+      "width": 1201,
+      "height": 200,
+      "system": "polychora"
+    },
+    {
+      "id": "vib34d-6",
+      "src": "https://domusgpt.github.io/vib34d-ultimate-viewer?geometry=3&gridDensity=24&morphFactor=1.9580767404...",
+      "loaded": false,
+      "visible": true,
+      "width": 553,
+      "height": 200,
+      "system": "quantum"
+    },
+    {
+      "id": "vib34d-7",
+      "src": "https://domusgpt.github.io/vib34d-ultimate-viewer?geometry=2&gridDensity=15&morphFactor=1.4792920492...",
+      "loaded": false,
+      "visible": true,
+      "width": 553,
+      "height": 200,
+      "system": "holographic"
+    },
+    {
+      "id": "vib34d-8",
+      "src": "https://domusgpt.github.io/vib34d-ultimate-viewer?geometry=7&gridDensity=32&morphFactor=1.9335237069...",
+      "loaded": false,
+      "visible": true,
+      "width": 659,
+      "height": 200,
+      "system": "polychora"
+    }
+  ],
+  "systemVariety": {
+    "totalVIB34DIframes": 9,
+    "uniqueSystems": [
+      "faceted",
+      "holographic",
+      "quantum",
+      "polychora"
+    ],
+    "uniqueGeometries": [
+      "0",
+      "2",
+      "3",
+      "7"
+    ],
+    "variety": true
+  },
+  "testResults": {
+    "realVIB34DLoaded": true,
+    "systemInitialized": true,
+    "hasWorkingVisualizers": true,
+    "iframesUseRealVIB34D": true,
+    "hasSystemVariety": true,
+    "noGenericShaders": true
+  },
+  "successRate": "6/6",
+  "successPercentage": 100
+}

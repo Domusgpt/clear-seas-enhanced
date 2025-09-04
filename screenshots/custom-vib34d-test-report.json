@@ -1,0 +1,164 @@
+{
+  "timestamp": "2025-09-04T02:30:01.277Z",
+  "url": "http://localhost:8149/index-totalistic.html",
+  "engine": {
+    "customEngineExists": true,
+    "isInitialized": false,
+    "visualizerCount": 3,
+    "visualizerDetails": [
+      {
+        "id": "hero-primary",
+        "systemType": "FACETED",
+        "hasWebGL": true,
+        "canvasSize": {
+          "width": 1320,
+          "height": 267
+        }
+      },
+      {
+        "id": "hero-secondary",
+        "systemType": "HOLOGRAPHIC",
+        "hasWebGL": true,
+        "canvasSize": {
+          "width": 1320,
+          "height": 267
+        }
+      },
+      {
+        "id": "",
+        "systemType": "FACETED",
+        "hasWebGL": true,
+        "canvasSize": {
+          "width": 625,
+          "height": 190
+        }
+      }
+    ],
+    "systemConfigs": [
+      "FACETED",
+      "QUANTUM",
+      "HOLOGRAPHIC",
+      "POLYCHORA"
+    ]
+  },
+  "canvases": [
+    {
+      "id": "hero-primary",
+      "width": 1320,
+      "height": 267,
+      "offsetWidth": 1200,
+      "offsetHeight": 243,
+      "hasWebGLContext": true,
+      "visible": true,
+      "hasVIB34DVisualizer": true
+    },
+    {
+      "id": "hero-secondary",
+      "width": 1320,
+      "height": 267,
+      "offsetWidth": 1200,
+      "offsetHeight": 243,
+      "hasWebGLContext": true,
+      "visible": true,
+      "hasVIB34DVisualizer": true
+    },
+    {
+      "id": "",
+      "width": 1140,
+      "height": 190,
+      "offsetWidth": 1201,
+      "offsetHeight": 200,
+      "hasWebGLContext": true,
+      "visible": true,
+      "hasVIB34DVisualizer": true
+    },
+    {
+      "id": "",
+      "width": 1140,
+      "height": 190,
+      "offsetWidth": 1201,
+      "offsetHeight": 200,
+      "hasWebGLContext": true,
+      "visible": true,
+      "hasVIB34DVisualizer": true
+    },
+    {
+      "id": "",
+      "width": 1140,
+      "height": 190,
+      "offsetWidth": 1201,
+      "offsetHeight": 200,
+      "hasWebGLContext": true,
+      "visible": true,
+      "hasVIB34DVisualizer": true
+    },
+    {
+      "id": "",
+      "width": 1140,
+      "height": 190,
+      "offsetWidth": 1201,
+      "offsetHeight": 200,
+      "hasWebGLContext": true,
+      "visible": true,
+      "hasVIB34DVisualizer": true
+    },
+    {
+      "id": "",
+      "width": 524,
+      "height": 190,
+      "offsetWidth": 553,
+      "offsetHeight": 200,
+      "hasWebGLContext": true,
+      "visible": true,
+      "hasVIB34DVisualizer": true
+    },
+    {
+      "id": "",
+      "width": 524,
+      "height": 190,
+      "offsetWidth": 553,
+      "offsetHeight": 200,
+      "hasWebGLContext": true,
+      "visible": true,
+      "hasVIB34DVisualizer": true
+    },
+    {
+      "id": "",
+      "width": 625,
+      "height": 190,
+      "offsetWidth": 659,
+      "offsetHeight": 200,
+      "hasWebGLContext": true,
+      "visible": true,
+      "hasVIB34DVisualizer": true
+    }
+  ],
+  "systems": {
+    "uniqueSystems": [
+      "FACETED",
+      "HOLOGRAPHIC"
+    ],
+    "uniqueGeometryTypes": [
+      3
+    ],
+    "systemVariety": true,
+    "geometryVariety": false,
+    "totalVisualizers": 3
+  },
+  "webgl": {
+    "totalCanvases": 9,
+    "workingWebGL": 9,
+    "webglPercentage": 100
+  },
+  "testResults": {
+    "customEngineLoaded": true,
+    "engineInitialized": false,
+    "hasWorkingVisualizers": true,
+    "allCanvasesHaveWebGL": true,
+    "hasSystemVariety": true,
+    "hasGeometryVariety": false,
+    "noIframeEmbeds": true
+  },
+  "successRate": "5/7",
+  "successPercentage": 71
+}
