@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clear Seas Solutions | Maritime Intelligence Consulting</title>
+    <title>Clear Seas Solutions | AI • Machine Intelligence • Synthetic Cognition</title>
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,11 +13,14 @@
         :root {
             --primary-blue: #003366;
             --accent-cyan: #00d4ff;
-            --dark-blue: #001a33;
+            --accent-purple: #8a2be2;
+            --accent-gold: #ffd700;
+            --dark-blue: #001122;
             --light-gray: #f8f9fa;
             --text-dark: #2c3e50;
             --gradient-primary: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
             --gradient-accent: linear-gradient(135deg, var(--accent-cyan), #0099cc);
+            --gradient-neural: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan), var(--accent-gold));
         }
 
         * {
@@ -31,6 +34,7 @@
             line-height: 1.6;
             color: var(--text-dark);
             overflow-x: hidden;
+            background: var(--dark-blue);
         }
 
         /* NAVIGATION */
@@ -38,20 +42,16 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(0, 51, 102, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 17, 34, 0.95);
+            backdrop-filter: blur(15px);
             z-index: 1000;
             padding: 1rem 2rem;
             transition: all 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            background: rgba(0, 51, 102, 0.98);
-            padding: 0.5rem 2rem;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -60,9 +60,23 @@
 
         .logo {
             font-family: 'Orbitron', monospace;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 900;
-            color: white;
+            background: var(--gradient-neural);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .logo-visualizer {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: calc(100% + 20px);
+            height: calc(100% + 20px);
+            opacity: 0.3;
+            pointer-events: none;
+            border-radius: 10px;
         }
 
         .nav-links {
@@ -72,262 +86,307 @@
         }
 
         .nav-links a {
-            color: white;
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .nav-link-visualizer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 20px;
+        }
+
+        .nav-links a:hover .nav-link-visualizer {
+            opacity: 0.4;
         }
 
         .nav-links a:hover {
             color: var(--accent-cyan);
+            transform: translateY(-2px);
         }
 
         /* HERO SECTION */
         .hero {
             height: 100vh;
-            background: var(--gradient-primary);
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
             position: relative;
-            overflow: hidden;
+            background: radial-gradient(circle at center, var(--primary-blue) 0%, var(--dark-blue) 100%);
         }
 
-        .hero-content {
-            max-width: 800px;
-            z-index: 10;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, white, var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: var(--gradient-accent);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
-        }
-
-        /* VIB34D EMBEDDED VISUALIZER FOR CTA BUTTON */
-        .cta-button .button-visualizer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.3;
-            pointer-events: none;
-            border-radius: 50px;
-        }
-
-        /* SERVICES SECTION */
-        .services {
-            padding: 5rem 2rem;
-            background: var(--light-gray);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: var(--primary-blue);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        /* VIB34D EMBEDDED VISUALIZER FOR SERVICE CARDS */
-        .service-card .card-visualizer {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 80px;
-            height: 80px;
-            opacity: 0.6;
-            border-radius: 0 15px 0 15px;
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary-blue);
-            margin-bottom: 1rem;
-        }
-
-        .service-card p {
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        /* PROJECTS SECTION */
-        .projects {
-            padding: 5rem 2rem;
-            background: white;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .project-card {
-            background: var(--gradient-primary);
-            color: white;
-            padding: 2rem;
-            border-radius: 15px;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: scale(1.05);
-        }
-
-        /* VIB34D EMBEDDED VISUALIZER FOR PROJECT CARDS */
-        .project-card .project-visualizer {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 120px;
-            height: 120px;
-            opacity: 0.4;
-            border-radius: 15px 0 15px 0;
-        }
-
-        .project-card h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .project-card p {
-            margin-bottom: 1.5rem;
-            opacity: 0.9;
-        }
-
-        .project-link {
-            display: inline-block;
-            color: var(--accent-cyan);
-            text-decoration: none;
-            font-weight: 600;
-            border: 1px solid var(--accent-cyan);
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-        }
-
-        .project-link:hover {
-            background: var(--accent-cyan);
-            color: var(--primary-blue);
-        }
-
-        /* CONTACT SECTION */
-        .contact {
-            padding: 5rem 2rem;
-            background: var(--dark-blue);
-            color: white;
-            text-align: center;
-        }
-
-        .contact-button {
-            display: inline-block;
-            padding: 1.5rem 3rem;
-            background: var(--gradient-accent);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-top: 2rem;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .contact-button:hover {
-            transform: translateY(-3px);
-        }
-
-        /* VIB34D EMBEDDED VISUALIZER FOR CONTACT BUTTON */
-        .contact-button .contact-visualizer {
+        .hero-bg-visualizer {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             opacity: 0.2;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-neural);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent-cyan);
+            font-weight: 300;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* HOLISTIC VISUALIZER SYSTEM */
+        .neural-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .neural-grid::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
             pointer-events: none;
+        }
+
+        .project-node {
+            background: rgba(0, 51, 102, 0.3);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .project-node:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.2);
+        }
+
+        .project-visualizer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+            border-radius: 20px;
+            transition: opacity 0.5s ease;
+        }
+
+        .project-node:hover .project-visualizer {
+            opacity: 0.6;
+        }
+
+        .project-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .project-node h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .project-status {
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .project-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-link-visualizer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 25px;
+        }
+
+        .project-link:hover .project-link-visualizer {
+            opacity: 0.4;
+        }
+
+        .project-link:hover {
+            background: rgba(0, 212, 255, 0.2);
+            transform: translateX(5px);
+            border-color: var(--accent-cyan);
+        }
+
+        /* NEURAL CONNECTION LINES */
+        .connection-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .connection-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+            opacity: 0.3;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* CONTACT SECTION */
+        .contact-section {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--dark-blue), #000511);
+            position: relative;
+        }
+
+        .contact-bg-visualizer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .contact-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--gradient-neural);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .contact-button-visualizer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.4;
             border-radius: 50px;
         }
 
-        /* FOOTER */
-        .footer {
-            background: var(--primary-blue);
-            color: white;
-            padding: 2rem;
-            text-align: center;
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(138, 43, 226, 0.3);
         }
 
         /* SCROLL ANIMATIONS */
-        .scroll-animate {
+        .scroll-trigger {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .scroll-animate.visible {
+        .scroll-trigger.visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -339,141 +398,193 @@
             }
             
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
             
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .services-grid,
-            .projects-grid {
+            .neural-grid {
                 grid-template-columns: 1fr;
+                padding: 3rem 1rem;
             }
         }
     </style>
 </head>
 <body>
     <!-- NAVIGATION -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">CLEAR SEAS</div>
+            <div class="logo">
+                <div class="holographic-layers logo-visualizer" id="logoVisualizer"></div>
+                CLEAR SEAS
+            </div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li>
+                    <a href="#projects">
+                        <div class="holographic-layers nav-link-visualizer" id="navProjects"></div>
+                        Projects
+                    </a>
+                </li>
+                <li>
+                    <a href="#contact">
+                        <div class="holographic-layers nav-link-visualizer" id="navContact"></div>
+                        Contact
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
-    <section id="home" class="hero">
+    <section class="hero">
+        <div class="holographic-layers hero-bg-visualizer" id="heroBackground"></div>
         <div class="hero-content">
-            <h1>Clear Seas Solutions</h1>
-            <p>Advanced Maritime Intelligence & Consulting Services</p>
-            <a href="#services" class="cta-button">
-                <div class="holographic-layers button-visualizer" id="heroButtonVisualizer"></div>
-                Explore Our Services
-            </a>
+            <h1 class="scroll-trigger">Clear Seas Solutions</h1>
+            <div class="hero-subtitle scroll-trigger">AI • Machine Intelligence • Synthetic Cognition</div>
+            <p class="hero-description scroll-trigger">
+                Technology innovation and architecture focused on artificial intelligence, 
+                synthetic cognition systems, and breakthrough approaches to machine intelligence. 
+                Specializing in maritime, fisheries, and offshore resource development applications.
+            </p>
         </div>
     </section>
 
-    <!-- SERVICES SECTION -->
-    <section id="services" class="services">
-        <div class="container">
-            <h2 class="section-title scroll-animate">Our Expertise</h2>
-            <div class="services-grid">
-                <div class="service-card scroll-animate">
-                    <div class="holographic-layers card-visualizer" id="serviceCard1"></div>
-                    <h3>Maritime Data Analytics</h3>
-                    <p>Advanced analytics and intelligence solutions for maritime operations, utilizing cutting-edge algorithms to process and interpret complex oceanographic data.</p>
-                </div>
-                
-                <div class="service-card scroll-animate">
-                    <div class="holographic-layers card-visualizer" id="serviceCard2"></div>
-                    <h3>Fleet Optimization</h3>
-                    <p>Comprehensive fleet management solutions that optimize routing, fuel efficiency, and operational performance through advanced mathematical modeling.</p>
-                </div>
-                
-                <div class="service-card scroll-animate">
-                    <div class="holographic-layers card-visualizer" id="serviceCard3"></div>
-                    <h3>Risk Assessment</h3>
-                    <p>Sophisticated risk analysis and mitigation strategies for maritime operations, incorporating real-time environmental and operational data.</p>
-                </div>
-                
-                <div class="service-card scroll-animate">
-                    <div class="holographic-layers card-visualizer" id="serviceCard4"></div>
-                    <h3>AI-Driven Insights</h3>
-                    <p>Machine learning and artificial intelligence solutions that transform maritime data into actionable business intelligence and strategic insights.</p>
-                </div>
+    <!-- NEURAL PROJECT GRID -->
+    <section id="projects" class="neural-grid">
+        <div class="connection-lines">
+            <div class="connection-line" style="top: 20%; left: 10%; width: 30%; transform: rotate(15deg);"></div>
+            <div class="connection-line" style="top: 60%; right: 15%; width: 25%; transform: rotate(-20deg);"></div>
+            <div class="connection-line" style="bottom: 30%; left: 40%; width: 20%; transform: rotate(45deg);"></div>
+        </div>
+
+        <!-- PARSERATOR -->
+        <div class="project-node scroll-trigger" onclick="window.open('https://parserator.com', '_blank')">
+            <div class="holographic-layers project-visualizer" id="parserator"></div>
+            <div class="project-content">
+                <h3>Parserator</h3>
+                <div class="project-status">Active • Production</div>
+                <p class="project-description">
+                    Advanced parsing and data extraction platform utilizing machine intelligence 
+                    for complex document and data stream processing.
+                </p>
+                <a href="https://parserator.com" target="_blank" class="project-link">
+                    <div class="holographic-layers project-link-visualizer" id="parseratorLink"></div>
+                    Explore Platform →
+                </a>
             </div>
         </div>
-    </section>
 
-    <!-- PROJECTS SECTION -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title scroll-animate">Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card scroll-animate">
-                    <div class="holographic-layers project-visualizer" id="projectCard1"></div>
-                    <h3>VIB34D Holographic Engine</h3>
-                    <p>Advanced 4D visualization system for maritime data analysis with real-time holographic rendering capabilities.</p>
-                    <a href="https://domusgpt.github.io/vib34d-holographic-engine/" class="project-link" target="_blank">View Project →</a>
-                </div>
-                
-                <div class="project-card scroll-animate">
-                    <div class="holographic-layers project-visualizer" id="projectCard2"></div>
-                    <h3>FLOWT Maritime Platform</h3>
-                    <p>Revolutionary ride-sharing platform for maritime transportation with advanced fleet management and real-time tracking.</p>
-                    <a href="#" class="project-link">Coming Soon →</a>
-                </div>
-                
-                <div class="project-card scroll-animate">
-                    <div class="holographic-layers project-visualizer" id="projectCard3"></div>
-                    <h3>Quantum Analytics Suite</h3>
-                    <p>Quantum-enhanced analytics platform for complex maritime optimization problems and predictive modeling.</p>
-                    <a href="#" class="project-link">In Development →</a>
-                </div>
+        <!-- VIB3CODE -->
+        <div class="project-node scroll-trigger">
+            <div class="holographic-layers project-visualizer" id="vib3code"></div>
+            <div class="project-content">
+                <h3>Vib3code</h3>
+                <div class="project-status">Coming Soon</div>
+                <p class="project-description">
+                    Vibe coding and culture tech blog exploring the intersection of technology, 
+                    consciousness, and creative expression in computational systems.
+                </p>
+                <a href="#" class="project-link">
+                    <div class="holographic-layers project-link-visualizer" id="vib3codeLink"></div>
+                    Launch Soon →
+                </a>
+            </div>
+        </div>
+
+        <!-- MINOOTS -->
+        <div class="project-node scroll-trigger">
+            <div class="holographic-layers project-visualizer" id="minoots"></div>
+            <div class="project-content">
+                <h3>Minoots</h3>
+                <div class="project-status">In Development</div>
+                <p class="project-description">
+                    Revolutionary approach to decentralized identity and autonomous agent systems, 
+                    focusing on synthetic cognition and emergent intelligence patterns.
+                </p>
+                <a href="#" class="project-link">
+                    <div class="holographic-layers project-link-visualizer" id="minootsLink"></div>
+                    Preview →
+                </a>
+            </div>
+        </div>
+
+        <!-- EXODITICAL MORAL ARCHITECTURE -->
+        <div class="project-node scroll-trigger">
+            <div class="holographic-layers project-visualizer" id="exoditical"></div>
+            <div class="project-content">
+                <h3>Exoditical Moral Architecture</h3>
+                <div class="project-status">Movement • Research</div>
+                <p class="project-description">
+                    Foundational movement against walled gardens and closed ecosystems, 
+                    promoting open architecture and ethical AI development principles.
+                </p>
+                <a href="#" class="project-link">
+                    <div class="holographic-layers project-link-visualizer" id="exoditicalLink"></div>
+                    Learn More →
+                </a>
+            </div>
+        </div>
+
+        <!-- GEOMETRIC CONDITION -->
+        <div class="project-node scroll-trigger">
+            <div class="holographic-layers project-visualizer" id="geometric"></div>
+            <div class="project-content">
+                <h3>Geometric Condition</h3>
+                <div class="project-status">Research Field</div>
+                <p class="project-description">
+                    Pioneering field of research exploring the geometric foundations of consciousness, 
+                    cognition, and information processing in synthetic intelligence systems.
+                </p>
+                <a href="#" class="project-link">
+                    <div class="holographic-layers project-link-visualizer" id="geometricLink"></div>
+                    Research →
+                </a>
+            </div>
+        </div>
+
+        <!-- VIB34D HOLOGRAPHIC ENGINE -->
+        <div class="project-node scroll-trigger" onclick="window.open('https://domusgpt.github.io/vib34d-holographic-engine/', '_blank')">
+            <div class="holographic-layers project-visualizer" id="vib34d"></div>
+            <div class="project-content">
+                <h3>VIB34D Holographic Engine</h3>
+                <div class="project-status">Active • Open Source</div>
+                <p class="project-description">
+                    Advanced 4D visualization and holographic rendering system for complex 
+                    mathematical structures and multidimensional data representation.
+                </p>
+                <a href="https://domusgpt.github.io/vib34d-holographic-engine/" target="_blank" class="project-link">
+                    <div class="holographic-layers project-link-visualizer" id="vib34dLink"></div>
+                    Explore Engine →
+                </a>
             </div>
         </div>
     </section>
 
     <!-- CONTACT SECTION -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Ready to Navigate Forward?</h2>
-            <p>Let's discuss how Clear Seas Solutions can transform your maritime operations</p>
-            <a href="mailto:contact@clearseas.solutions" class="contact-button">
-                <div class="holographic-layers contact-visualizer" id="contactButtonVisualizer"></div>
+    <section id="contact" class="contact-section">
+        <div class="holographic-layers contact-bg-visualizer" id="contactBackground"></div>
+        <div class="contact-content">
+            <h2 class="contact-title scroll-trigger">Ready to Innovate?</h2>
+            <p class="contact-description scroll-trigger">
+                Connect with Clear Seas Solutions for AI architecture, synthetic cognition research, 
+                and breakthrough technology innovation projects.
+            </p>
+            <a href="mailto:hello@clearseas.solutions" class="contact-button scroll-trigger">
+                <div class="holographic-layers contact-button-visualizer" id="contactButton"></div>
                 Get In Touch
             </a>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Clear Seas Solutions. Advanced Maritime Intelligence & Consulting.</p>
-        </div>
-    </footer>
-
-    <!-- VIB34D ENGINE INTEGRATION -->
-    <script type="module" src="js/core/url-params.js"></script>
-    <script type="module" src="js/audio/audio-engine.js"></script>
-    <script type="module" src="js/controls/ui-handlers.js"></script>
-    <script type="module" src="js/interactions/device-tilt.js"></script>
-
-    <!-- CLEAR SEAS CONSULTING SITE INTEGRATION -->
+    <!-- VIB34D HOLISTIC INTEGRATION -->
     <script type="module">
         let vib34dEngines = {};
-        let visualizerContainers = [];
+        let visualizerNodes = new Map();
+        let scrollProgress = 0;
+        let mousePosition = { x: 0.5, y: 0.5 };
 
-        // Initialize VIB34D systems for embedded visualizers
-        async function initializeVIB34DSystems() {
+        // Initialize VIB34D systems for holistic visualization
+        async function initializeHolisticVIB34D() {
             try {
-                console.log('🌊 Initializing VIB34D for Clear Seas consulting site...');
+                console.log('🧠 Initializing holistic VIB34D neural network...');
                 
                 // Import VIB34D engines
                 const [coreEngine, quantumEngine, holoSystem, polySystem, canvasManager] = await Promise.all([
@@ -493,97 +604,232 @@
                     window.canvasManager = new canvasManager.CanvasManager();
                 }
 
-                // Initialize embedded visualizers
-                await initializeEmbeddedVisualizers();
-                console.log('✅ Clear Seas VIB34D integration complete');
+                // Create neural network of visualizers
+                await createNeuralVisualizerNetwork();
+                
+                // Start holistic response system
+                startHolisticResponseSystem();
+                
+                console.log('✅ Neural VIB34D network online');
                 
             } catch (error) {
-                console.warn('⚠️ VIB34D systems not fully available:', error);
+                console.warn('⚠️ Neural network initialization partial:', error);
             }
         }
 
-        // Initialize small embedded visualizers
-        async function initializeEmbeddedVisualizers() {
-            const visualizerConfigs = [
-                { id: 'heroButtonVisualizer', system: 'faceted', size: 'small' },
-                { id: 'serviceCard1', system: 'quantum', size: 'small' },
-                { id: 'serviceCard2', system: 'holographic', size: 'small' },
-                { id: 'serviceCard3', system: 'polychora', size: 'small' },
-                { id: 'serviceCard4', system: 'faceted', size: 'small' },
-                { id: 'projectCard1', system: 'holographic', size: 'medium' },
-                { id: 'projectCard2', system: 'quantum', size: 'medium' },
-                { id: 'projectCard3', system: 'polychora', size: 'medium' },
-                { id: 'contactButtonVisualizer', system: 'quantum', size: 'small' }
+        // Create interconnected visualizer network
+        async function createNeuralVisualizerNetwork() {
+            const neuralNodes = [
+                // Navigation & Branding
+                { id: 'logoVisualizer', system: 'faceted', role: 'identity', intensity: 0.8 },
+                { id: 'navProjects', system: 'quantum', role: 'navigation', intensity: 0.4 },
+                { id: 'navContact', system: 'holographic', role: 'navigation', intensity: 0.4 },
+                
+                // Hero System
+                { id: 'heroBackground', system: 'polychora', role: 'background', intensity: 0.3 },
+                
+                // Project Nodes - Each with unique system and complementary parameters
+                { id: 'parserator', system: 'faceted', role: 'primary', intensity: 0.7, hue: 180 },
+                { id: 'vib3code', system: 'quantum', role: 'primary', intensity: 0.8, hue: 280 },
+                { id: 'minoots', system: 'holographic', role: 'primary', intensity: 0.6, hue: 60 },
+                { id: 'exoditical', system: 'polychora', role: 'primary', intensity: 0.9, hue: 320 },
+                { id: 'geometric', system: 'faceted', role: 'primary', intensity: 0.8, hue: 120 },
+                { id: 'vib34d', system: 'holographic', role: 'primary', intensity: 1.0, hue: 200 },
+                
+                // Interactive Elements
+                { id: 'parseratorLink', system: 'quantum', role: 'interactive', intensity: 0.5 },
+                { id: 'vib3codeLink', system: 'holographic', role: 'interactive', intensity: 0.5 },
+                { id: 'minootsLink', system: 'polychora', role: 'interactive', intensity: 0.5 },
+                { id: 'exoditicalLink', system: 'faceted', role: 'interactive', intensity: 0.5 },
+                { id: 'geometricLink', system: 'quantum', role: 'interactive', intensity: 0.5 },
+                { id: 'vib34dLink', system: 'polychora', role: 'interactive', intensity: 0.5 },
+                
+                // Contact System
+                { id: 'contactBackground', system: 'quantum', role: 'background', intensity: 0.2 },
+                { id: 'contactButton', system: 'holographic', role: 'action', intensity: 0.6 }
             ];
 
-            for (const config of visualizerConfigs) {
-                const container = document.getElementById(config.id);
+            for (const node of neuralNodes) {
+                const container = document.getElementById(node.id);
                 if (container && window.canvasManager) {
                     try {
-                        await window.canvasManager.createVisualizerInContainer(config.id, config.system, vib34dEngines);
-                        visualizerContainers.push({ container, config });
+                        const engine = await window.canvasManager.createVisualizerInContainer(
+                            node.id, node.system, vib34dEngines
+                        );
+                        
+                        visualizerNodes.set(node.id, {
+                            engine,
+                            container,
+                            system: node.system,
+                            role: node.role,
+                            baseIntensity: node.intensity || 0.5,
+                            baseHue: node.hue || Math.random() * 360,
+                            currentParams: {}
+                        });
+                        
                     } catch (error) {
-                        console.warn(`Failed to create visualizer for ${config.id}:`, error);
+                        console.warn(`Failed to create neural node ${node.id}:`, error);
                     }
                 }
             }
         }
 
-        // Scroll animations and visualizer morphing
-        function setupScrollAnimations() {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
+        // Start holistic response system
+        function startHolisticResponseSystem() {
+            // Mouse tracking for neural response
+            document.addEventListener('mousemove', (e) => {
+                mousePosition.x = e.clientX / window.innerWidth;
+                mousePosition.y = e.clientY / window.innerHeight;
+                updateNeuralNetwork();
+            });
 
+            // Scroll tracking for wave propagation
+            window.addEventListener('scroll', () => {
+                scrollProgress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+                propagateScrollWave();
+            });
+
+            // Intersection observer for activation waves
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        
-                        // Morph visualizers when elements come into view
-                        const visualizer = entry.target.querySelector('.holographic-layers');
-                        if (visualizer) {
-                            morphVisualizer(visualizer);
-                        }
+                        triggerActivationWave(entry.target);
                     }
                 });
-            }, observerOptions);
+            }, { threshold: 0.1, rootMargin: '50px' });
 
-            // Observe all scroll-animate elements
-            document.querySelectorAll('.scroll-animate').forEach(el => {
+            document.querySelectorAll('.scroll-trigger').forEach(el => {
                 observer.observe(el);
             });
+
+            // Start continuous neural oscillation
+            setInterval(updateNeuralOscillation, 100);
         }
 
-        // Morph visualizers based on scroll position
-        function morphVisualizer(visualizerElement) {
-            const scrollProgress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        // Update neural network based on mouse position
+        function updateNeuralNetwork() {
+            const time = Date.now() * 0.001;
             
-            // Send morph parameters to VIB34D visualizer
-            if (window.currentEngine && typeof window.currentEngine.updateParameters === 'function') {
-                window.currentEngine.updateParameters({
-                    morphFactor: 1 + scrollProgress * 2,
-                    chaos: 0.2 + scrollProgress * 0.3,
-                    speed: 0.8 + scrollProgress * 0.7,
-                    hue: Math.floor(180 + scrollProgress * 180)
-                });
-            }
-        }
-
-        // Navbar scroll effect
-        function setupNavbarScroll() {
-            window.addEventListener('scroll', () => {
-                const navbar = document.getElementById('navbar');
-                if (window.scrollY > 100) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
+            visualizerNodes.forEach((node, id) => {
+                if (!node.engine || !node.engine.updateParameters) return;
+                
+                // Calculate influence based on role and mouse position
+                const influence = calculateNeuralInfluence(node, mousePosition, time);
+                
+                const params = {
+                    intensity: node.baseIntensity + influence.intensity,
+                    hue: (node.baseHue + influence.hueShift) % 360,
+                    morphFactor: 1.0 + influence.morph,
+                    chaos: 0.2 + influence.chaos,
+                    speed: 0.8 + influence.speed
+                };
+                
+                node.engine.updateParameters(params);
+                node.currentParams = params;
             });
         }
 
-        // Smooth scrolling for navigation links
+        // Calculate neural influence for holistic behavior
+        function calculateNeuralInfluence(node, mouse, time) {
+            const role = node.role;
+            const system = node.system;
+            
+            // Base oscillation for all nodes
+            const baseWave = Math.sin(time * 0.5) * 0.1;
+            
+            // Mouse influence varies by role
+            const mouseInfluence = {
+                'identity': { intensity: mouse.x * 0.3, hueShift: mouse.y * 30 },
+                'navigation': { intensity: mouse.x * 0.2, hueShift: mouse.y * 20 },
+                'primary': { intensity: mouse.y * 0.4, hueShift: mouse.x * 40 },
+                'interactive': { intensity: (mouse.x + mouse.y) * 0.25, hueShift: mouse.x * 60 },
+                'background': { intensity: mouse.y * 0.1, hueShift: mouse.x * 15 },
+                'action': { intensity: mouse.x * 0.5, hueShift: mouse.y * 50 }
+            }[role] || { intensity: 0.1, hueShift: 10 };
+            
+            // System-specific complementary behavior
+            const systemModifier = {
+                'faceted': { morph: 0.1, chaos: 0.05, speed: 0.1 },
+                'quantum': { morph: 0.3, chaos: 0.2, speed: 0.3 },
+                'holographic': { morph: 0.5, chaos: 0.3, speed: 0.5 },
+                'polychora': { morph: 0.7, chaos: 0.1, speed: 0.2 }
+            }[system] || { morph: 0.2, chaos: 0.1, speed: 0.2 };
+            
+            return {
+                intensity: baseWave + mouseInfluence.intensity,
+                hueShift: mouseInfluence.hueShift + Math.sin(time * 0.3) * 10,
+                morph: systemModifier.morph + baseWave,
+                chaos: systemModifier.chaos + Math.sin(time * 0.7) * 0.1,
+                speed: systemModifier.speed + baseWave * 0.5
+            };
+        }
+
+        // Propagate scroll wave through network
+        function propagateScrollWave() {
+            const wavePhase = scrollProgress * Math.PI * 2;
+            
+            visualizerNodes.forEach((node, id) => {
+                if (!node.engine || !node.engine.updateParameters) return;
+                
+                const scrollInfluence = Math.sin(wavePhase + node.baseHue * 0.01) * 0.3;
+                
+                const params = {
+                    ...node.currentParams,
+                    morphFactor: (node.currentParams.morphFactor || 1.0) + scrollInfluence,
+                    intensity: (node.currentParams.intensity || node.baseIntensity) + scrollInfluence * 0.2
+                };
+                
+                node.engine.updateParameters(params);
+            });
+        }
+
+        // Trigger activation wave when elements become visible
+        function triggerActivationWave(element) {
+            const visualizer = element.querySelector('.holographic-layers');
+            if (!visualizer) return;
+            
+            const nodeData = visualizerNodes.get(visualizer.id);
+            if (!nodeData || !nodeData.engine) return;
+            
+            // Create activation pulse
+            const originalIntensity = nodeData.baseIntensity;
+            nodeData.engine.updateParameters({
+                intensity: originalIntensity * 1.5,
+                morphFactor: 2.0,
+                chaos: 0.8
+            });
+            
+            // Fade back to normal
+            setTimeout(() => {
+                nodeData.engine.updateParameters({
+                    intensity: originalIntensity,
+                    morphFactor: 1.0,
+                    chaos: 0.2
+                });
+            }, 1000);
+        }
+
+        // Continuous neural oscillation for living system feel
+        function updateNeuralOscillation() {
+            const time = Date.now() * 0.001;
+            
+            visualizerNodes.forEach((node, id) => {
+                if (!node.engine || !node.engine.updateParameters) return;
+                
+                // Subtle breathing effect
+                const breathe = Math.sin(time * 0.2 + node.baseHue * 0.01) * 0.05;
+                
+                const params = {
+                    ...node.currentParams,
+                    intensity: (node.currentParams.intensity || node.baseIntensity) + breathe
+                };
+                
+                node.engine.updateParameters(params);
+            });
+        }
+
+        // Smooth scrolling
         function setupSmoothScrolling() {
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -601,10 +847,15 @@
 
         // Initialize everything
         document.addEventListener('DOMContentLoaded', async () => {
-            setupNavbarScroll();
             setupSmoothScrolling();
-            setupScrollAnimations();
-            await initializeVIB34DSystems();
+            await initializeHolisticVIB34D();
+            
+            // Initial scroll trigger for hero
+            setTimeout(() => {
+                document.querySelectorAll('.hero .scroll-trigger').forEach(el => {
+                    el.classList.add('visible');
+                });
+            }, 500);
         });
     </script>
 </body>
