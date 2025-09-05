@@ -3,24 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clear Seas Solutions | AI • Machine Intelligence • Synthetic Cognition</title>
+    <title>Clear Seas Solutions | Portfolio</title>
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary-blue: #003366;
-            --accent-cyan: #00d4ff;
-            --accent-purple: #8a2be2;
-            --accent-gold: #ffd700;
-            --dark-blue: #001122;
-            --light-gray: #f8f9fa;
-            --text-dark: #2c3e50;
-            --gradient-primary: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
-            --gradient-accent: linear-gradient(135deg, var(--accent-cyan), #0099cc);
-            --gradient-neural: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan), var(--accent-gold));
+            --neural-purple: #8a2be2;
+            --quantum-cyan: #00d4ff;
+            --holographic-pink: #ff1493;
+            --polychora-gold: #ffd700;
+            --void-black: #0a0a0a;
+            --neural-gradient: linear-gradient(135deg, var(--neural-purple), var(--quantum-cyan), var(--holographic-pink));
         }
 
         * {
@@ -31,562 +27,479 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
+            background: var(--void-black);
+            color: white;
             overflow-x: hidden;
-            background: var(--dark-blue);
+            cursor: none;
         }
 
-        /* NAVIGATION */
-        .navbar {
+        /* CUSTOM CURSOR WITH VIB34D TRAIL */
+        .cursor-trail {
             position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(0, 17, 34, 0.95);
-            backdrop-filter: blur(15px);
-            z-index: 1000;
-            padding: 1rem 2rem;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.8rem;
-            font-weight: 900;
-            background: var(--gradient-neural);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            position: relative;
-        }
-
-        .logo-visualizer {
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            width: calc(100% + 20px);
-            height: calc(100% + 20px);
-            opacity: 0.3;
+            width: 4px;
+            height: 4px;
+            background: var(--quantum-cyan);
+            border-radius: 50%;
             pointer-events: none;
-            border-radius: 10px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .nav-link-visualizer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            z-index: 10000;
             opacity: 0;
-            transition: opacity 0.3s ease;
-            border-radius: 20px;
+            transition: opacity 0.1s ease;
         }
 
-        .nav-links a:hover .nav-link-visualizer {
-            opacity: 0.4;
+        .cursor-main {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--quantum-cyan);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10001;
+            mix-blend-mode: difference;
+            transition: all 0.1s ease;
         }
 
-        .nav-links a:hover {
-            color: var(--accent-cyan);
-            transform: translateY(-2px);
-        }
-
-        /* HERO SECTION */
-        .hero {
-            height: 100vh;
+        /* IMMERSIVE PORTFOLIO SECTIONS */
+        .portfolio-section {
+            position: relative;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+        }
+
+        /* HERO - IDENTITY EMERGENCE */
+        .hero-emergence {
+            position: relative;
             text-align: center;
-            color: white;
-            position: relative;
-            background: radial-gradient(circle at center, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            perspective: 1000px;
         }
 
-        .hero-bg-visualizer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.2;
-            z-index: 1;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            z-index: 10;
-            position: relative;
-        }
-
-        .hero h1 {
+        .identity-core {
+            font-family: 'JetBrains Mono', monospace;
             font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: var(--gradient-neural);
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            background: var(--neural-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-family: 'Orbitron', monospace;
-        }
-
-        .hero-subtitle {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--accent-cyan);
-            font-weight: 300;
-        }
-
-        .hero-description {
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            opacity: 0.9;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* HOLISTIC VISUALIZER SYSTEM */
-        .neural-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            padding: 5rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
+            transform: translateZ(0);
             position: relative;
+            z-index: 10;
         }
 
-        .neural-grid::before {
-            content: '';
+        .identity-substrate {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 20%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
-            pointer-events: none;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150%;
+            height: 150%;
+            opacity: 0.8;
+        }
+
+        .subtitle-matrix {
+            font-size: 1.2rem;
+            font-weight: 200;
+            margin-top: 2rem;
+            opacity: 0.7;
+            letter-spacing: 0.1em;
+        }
+
+        /* PROJECT CONSTELLATION */
+        .constellation-space {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            perspective: 2000px;
+        }
+
+        .project-constellation {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
         }
 
         .project-node {
-            background: rgba(0, 51, 102, 0.3);
+            position: absolute;
+            width: 280px;
+            height: 320px;
+            background: rgba(10, 10, 10, 0.8);
             border: 1px solid rgba(0, 212, 255, 0.2);
             border-radius: 20px;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.5s ease;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
             cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .project-node:nth-child(1) { /* Parserator */
+            top: 15%;
+            left: 10%;
+            transform: rotateX(5deg) rotateY(-10deg);
+        }
+
+        .project-node:nth-child(2) { /* VIB34D */
+            top: 10%;
+            right: 15%;
+            transform: rotateX(-5deg) rotateY(15deg);
+        }
+
+        .project-node:nth-child(3) { /* Vib3code */
+            bottom: 20%;
+            left: 20%;
+            transform: rotateX(10deg) rotateY(5deg);
+        }
+
+        .project-node:nth-child(4) { /* Geometric Condition */
+            bottom: 25%;
+            right: 10%;
+            transform: rotateX(-8deg) rotateY(-12deg);
+        }
+
+        .project-node:nth-child(5) { /* Minoots */
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg);
+        }
+
+        .project-node:nth-child(6) { /* Exoditical */
+            top: 60%;
+            left: 5%;
+            transform: rotateX(12deg) rotateY(8deg);
         }
 
         .project-node:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: var(--accent-cyan);
-            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.2);
+            transform: translateZ(50px) rotateX(0deg) rotateY(0deg) scale(1.05);
+            border-color: var(--quantum-cyan);
+            box-shadow: 0 0 60px rgba(0, 212, 255, 0.3);
         }
 
-        .project-visualizer {
+        .project-visualizer-field {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            opacity: 0.3;
-            border-radius: 20px;
-            transition: opacity 0.5s ease;
-        }
-
-        .project-node:hover .project-visualizer {
+            height: 60%;
             opacity: 0.6;
-        }
-
-        .project-content {
-            position: relative;
-            z-index: 10;
-        }
-
-        .project-node h3 {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 0.5rem;
-            font-family: 'Orbitron', monospace;
-        }
-
-        .project-status {
-            font-size: 0.9rem;
-            color: var(--accent-cyan);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .project-description {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .project-link {
-            display: inline-block;
-            padding: 0.7rem 1.5rem;
-            background: rgba(0, 212, 255, 0.1);
-            color: var(--accent-cyan);
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 500;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            transition: all 0.3s ease;
-            position: relative;
+            border-radius: 20px 20px 0 0;
             overflow: hidden;
         }
 
-        .project-link-visualizer {
+        .project-metadata {
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            border-radius: 25px;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
         }
 
-        .project-link:hover .project-link-visualizer {
-            opacity: 0.4;
+        .project-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--quantum-cyan);
         }
 
-        .project-link:hover {
-            background: rgba(0, 212, 255, 0.2);
-            transform: translateX(5px);
-            border-color: var(--accent-cyan);
+        .project-essence {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+
+        .project-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 0.7rem;
+            padding: 0.3rem 0.8rem;
+            background: rgba(138, 43, 226, 0.3);
+            border: 1px solid var(--neural-purple);
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         /* NEURAL CONNECTION LINES */
-        .connection-lines {
+        .neural-connections {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1;
+            opacity: 0.4;
         }
 
-        .connection-line {
+        .connection-path {
             position: absolute;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
-            opacity: 0.3;
-            animation: pulse 3s ease-in-out infinite;
+            background: linear-gradient(90deg, transparent, var(--quantum-cyan), transparent);
+            transform-origin: left center;
+            animation: pulse-connection 4s ease-in-out infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.1; }
-            50% { opacity: 0.5; }
+        @keyframes pulse-connection {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.8; }
         }
 
-        /* CONTACT SECTION */
-        .contact-section {
-            padding: 5rem 2rem;
+        /* CONTACT PORTAL */
+        .contact-portal {
             text-align: center;
-            background: linear-gradient(135deg, var(--dark-blue), #000511);
-            position: relative;
-        }
-
-        .contact-bg-visualizer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.15;
-        }
-
-        .contact-content {
-            max-width: 600px;
-            margin: 0 auto;
             position: relative;
             z-index: 10;
         }
 
-        .contact-title {
+        .portal-title {
+            font-family: 'JetBrains Mono', monospace;
             font-size: 2.5rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 1rem;
-            font-family: 'Orbitron', monospace;
-        }
-
-        .contact-description {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
             margin-bottom: 2rem;
+            background: var(--neural-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .contact-button {
-            display: inline-block;
-            padding: 1.2rem 3rem;
-            background: var(--gradient-neural);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
+        .portal-interface {
             position: relative;
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            background: rgba(10, 10, 10, 0.8);
+            border: 2px solid transparent;
+            border-radius: 50px;
+            backdrop-filter: blur(20px);
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: all 0.4s ease;
             overflow: hidden;
-            transition: all 0.3s ease;
         }
 
-        .contact-button-visualizer {
+        .portal-visualizer-core {
             position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 60px;
+            opacity: 0.7;
+        }
+
+        .portal-interface:hover {
+            transform: translateY(-5px);
+            border-color: var(--quantum-cyan);
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
+        }
+
+        /* BACKGROUND NEURAL FIELD */
+        .neural-field-layer {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0.4;
-            border-radius: 50px;
+            opacity: 0.1;
+            z-index: -1;
         }
 
-        .contact-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(138, 43, 226, 0.3);
-        }
-
-        /* SCROLL ANIMATIONS */
-        .scroll-trigger {
+        /* SCROLL CHOREOGRAPHY */
+        .scroll-orchestrated {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(60px) rotateX(15deg);
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .scroll-trigger.visible {
+        .scroll-orchestrated.choreographed {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) rotateX(0deg);
         }
 
-        /* RESPONSIVE */
+        /* RESPONSIVE ELEGANCE */
+        @media (max-width: 1024px) {
+            .project-constellation {
+                width: 95%;
+                height: 95%;
+            }
+            
+            .project-node {
+                width: 240px;
+                height: 280px;
+            }
+            
+            .identity-core {
+                font-size: 3rem;
+            }
+        }
+
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .project-node {
+                position: relative;
+                display: block;
+                margin: 2rem auto;
+                width: 280px;
+                transform: none !important;
             }
             
-            .hero h1 {
-                font-size: 2.8rem;
+            .constellation-space {
+                height: auto;
+                padding: 2rem 0;
             }
             
-            .neural-grid {
-                grid-template-columns: 1fr;
-                padding: 3rem 1rem;
+            .project-constellation {
+                position: relative;
+                transform: none;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .identity-core {
+                font-size: 2.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- NAVIGATION -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <div class="holographic-layers logo-visualizer" id="logoVisualizer"></div>
-                CLEAR SEAS
-            </div>
-            <ul class="nav-links">
-                <li>
-                    <a href="#projects">
-                        <div class="holographic-layers nav-link-visualizer" id="navProjects"></div>
-                        Projects
-                    </a>
-                </li>
-                <li>
-                    <a href="#contact">
-                        <div class="holographic-layers nav-link-visualizer" id="navContact"></div>
-                        Contact
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <!-- CUSTOM CURSOR SYSTEM -->
+    <div class="cursor-main"></div>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <div class="holographic-layers hero-bg-visualizer" id="heroBackground"></div>
-        <div class="hero-content">
-            <h1 class="scroll-trigger">Clear Seas Solutions</h1>
-            <div class="hero-subtitle scroll-trigger">AI • Machine Intelligence • Synthetic Cognition</div>
-            <p class="hero-description scroll-trigger">
-                Technology innovation and architecture focused on artificial intelligence, 
-                synthetic cognition systems, and breakthrough approaches to machine intelligence. 
-                Specializing in maritime, fisheries, and offshore resource development applications.
-            </p>
+    <!-- NEURAL FIELD BACKGROUND -->
+    <div class="holographic-layers neural-field-layer" id="neuralFieldBackground"></div>
+
+    <!-- HERO - IDENTITY EMERGENCE -->
+    <section class="portfolio-section">
+        <div class="hero-emergence scroll-orchestrated">
+            <div class="holographic-layers identity-substrate" id="identitySubstrate"></div>
+            <h1 class="identity-core">CLEAR SEAS</h1>
+            <div class="subtitle-matrix">AI • Machine Intelligence • Synthetic Cognition</div>
         </div>
     </section>
 
-    <!-- NEURAL PROJECT GRID -->
-    <section id="projects" class="neural-grid">
-        <div class="connection-lines">
-            <div class="connection-line" style="top: 20%; left: 10%; width: 30%; transform: rotate(15deg);"></div>
-            <div class="connection-line" style="top: 60%; right: 15%; width: 25%; transform: rotate(-20deg);"></div>
-            <div class="connection-line" style="bottom: 30%; left: 40%; width: 20%; transform: rotate(45deg);"></div>
-        </div>
+    <!-- PROJECT CONSTELLATION -->
+    <section class="portfolio-section">
+        <div class="constellation-space scroll-orchestrated">
+            <div class="project-constellation">
+                
+                <!-- PARSERATOR NODE -->
+                <div class="project-node" data-project="parserator">
+                    <div class="project-status">Production</div>
+                    <div class="holographic-layers project-visualizer-field" id="parserator-field"></div>
+                    <div class="project-metadata">
+                        <div class="project-title">Parserator</div>
+                        <div class="project-essence">
+                            Advanced parsing & data extraction platform utilizing machine intelligence
+                        </div>
+                    </div>
+                </div>
 
-        <!-- PARSERATOR -->
-        <div class="project-node scroll-trigger" onclick="window.open('https://parserator.com', '_blank')">
-            <div class="holographic-layers project-visualizer" id="parserator"></div>
-            <div class="project-content">
-                <h3>Parserator</h3>
-                <div class="project-status">Active • Production</div>
-                <p class="project-description">
-                    Advanced parsing and data extraction platform utilizing machine intelligence 
-                    for complex document and data stream processing.
-                </p>
-                <a href="https://parserator.com" target="_blank" class="project-link">
-                    <div class="holographic-layers project-link-visualizer" id="parseratorLink"></div>
-                    Explore Platform →
-                </a>
+                <!-- VIB34D NODE -->
+                <div class="project-node" data-project="vib34d">
+                    <div class="project-status">Open Source</div>
+                    <div class="holographic-layers project-visualizer-field" id="vib34d-field"></div>
+                    <div class="project-metadata">
+                        <div class="project-title">VIB34D Engine</div>
+                        <div class="project-essence">
+                            4D holographic visualization system for multidimensional data representation
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIB3CODE NODE -->
+                <div class="project-node" data-project="vib3code">
+                    <div class="project-status">Coming Soon</div>
+                    <div class="holographic-layers project-visualizer-field" id="vib3code-field"></div>
+                    <div class="project-metadata">
+                        <div class="project-title">Vib3code</div>
+                        <div class="project-essence">
+                            Culture tech blog exploring consciousness & creative expression in computation
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GEOMETRIC CONDITION NODE -->
+                <div class="project-node" data-project="geometric">
+                    <div class="project-status">Research</div>
+                    <div class="holographic-layers project-visualizer-field" id="geometric-field"></div>
+                    <div class="project-metadata">
+                        <div class="project-title">Geometric Condition</div>
+                        <div class="project-essence">
+                            Research field exploring geometric foundations of consciousness & cognition
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MINOOTS NODE -->
+                <div class="project-node" data-project="minoots">
+                    <div class="project-status">Development</div>
+                    <div class="holographic-layers project-visualizer-field" id="minoots-field"></div>
+                    <div class="project-metadata">
+                        <div class="project-title">Minoots</div>
+                        <div class="project-essence">
+                            Decentralized identity & autonomous agent systems with emergent intelligence
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EXODITICAL NODE -->
+                <div class="project-node" data-project="exoditical">
+                    <div class="project-status">Movement</div>
+                    <div class="holographic-layers project-visualizer-field" id="exoditical-field"></div>
+                    <div class="project-metadata">
+                        <div class="project-title">Exoditical Moral Architecture</div>
+                        <div class="project-essence">
+                            Movement against walled gardens promoting open architecture & ethical AI
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        </div>
 
-        <!-- VIB3CODE -->
-        <div class="project-node scroll-trigger">
-            <div class="holographic-layers project-visualizer" id="vib3code"></div>
-            <div class="project-content">
-                <h3>Vib3code</h3>
-                <div class="project-status">Coming Soon</div>
-                <p class="project-description">
-                    Vibe coding and culture tech blog exploring the intersection of technology, 
-                    consciousness, and creative expression in computational systems.
-                </p>
-                <a href="#" class="project-link">
-                    <div class="holographic-layers project-link-visualizer" id="vib3codeLink"></div>
-                    Launch Soon →
-                </a>
-            </div>
-        </div>
-
-        <!-- MINOOTS -->
-        <div class="project-node scroll-trigger">
-            <div class="holographic-layers project-visualizer" id="minoots"></div>
-            <div class="project-content">
-                <h3>Minoots</h3>
-                <div class="project-status">In Development</div>
-                <p class="project-description">
-                    Revolutionary approach to decentralized identity and autonomous agent systems, 
-                    focusing on synthetic cognition and emergent intelligence patterns.
-                </p>
-                <a href="#" class="project-link">
-                    <div class="holographic-layers project-link-visualizer" id="minootsLink"></div>
-                    Preview →
-                </a>
-            </div>
-        </div>
-
-        <!-- EXODITICAL MORAL ARCHITECTURE -->
-        <div class="project-node scroll-trigger">
-            <div class="holographic-layers project-visualizer" id="exoditical"></div>
-            <div class="project-content">
-                <h3>Exoditical Moral Architecture</h3>
-                <div class="project-status">Movement • Research</div>
-                <p class="project-description">
-                    Foundational movement against walled gardens and closed ecosystems, 
-                    promoting open architecture and ethical AI development principles.
-                </p>
-                <a href="#" class="project-link">
-                    <div class="holographic-layers project-link-visualizer" id="exoditicalLink"></div>
-                    Learn More →
-                </a>
-            </div>
-        </div>
-
-        <!-- GEOMETRIC CONDITION -->
-        <div class="project-node scroll-trigger">
-            <div class="holographic-layers project-visualizer" id="geometric"></div>
-            <div class="project-content">
-                <h3>Geometric Condition</h3>
-                <div class="project-status">Research Field</div>
-                <p class="project-description">
-                    Pioneering field of research exploring the geometric foundations of consciousness, 
-                    cognition, and information processing in synthetic intelligence systems.
-                </p>
-                <a href="#" class="project-link">
-                    <div class="holographic-layers project-link-visualizer" id="geometricLink"></div>
-                    Research →
-                </a>
-            </div>
-        </div>
-
-        <!-- VIB34D HOLOGRAPHIC ENGINE -->
-        <div class="project-node scroll-trigger" onclick="window.open('https://domusgpt.github.io/vib34d-holographic-engine/', '_blank')">
-            <div class="holographic-layers project-visualizer" id="vib34d"></div>
-            <div class="project-content">
-                <h3>VIB34D Holographic Engine</h3>
-                <div class="project-status">Active • Open Source</div>
-                <p class="project-description">
-                    Advanced 4D visualization and holographic rendering system for complex 
-                    mathematical structures and multidimensional data representation.
-                </p>
-                <a href="https://domusgpt.github.io/vib34d-holographic-engine/" target="_blank" class="project-link">
-                    <div class="holographic-layers project-link-visualizer" id="vib34dLink"></div>
-                    Explore Engine →
-                </a>
+            <!-- NEURAL CONNECTIONS -->
+            <div class="neural-connections">
+                <div class="connection-path" style="top: 25%; left: 25%; width: 30%; transform: rotate(25deg);"></div>
+                <div class="connection-path" style="top: 45%; right: 20%; width: 25%; transform: rotate(-15deg);"></div>
+                <div class="connection-path" style="bottom: 35%; left: 15%; width: 35%; transform: rotate(45deg);"></div>
+                <div class="connection-path" style="top: 65%; left: 30%; width: 20%; transform: rotate(-30deg);"></div>
             </div>
         </div>
     </section>
 
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="contact-section">
-        <div class="holographic-layers contact-bg-visualizer" id="contactBackground"></div>
-        <div class="contact-content">
-            <h2 class="contact-title scroll-trigger">Ready to Innovate?</h2>
-            <p class="contact-description scroll-trigger">
-                Connect with Clear Seas Solutions for AI architecture, synthetic cognition research, 
-                and breakthrough technology innovation projects.
-            </p>
-            <a href="mailto:hello@clearseas.solutions" class="contact-button scroll-trigger">
-                <div class="holographic-layers contact-button-visualizer" id="contactButton"></div>
-                Get In Touch
+    <!-- CONTACT PORTAL -->
+    <section class="portfolio-section">
+        <div class="contact-portal scroll-orchestrated">
+            <h2 class="portal-title">Initialize Contact</h2>
+            <a href="mailto:hello@clearseas.solutions" class="portal-interface">
+                <div class="holographic-layers portal-visualizer-core" id="contactPortalCore"></div>
+                Establish Connection
             </a>
         </div>
     </section>
 
-    <!-- VIB34D HOLISTIC INTEGRATION -->
+    <!-- HOLISTIC VIB34D CHOREOGRAPHY ENGINE -->
     <script type="module">
-        let vib34dEngines = {};
-        let visualizerNodes = new Map();
-        let scrollProgress = 0;
-        let mousePosition = { x: 0.5, y: 0.5 };
+        let vib34dConductor = {};
+        let visualizerNetwork = new Map();
+        let cursorTrails = [];
+        let choreographyState = {
+            scroll: 0,
+            mouse: { x: 0.5, y: 0.5 },
+            section: 0,
+            resonance: 0
+        };
 
-        // Initialize VIB34D systems for holistic visualization
-        async function initializeHolisticVIB34D() {
+        // Initialize VIB34D Choreography System
+        async function initializeChoreographyEngine() {
             try {
-                console.log('🧠 Initializing holistic VIB34D neural network...');
+                console.log('🎭 Initializing VIB34D Choreography Engine...');
                 
-                // Import VIB34D engines
+                // Import VIB34D systems
                 const [coreEngine, quantumEngine, holoSystem, polySystem, canvasManager] = await Promise.all([
                     import('./src/core/Engine.js').catch(() => null),
                     import('./src/quantum/QuantumEngine.js').catch(() => null),
@@ -595,127 +508,198 @@
                     import('./src/core/CanvasManager.js').catch(() => null)
                 ]);
                 
-                if (coreEngine) vib34dEngines.VIB34DIntegratedEngine = coreEngine.VIB34DIntegratedEngine;
-                if (quantumEngine) vib34dEngines.QuantumEngine = quantumEngine.QuantumEngine;
-                if (holoSystem) vib34dEngines.RealHolographicSystem = holoSystem.RealHolographicSystem;
-                if (polySystem) vib34dEngines.PolychoraSystem = polySystem.PolychoraSystem;
+                if (coreEngine) vib34dConductor.VIB34DIntegratedEngine = coreEngine.VIB34DIntegratedEngine;
+                if (quantumEngine) vib34dConductor.QuantumEngine = quantumEngine.QuantumEngine;
+                if (holoSystem) vib34dConductor.RealHolographicSystem = holoSystem.RealHolographicSystem;
+                if (polySystem) vib34dConductor.PolychoraSystem = polySystem.PolychoraSystem;
                 
                 if (canvasManager) {
-                    window.canvasManager = new canvasManager.CanvasManager();
+                    window.choreographyManager = new canvasManager.CanvasManager();
                 }
 
-                // Create neural network of visualizers
-                await createNeuralVisualizerNetwork();
+                // Create choreographed visualizer network
+                await createChoreographedNetwork();
                 
-                // Start holistic response system
-                startHolisticResponseSystem();
+                // Initialize interaction choreography
+                initializeInteractionChoreography();
                 
-                console.log('✅ Neural VIB34D network online');
+                // Start the choreography loop
+                startChoreographyLoop();
+                
+                console.log('✨ Choreography Engine Online');
                 
             } catch (error) {
-                console.warn('⚠️ Neural network initialization partial:', error);
+                console.warn('⚠️ Choreography Engine partial initialization:', error);
             }
         }
 
-        // Create interconnected visualizer network
-        async function createNeuralVisualizerNetwork() {
-            const neuralNodes = [
-                // Navigation & Branding
-                { id: 'logoVisualizer', system: 'faceted', role: 'identity', intensity: 0.8 },
-                { id: 'navProjects', system: 'quantum', role: 'navigation', intensity: 0.4 },
-                { id: 'navContact', system: 'holographic', role: 'navigation', intensity: 0.4 },
+        // Create choreographed network of visualizers
+        async function createChoreographedNetwork() {
+            const choreographyNodes = [
+                // Background neural field
+                { id: 'neuralFieldBackground', system: 'polychora', role: 'ambient', intensity: 0.15, resonance: 0.1 },
                 
-                // Hero System
-                { id: 'heroBackground', system: 'polychora', role: 'background', intensity: 0.3 },
+                // Identity emergence
+                { id: 'identitySubstrate', system: 'holographic', role: 'identity', intensity: 0.8, resonance: 0.3 },
                 
-                // Project Nodes - Each with unique system and complementary parameters
-                { id: 'parserator', system: 'faceted', role: 'primary', intensity: 0.7, hue: 180 },
-                { id: 'vib3code', system: 'quantum', role: 'primary', intensity: 0.8, hue: 280 },
-                { id: 'minoots', system: 'holographic', role: 'primary', intensity: 0.6, hue: 60 },
-                { id: 'exoditical', system: 'polychora', role: 'primary', intensity: 0.9, hue: 320 },
-                { id: 'geometric', system: 'faceted', role: 'primary', intensity: 0.8, hue: 120 },
-                { id: 'vib34d', system: 'holographic', role: 'primary', intensity: 1.0, hue: 200 },
+                // Project constellation fields
+                { id: 'parserator-field', system: 'faceted', role: 'project', intensity: 0.9, hue: 180, resonance: 0.7 },
+                { id: 'vib34d-field', system: 'holographic', role: 'project', intensity: 1.0, hue: 280, resonance: 0.9 },
+                { id: 'vib3code-field', system: 'quantum', role: 'project', intensity: 0.8, hue: 320, resonance: 0.6 },
+                { id: 'geometric-field', system: 'polychora', role: 'project', intensity: 0.7, hue: 120, resonance: 0.8 },
+                { id: 'minoots-field', system: 'quantum', role: 'project', intensity: 0.9, hue: 60, resonance: 0.5 },
+                { id: 'exoditical-field', system: 'faceted', role: 'project', intensity: 0.6, hue: 240, resonance: 0.4 },
                 
-                // Interactive Elements
-                { id: 'parseratorLink', system: 'quantum', role: 'interactive', intensity: 0.5 },
-                { id: 'vib3codeLink', system: 'holographic', role: 'interactive', intensity: 0.5 },
-                { id: 'minootsLink', system: 'polychora', role: 'interactive', intensity: 0.5 },
-                { id: 'exoditicalLink', system: 'faceted', role: 'interactive', intensity: 0.5 },
-                { id: 'geometricLink', system: 'quantum', role: 'interactive', intensity: 0.5 },
-                { id: 'vib34dLink', system: 'polychora', role: 'interactive', intensity: 0.5 },
-                
-                // Contact System
-                { id: 'contactBackground', system: 'quantum', role: 'background', intensity: 0.2 },
-                { id: 'contactButton', system: 'holographic', role: 'action', intensity: 0.6 }
+                // Contact portal
+                { id: 'contactPortalCore', system: 'holographic', role: 'portal', intensity: 0.7, resonance: 0.8 }
             ];
 
-            for (const node of neuralNodes) {
+            for (const node of choreographyNodes) {
                 const container = document.getElementById(node.id);
-                if (container && window.canvasManager) {
+                if (container && window.choreographyManager) {
                     try {
-                        const engine = await window.canvasManager.createVisualizerInContainer(
-                            node.id, node.system, vib34dEngines
+                        const engine = await window.choreographyManager.createVisualizerInContainer(
+                            node.id, node.system, vib34dConductor
                         );
                         
-                        visualizerNodes.set(node.id, {
+                        visualizerNetwork.set(node.id, {
                             engine,
                             container,
                             system: node.system,
                             role: node.role,
                             baseIntensity: node.intensity || 0.5,
                             baseHue: node.hue || Math.random() * 360,
-                            currentParams: {}
+                            resonance: node.resonance || 0.5,
+                            currentParams: {},
+                            phase: Math.random() * Math.PI * 2
                         });
                         
                     } catch (error) {
-                        console.warn(`Failed to create neural node ${node.id}:`, error);
+                        console.warn(`Failed to create choreography node ${node.id}:`, error);
                     }
                 }
             }
         }
 
-        // Start holistic response system
-        function startHolisticResponseSystem() {
-            // Mouse tracking for neural response
-            document.addEventListener('mousemove', (e) => {
-                mousePosition.x = e.clientX / window.innerWidth;
-                mousePosition.y = e.clientY / window.innerHeight;
-                updateNeuralNetwork();
-            });
+        // Initialize sophisticated interaction choreography
+        function initializeInteractionChoreography() {
+            // Cursor choreography with VIB34D trail
+            setupCursorChoreography();
+            
+            // Scroll choreography
+            setupScrollChoreography();
+            
+            // Project node interaction choreography
+            setupProjectChoreography();
+            
+            // Viewport choreography
+            setupViewportChoreography();
+        }
 
-            // Scroll tracking for wave propagation
+        // Cursor choreography with trail system
+        function setupCursorChoreography() {
+            const cursor = document.querySelector('.cursor-main');
+            
+            // Create cursor trails
+            for (let i = 0; i < 12; i++) {
+                const trail = document.createElement('div');
+                trail.className = 'cursor-trail';
+                document.body.appendChild(trail);
+                cursorTrails.push({ element: trail, x: 0, y: 0, delay: i * 0.02 });
+            }
+            
+            document.addEventListener('mousemove', (e) => {
+                choreographyState.mouse.x = e.clientX / window.innerWidth;
+                choreographyState.mouse.y = e.clientY / window.innerHeight;
+                
+                cursor.style.left = e.clientX - 10 + 'px';
+                cursor.style.top = e.clientY - 10 + 'px';
+                
+                // Update trail positions with delay
+                cursorTrails.forEach((trail, i) => {
+                    setTimeout(() => {
+                        trail.x = e.clientX;
+                        trail.y = e.clientY;
+                        trail.element.style.left = trail.x - 2 + 'px';
+                        trail.element.style.top = trail.y - 2 + 'px';
+                        trail.element.style.opacity = 0.8 - (i * 0.06);
+                    }, trail.delay * 1000);
+                });
+                
+                // Cursor influences visualizer network
+                influenceNetworkFromCursor();
+            });
+            
+            document.addEventListener('mouseenter', () => {
+                cursor.style.opacity = '1';
+                cursorTrails.forEach(trail => trail.element.style.opacity = '0.6');
+            });
+            
+            document.addEventListener('mouseleave', () => {
+                cursor.style.opacity = '0';
+                cursorTrails.forEach(trail => trail.element.style.opacity = '0');
+            });
+        }
+
+        // Scroll choreography with wave propagation
+        function setupScrollChoreography() {
             window.addEventListener('scroll', () => {
-                scrollProgress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+                const scrollProgress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+                const sections = document.querySelectorAll('.portfolio-section');
+                
+                choreographyState.scroll = scrollProgress;
+                choreographyState.section = Math.floor(scrollProgress * sections.length);
+                
                 propagateScrollWave();
             });
+        }
 
-            // Intersection observer for activation waves
+        // Project node interaction choreography
+        function setupProjectChoreography() {
+            document.querySelectorAll('.project-node').forEach(node => {
+                const projectType = node.dataset.project;
+                
+                node.addEventListener('mouseenter', () => {
+                    triggerProjectResonance(projectType, 'enter');
+                });
+                
+                node.addEventListener('mouseleave', () => {
+                    triggerProjectResonance(projectType, 'leave');
+                });
+                
+                node.addEventListener('click', () => {
+                    triggerProjectActivation(projectType);
+                });
+            });
+        }
+
+        // Viewport choreography with intersection observer
+        function setupViewportChoreography() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        triggerActivationWave(entry.target);
+                        entry.target.classList.add('choreographed');
+                        triggerSectionTransition(entry.target);
                     }
                 });
-            }, { threshold: 0.1, rootMargin: '50px' });
-
-            document.querySelectorAll('.scroll-trigger').forEach(el => {
-                observer.observe(el);
+            }, { 
+                threshold: 0.3,
+                rootMargin: '50px'
             });
 
-            // Start continuous neural oscillation
-            setInterval(updateNeuralOscillation, 100);
+            document.querySelectorAll('.scroll-orchestrated').forEach(el => {
+                observer.observe(el);
+            });
         }
 
-        // Update neural network based on mouse position
-        function updateNeuralNetwork() {
-            const time = Date.now() * 0.001;
+        // Influence network from cursor position
+        function influenceNetworkFromCursor() {
+            const { x, y } = choreographyState.mouse;
             
-            visualizerNodes.forEach((node, id) => {
+            visualizerNetwork.forEach((node, id) => {
                 if (!node.engine || !node.engine.updateParameters) return;
                 
-                // Calculate influence based on role and mouse position
-                const influence = calculateNeuralInfluence(node, mousePosition, time);
+                const influence = calculateCursorInfluence(node, x, y);
                 
                 const params = {
                     intensity: node.baseIntensity + influence.intensity,
@@ -730,131 +714,145 @@
             });
         }
 
-        // Calculate neural influence for holistic behavior
-        function calculateNeuralInfluence(node, mouse, time) {
+        // Calculate sophisticated cursor influence
+        function calculateCursorInfluence(node, x, y) {
             const role = node.role;
-            const system = node.system;
+            const resonance = node.resonance;
+            const distance = Math.sqrt((x - 0.5) ** 2 + (y - 0.5) ** 2);
             
-            // Base oscillation for all nodes
-            const baseWave = Math.sin(time * 0.5) * 0.1;
+            const baseInfluence = (1 - distance) * resonance;
             
-            // Mouse influence varies by role
-            const mouseInfluence = {
-                'identity': { intensity: mouse.x * 0.3, hueShift: mouse.y * 30 },
-                'navigation': { intensity: mouse.x * 0.2, hueShift: mouse.y * 20 },
-                'primary': { intensity: mouse.y * 0.4, hueShift: mouse.x * 40 },
-                'interactive': { intensity: (mouse.x + mouse.y) * 0.25, hueShift: mouse.x * 60 },
-                'background': { intensity: mouse.y * 0.1, hueShift: mouse.x * 15 },
-                'action': { intensity: mouse.x * 0.5, hueShift: mouse.y * 50 }
-            }[role] || { intensity: 0.1, hueShift: 10 };
-            
-            // System-specific complementary behavior
-            const systemModifier = {
-                'faceted': { morph: 0.1, chaos: 0.05, speed: 0.1 },
-                'quantum': { morph: 0.3, chaos: 0.2, speed: 0.3 },
-                'holographic': { morph: 0.5, chaos: 0.3, speed: 0.5 },
-                'polychora': { morph: 0.7, chaos: 0.1, speed: 0.2 }
-            }[system] || { morph: 0.2, chaos: 0.1, speed: 0.2 };
+            const roleMultipliers = {
+                'ambient': { intensity: 0.1, hue: 20, morph: 0.2 },
+                'identity': { intensity: 0.4, hue: 40, morph: 0.3 },
+                'project': { intensity: 0.6, hue: 60, morph: 0.5 },
+                'portal': { intensity: 0.8, hue: 80, morph: 0.7 }
+            }[role] || { intensity: 0.3, hue: 30, morph: 0.3 };
             
             return {
-                intensity: baseWave + mouseInfluence.intensity,
-                hueShift: mouseInfluence.hueShift + Math.sin(time * 0.3) * 10,
-                morph: systemModifier.morph + baseWave,
-                chaos: systemModifier.chaos + Math.sin(time * 0.7) * 0.1,
-                speed: systemModifier.speed + baseWave * 0.5
+                intensity: baseInfluence * roleMultipliers.intensity,
+                hueShift: x * roleMultipliers.hue,
+                morph: y * roleMultipliers.morph,
+                chaos: baseInfluence * 0.3,
+                speed: baseInfluence * 0.5
             };
         }
 
         // Propagate scroll wave through network
         function propagateScrollWave() {
-            const wavePhase = scrollProgress * Math.PI * 2;
+            const wavePhase = choreographyState.scroll * Math.PI * 4;
             
-            visualizerNodes.forEach((node, id) => {
+            visualizerNetwork.forEach((node, id) => {
                 if (!node.engine || !node.engine.updateParameters) return;
                 
-                const scrollInfluence = Math.sin(wavePhase + node.baseHue * 0.01) * 0.3;
+                const phase = wavePhase + node.phase;
+                const waveInfluence = Math.sin(phase) * 0.3 * node.resonance;
                 
                 const params = {
                     ...node.currentParams,
-                    morphFactor: (node.currentParams.morphFactor || 1.0) + scrollInfluence,
-                    intensity: (node.currentParams.intensity || node.baseIntensity) + scrollInfluence * 0.2
+                    morphFactor: (node.currentParams.morphFactor || 1.0) + waveInfluence,
+                    intensity: (node.currentParams.intensity || node.baseIntensity) + waveInfluence * 0.2
                 };
                 
                 node.engine.updateParameters(params);
             });
         }
 
-        // Trigger activation wave when elements become visible
-        function triggerActivationWave(element) {
-            const visualizer = element.querySelector('.holographic-layers');
-            if (!visualizer) return;
+        // Trigger project resonance
+        function triggerProjectResonance(projectType, action) {
+            const fieldId = `${projectType}-field`;
+            const node = visualizerNetwork.get(fieldId);
             
-            const nodeData = visualizerNodes.get(visualizer.id);
-            if (!nodeData || !nodeData.engine) return;
+            if (!node || !node.engine) return;
             
-            // Create activation pulse
-            const originalIntensity = nodeData.baseIntensity;
-            nodeData.engine.updateParameters({
-                intensity: originalIntensity * 1.5,
-                morphFactor: 2.0,
-                chaos: 0.8
+            const multiplier = action === 'enter' ? 1.5 : 1.0;
+            
+            node.engine.updateParameters({
+                intensity: node.baseIntensity * multiplier,
+                morphFactor: 1.0 + (multiplier - 1.0) * 0.8,
+                chaos: 0.2 + (multiplier - 1.0) * 0.4,
+                speed: 0.8 + (multiplier - 1.0) * 0.3
             });
-            
-            // Fade back to normal
-            setTimeout(() => {
-                nodeData.engine.updateParameters({
-                    intensity: originalIntensity,
-                    morphFactor: 1.0,
-                    chaos: 0.2
-                });
-            }, 1000);
         }
 
-        // Continuous neural oscillation for living system feel
-        function updateNeuralOscillation() {
-            const time = Date.now() * 0.001;
+        // Trigger project activation
+        function triggerProjectActivation(projectType) {
+            const urls = {
+                'parserator': 'https://parserator.com',
+                'vib34d': 'https://domusgpt.github.io/vib34d-holographic-engine/'
+            };
             
-            visualizerNodes.forEach((node, id) => {
+            if (urls[projectType]) {
+                window.open(urls[projectType], '_blank');
+            }
+            
+            // Visual activation pulse
+            const fieldId = `${projectType}-field`;
+            const node = visualizerNetwork.get(fieldId);
+            
+            if (node && node.engine) {
+                node.engine.updateParameters({
+                    intensity: node.baseIntensity * 2.0,
+                    morphFactor: 3.0,
+                    chaos: 1.0
+                });
+                
+                setTimeout(() => {
+                    node.engine.updateParameters({
+                        intensity: node.baseIntensity,
+                        morphFactor: 1.0,
+                        chaos: 0.2
+                    });
+                }, 800);
+            }
+        }
+
+        // Trigger section transition
+        function triggerSectionTransition(section) {
+            visualizerNetwork.forEach((node, id) => {
                 if (!node.engine || !node.engine.updateParameters) return;
                 
-                // Subtle breathing effect
-                const breathe = Math.sin(time * 0.2 + node.baseHue * 0.01) * 0.05;
+                const transitionPulse = Math.sin(Date.now() * 0.005) * 0.2;
                 
-                const params = {
-                    ...node.currentParams,
-                    intensity: (node.currentParams.intensity || node.baseIntensity) + breathe
-                };
-                
-                node.engine.updateParameters(params);
-            });
-        }
-
-        // Smooth scrolling
-        function setupSmoothScrolling() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
+                node.engine.updateParameters({
+                    intensity: node.baseIntensity + transitionPulse,
+                    hue: (node.baseHue + transitionPulse * 50) % 360
                 });
             });
         }
 
-        // Initialize everything
+        // Continuous choreography loop
+        function startChoreographyLoop() {
+            function choreographyFrame() {
+                const time = Date.now() * 0.001;
+                
+                visualizerNetwork.forEach((node, id) => {
+                    if (!node.engine || !node.engine.updateParameters) return;
+                    
+                    // Breathing oscillation
+                    const breath = Math.sin(time * 0.3 + node.phase) * 0.05 * node.resonance;
+                    
+                    const params = {
+                        ...node.currentParams,
+                        intensity: (node.currentParams.intensity || node.baseIntensity) + breath
+                    };
+                    
+                    node.engine.updateParameters(params);
+                });
+                
+                requestAnimationFrame(choreographyFrame);
+            }
+            
+            requestAnimationFrame(choreographyFrame);
+        }
+
+        // Initialize choreography on load
         document.addEventListener('DOMContentLoaded', async () => {
-            setupSmoothScrolling();
-            await initializeHolisticVIB34D();
+            await initializeChoreographyEngine();
             
-            // Initial scroll trigger for hero
+            // Initial hero animation
             setTimeout(() => {
-                document.querySelectorAll('.hero .scroll-trigger').forEach(el => {
-                    el.classList.add('visible');
-                });
+                document.querySelector('.hero-emergence').classList.add('choreographed');
             }, 500);
         });
     </script>
