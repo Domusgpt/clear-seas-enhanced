@@ -1,1004 +1,611 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clear Seas Solutions LLC - Polytopal Projection Technology</title>
-  
-  <!-- Meta Tags for SEO and Professional Presentation -->
-  <meta name="description" content="Clear Seas Solutions LLC - Revolutionary polytopal projection technology for machine-oriented data encoding, robotics perception, and distributed AI systems." />
-  <meta name="keywords" content="polytopal projection, machine learning, robotics, AI, data encoding, high-dimensional geometry, GPU shaders, agentic systems" />
-  <meta name="author" content="Paul Phillips, Clear Seas Solutions LLC" />
-  
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Clear Seas Solutions LLC - Polytopal Projection Technology" />
-  <meta property="og:description" content="Revolutionary high-dimensional geometry and GPU shader systems for real-time robotics perception and distributed AI." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://clearseassolutions.com" />
-  
-  <!-- Favicon and Icons -->
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A0tLSBOLi4g/i4uIP4uLiD+Li4g/i4uIP4uLiD+Li4g/i4uIP4uLiD9LS0gT///8A////AP///wD///8A4uLiD2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/4uLiD////wD///8A4uLiD2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/4uLiD////wD///8A4uLiD2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/4uLiD////wD///8A4uLiD2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/4uLiD////wD///8A4uLiD2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/4uLiD////wD///8A4uLiD2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/4uLiD////wD///8A4uLiD2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/4uLiD////wD///8A4uLiD2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/4uLiD////wD///8A4uLiD2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/4uLiD////wD///8A4uLiD2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/ZGRk/2RkZP9kZGT/4uLiD////wD///8A0tLSBOLi4g/i4uIP4uLiD+Li4g/i4uIP4uLiD+Li4g/i4uIP4uLiD+Li4g/S0tIE////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==" />
-  <link rel="apple-touch-icon" href="assets/favicon.svg" />
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="styles/main.css" />
-  <link rel="stylesheet" href="styles/visualizer.css" />
-  <link rel="stylesheet" href="styles/portfolio.css" />
-  <link rel="stylesheet" href="styles/research.css" />
-  <link rel="stylesheet" href="styles/totalistic-reactive.css" />
-  <link rel="stylesheet" href="styles/neoskeuomorphic-cards.css" />
-  <link rel="stylesheet" href="styles/advanced-parallax-2025.css" />
-  
-  <!-- CINEMATIC SCROLL SYSTEM -->
-  <link rel="stylesheet" href="styles/cinematic-scroll-effects.css" />
-  
-  <!-- INTELLIGENT SCROLL ZONES -->
-  <link rel="stylesheet" href="styles/intelligent-scroll-zones.css" />
-  
-  <!-- MOBILE UX OVERHAUL -->
-  <link rel="stylesheet" href="styles/mobile-ux-overhaul.css" />
-  
-  <!-- IMMERSIVE ZONE PRESENTATIONS -->
-  <link rel="stylesheet" href="styles/immersive-zone-presentation.css" />
-  
-  <!-- UNIFIED EXPERIENCE ENGINE STYLES -->
-  <link rel="stylesheet" href="styles/unified-experience-engine.css" />
-  
-  <!-- Performance and Analytics -->
-  <script>
-    // Performance monitoring setup
-    window.performance.mark('page-start');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear Seas Solutions | Maritime Intelligence Consulting</title>
     
-    // Critical performance metrics
-    window.clearSeasMetrics = {
-      startTime: performance.now(),
-      loadEvents: [],
-      systemStatus: 'loading'
-    };
-  </script>
-  
-  <!-- UNIFIED EXPERIENCE ENGINE - Single RAF, Single Source of Truth -->
-  <script src="scripts/unified-experience-engine.js" defer></script>
-  
-  <!-- SUPPORTING SYSTEMS - CSS-driven, no RAF conflicts -->
-  <script src="scripts/zone-visualizers.js" defer></script>
-  <script src="scripts/mobile-navigation-injector.js" defer></script>
-  
-  <!-- ARCHIVED: Multiple conflicting systems with 10+ RAF loops -->
-  <!-- 
-  THESE SYSTEMS CAUSED THE "TWO SCROLL BARS" AND RAF CONFLICTS:
-  - master-conductor.js (tried to coordinate conflicts instead of fixing them)
-  - ultimate-scroll-orchestrator.js (RAF + setInterval conflicts)
-  - advanced-scroll-morph-system.js (RAF + intersection observer conflicts) 
-  - tactile-snap-scroll-system.js (RAF + multiple event listeners)
-  - cinematic-scroll-director.js (6 RAF loops + nested animations)
-  - woah-card-metamorphosis-engine.js (RAF + WebGL + observers)
-  - choreographed-visualizer.js (6 RAF loops fighting each other)
-  - intelligent-scroll-master.js (RAF + aggressive system killing)
-  - zone-pacing-controller.js (Multiple RAF + setInterval)
-  -->
-  
-  <script src="scripts/unified-system-integration.js" defer></script>
-  <script src="scripts/card-system-initializer.js" defer></script>
-  <script src="scripts/portfolio-system.js" defer></script>
-  <script src="scripts/research-system.js" defer></script>
-  <script src="scripts/main.js" defer></script>
-  
-  <!-- SYSTEM VERIFICATION TOOL -->
-  <script src="scripts/system-verification.js" defer></script>
-  
-  <!-- System Status and Error Handling -->
-  <script>
-    // Global error handler for graceful degradation
-    window.addEventListener('error', (e) => {
-      console.warn('Non-critical error handled:', e.message);
-      // Ensure site continues to function even if advanced features fail
-    });
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     
-    // Performance completion marker
-    window.addEventListener('load', () => {
-      performance.mark('page-loaded');
-      performance.measure('page-load-time', 'page-start', 'page-loaded');
-      
-      // Remove loading state
-      setTimeout(() => {
-        document.body.classList.remove('loading');
-        document.querySelector('#loading-screen')?.classList.add('fade-out');
-      }, 1500);
-    });
-  </script>
-</head>
-<body class="loading reactive-element scroll-container fluid-dynamics-container" data-mood="exploration" data-choreographed="true" data-scroll-system="unified" data-fluid-dynamics="active">
-  
-  <!-- Loading Screen with VIB34D Preloader -->
-  <div id="loading-screen" class="loading-screen">
-    <div class="loading-content">
-      <div class="polytopal-loader">
-        <canvas id="preloader-canvas" class="preloader-canvas"></canvas>
-      </div>
-      <div class="loading-text">
-        <h2>Clear Seas Solutions</h2>
-        <p>Initializing Polytopal Projection Engine...</p>
-        <div class="progress-bar">
-          <div class="progress-fill"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Unified Scroll System Elements -->
-  <div id="scroll-indicator" class="scroll-indicator"></div>
-  <div id="fluid-background" class="fluid-background"></div>
-  <div id="particle-system" class="particle-system"></div>
-
-  <!-- Enhanced Navigation with Dynamic Themes -->
-  <!-- Scroll Progress Indicator -->
-  <div class="scroll-progress-indicator"></div>
-
-  <!-- Debug Info (will be hidden in production) -->
-  <div class="debug-info" id="debug-info" style="display: none;"></div>
-
-  <nav id="main-nav" class="nav-container scroll-reactive">
-    <div class="nav-content">
-      <div class="nav-brand">
-        <div class="brand-logo">
-          <canvas id="nav-logo-canvas" class="logo-canvas"></canvas>
-        </div>
-        <div class="brand-text">
-          <span class="brand-name">Clear Seas</span>
-          <span class="brand-highlight">Solutions</span>
-        </div>
-      </div>
-      
-      <ul class="nav-links">
-        <li><a href="#hero" class="nav-link active" data-section="hero">Home</a></li>
-        <li><a href="#technology" class="nav-link" data-section="technology">Technology</a></li>
-        <li><a href="#portfolio" class="nav-link" data-section="portfolio">Portfolio</a></li>
-        <li><a href="#research" class="nav-link" data-section="research">Research</a></li>
-        <li><a href="#about" class="nav-link" data-section="about">About</a></li>
-        <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
-      </ul>
-      
-      <div class="nav-actions">
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
-          <span class="theme-icon"></span>
-        </button>
-        <button class="nav-mobile-toggle" id="nav-mobile-toggle" aria-label="Toggle Navigation">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero Section with Integrated VIB34D Engine -->
-  <section id="hero" class="hero-section zone-section scroll-reactive energy-reactive" data-theme="polychora" data-scene="hero" data-scene-active="true" data-visualizer-system="polychora">
-    <div class="hero-background">
-      <!-- VIB34D Polychora Visualization Background -->
-      <iframe class="hero-visualizer" 
-              src="https://domusgpt.github.io/vib34d-ultimate-viewer/viewer.html?system=polychora" 
-              loading="lazy" 
-              title="Polychora Visualizer"></iframe>
-      <div class="hero-overlay"></div>
-    </div>
-    
-    <div class="hero-content">
-      <div class="hero-main">
-        <h1 class="hero-title">
-          <span class="title-line">Polytopal Projection</span>
-          <span class="title-line highlight">Technology</span>
-        </h1>
-        
-        <p class="hero-subtitle">
-          Revolutionary high-dimensional geometry and GPU shader systems for 
-          real-time robotics perception and distributed AI applications
-        </p>
-        
-        <div class="hero-stats">
-          <div class="stat">
-            <span class="stat-value">60+</span>
-            <span class="stat-label">FPS Real-time</span>
-          </div>
-          <div class="stat">
-            <span class="stat-value">4D</span>
-            <span class="stat-label">Mathematics</span>
-          </div>
-          <div class="stat">
-            <span class="stat-value">GPU</span>
-            <span class="stat-label">Accelerated</span>
-          </div>
-        </div>
-        
-        <div class="hero-actions">
-          <a href="#technology" class="btn btn-primary">
-            <span>Explore Technology</span>
-            <div class="btn-bg"></div>
-          </a>
-          <a href="#portfolio" class="btn btn-secondary">
-            <span>View Portfolio</span>
-            <div class="btn-bg"></div>
-          </a>
-        </div>
-      </div>
-      
-      <!-- Real-time Technical Metrics -->
-      <div class="hero-metrics">
-        <div class="metrics-panel">
-          <h3>Live System Metrics</h3>
-          <div class="metric-row">
-            <span class="metric-label">Render FPS:</span>
-            <span class="metric-value" id="fps-counter">--</span>
-          </div>
-          <div class="metric-row">
-            <span class="metric-label">GPU Utilization:</span>
-            <span class="metric-value" id="gpu-util">--</span>
-          </div>
-          <div class="metric-row">
-            <span class="metric-label">Active Polytopes:</span>
-            <span class="metric-value" id="polytope-count">--</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Technology Section with Interactive Demonstrations -->
-  <section id="technology" class="tech-section zone-section scroll-reactive energy-reactive" data-theme="quantum" data-scene="technology" data-visualizer-system="quantum">
-    <div class="section-container">
-      <header class="section-header">
-        <h2 class="section-title">Core Technology</h2>
-        <p class="section-subtitle">
-          Advanced polytopal projection algorithms that transform high-dimensional 
-          sensor data into GPU-optimized representations for machine intelligence
-        </p>
-      </header>
-      
-      <div class="tech-grid">
-        <!-- Polytopal Projection Engine -->
-        <div id="tech-card-polychora" class="tech-card card-scroll-reactive mouse-reactive energy-reactive" data-system="polychora" data-interaction-type="cosmic" data-entrance="bottom">
-          <div class="card-depth-background"></div>
-          <div class="card-depth-shadow"></div>
-          <div class="card-content">
-            <div class="card-icon">
-              <svg class="icon-polytopal" viewBox="0 0 64 64">
-                <!-- Complex polytopal icon SVG -->
-                <path d="M32,4 L56,16 L56,48 L32,60 L8,48 L8,16 Z M32,12 L44,18 L44,46 L32,52 L20,46 L20,18 Z"/>
-              </svg>
-            </div>
-            <h3>Polytopal Projection Engine</h3>
-            <p>Novel mathematical framework using n-dimensional polytopes to encode complex sensor data while preserving relational structure for machine learning applications.</p>
-            <div class="tech-specs">
-              <span class="spec">Real-time Processing</span>
-              <span class="spec">4D Mathematics</span>
-              <span class="spec">Structure Preservation</span>
-            </div>
-          </div>
-          <div class="card-depth-highlight"></div>
-          <div class="card-depth-accent"></div>
-        </div>
-        
-        <!-- GPU Shader Systems -->
-        <div id="tech-card-quantum" class="tech-card card-scroll-reactive mouse-reactive energy-reactive" data-system="quantum" data-interaction-type="precision" data-entrance="bottom">
-          <div class="card-depth-background"></div>
-          <div class="card-depth-shadow"></div>
-          <div class="card-content">
-            <div class="card-icon">
-              <svg class="icon-gpu" viewBox="0 0 64 64">
-                <rect x="8" y="16" width="48" height="32" rx="4"/>
-                <rect x="12" y="20" width="8" height="4"/>
-                <rect x="12" y="26" width="8" height="4"/>
-                <rect x="12" y="32" width="8" height="4"/>
-                <rect x="44" y="20" width="8" height="24"/>
-              </svg>
-            </div>
-            <h3>GPU Shader Acceleration</h3>
-            <p>WebGL and WebGPU compute shaders that process polytopal transformations massively in parallel, achieving 60+ FPS performance for robotics applications.</p>
-            <div class="tech-specs">
-              <span class="spec">WebGPU Compute</span>
-              <span class="spec">60+ FPS</span>
-              <span class="spec">Parallel Processing</span>
-            </div>
-          </div>
-          <div class="card-depth-highlight"></div>
-          <div class="card-depth-accent"></div>
-        </div>
-        
-        <!-- Agentic Integration -->
-        <div id="tech-card-holographic" class="tech-card card-scroll-reactive mouse-reactive energy-reactive" data-system="holographic" data-interaction-type="creative" data-entrance="bottom">
-          <div class="card-depth-background"></div>
-          <div class="card-depth-shadow"></div>
-          <div class="card-content">
-            <div class="card-icon">
-              <svg class="icon-agent" viewBox="0 0 64 64">
-                <circle cx="32" cy="20" r="12"/>
-                <path d="M20,36 Q32,28 44,36 L44,48 Q32,56 20,48 Z"/>
-                <circle cx="24" cy="20" r="2"/>
-                <circle cx="40" cy="20" r="2"/>
-              </svg>
-            </div>
-            <h3>Agentic Intelligence</h3>
-            <p>Multi-agent LLM orchestration that provides symbolic interpretation of geometric projections, enabling autonomous robotics coordination and decision-making.</p>
-            <div class="tech-specs">
-              <span class="spec">Multi-Agent LLMs</span>
-              <span class="spec">Symbolic Reasoning</span>
-              <span class="spec">Autonomous Systems</span>
-            </div>
-          </div>
-          <div class="card-depth-highlight"></div>
-          <div class="card-depth-accent"></div>
-        </div>
-      </div>
-      
-      <!-- Interactive Demo Controls -->
-      <div class="demo-controls">
-        <h3>Interactive Technology Demo</h3>
-        <div class="control-panel">
-          <div class="control-group">
-            <label>Visualization Mode:</label>
-            <select id="demo-mode" class="demo-select">
-              <option value="polychora">Polychora (4D Polytopes)</option>
-              <option value="quantum">Quantum (Enhanced Lattice)</option>
-              <option value="holographic">Holographic (Audio Reactive)</option>
-              <option value="faceted">Faceted (Geometric Patterns)</option>
-            </select>
-          </div>
-          <div class="control-group">
-            <label>Performance Mode:</label>
-            <div class="toggle-switch">
-              <input type="checkbox" id="performance-mode" checked>
-              <span class="toggle-slider"></span>
-            </div>
-          </div>
-          <div class="control-group">
-            <label>Render Quality:</label>
-            <input type="range" id="quality-slider" min="0.5" max="2" step="0.1" value="1" class="quality-range">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Portfolio Section -->
-  <section id="portfolio" class="portfolio-section zone-section scroll-reactive energy-reactive" data-theme="faceted" data-scene="portfolio" data-visualizer-system="faceted">
-    <div class="section-container">
-      <header class="section-header">
-        <h2 class="section-title">Portfolio</h2>
-        <p class="section-subtitle">
-          Showcase of innovative projects demonstrating polytopal projection 
-          technology across robotics, AI systems, and interactive applications
-        </p>
-      </header>
-      
-      <div class="portfolio-filters">
-        <button class="filter-btn active" data-filter="all">All Projects</button>
-        <button class="filter-btn" data-filter="robotics">Robotics</button>
-        <button class="filter-btn" data-filter="ai-systems">AI Systems</button>
-        <button class="filter-btn" data-filter="interactive">Interactive</button>
-        <button class="filter-btn" data-filter="research">Research</button>
-      </div>
-      
-      <div class="portfolio-grid">
-        <!-- VIB34D Holographic Engine -->
-        <article id="portfolio-vib34d" class="portfolio-item card-scroll-reactive mouse-reactive energy-reactive" data-category="interactive research" data-interaction-type="creative" data-entrance="bottom">
-          <div class="card-depth-background"></div>
-          <div class="card-depth-shadow"></div>
-          <div class="item-visual">
-            <!-- VIB34D Live Visualization -->
-            <iframe class="portfolio-canvas" 
-                    src="https://domusgpt.github.io/vib34d-holographic-engine/"
-                    loading="lazy" 
-                    title="VIB34D Holographic Engine Live Demo"></iframe>
-            <div class="item-overlay">
-              <div class="overlay-content">
-                <h3>VIB34D Holographic Engine</h3>
-                <p>Advanced 4D visualization system with real-time polytope rendering</p>
-                <div class="item-links">
-                  <a href="https://github.com/Domusgpt/vib34d-holographic-engine" target="_blank" class="link-btn">
-                    <span>View Code</span>
-                  </a>
-                  <a href="https://domusgpt.github.io/vib34d-holographic-engine/" target="_blank" class="link-btn">
-                    <span>Live Demo</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="item-content">
-            <div class="item-meta">
-              <span class="meta-tag">Interactive</span>
-              <span class="meta-tag">Research</span>
-              <span class="meta-date">2024-2025</span>
-            </div>
-            <h3>VIB34D Holographic Engine</h3>
-            <p>Revolutionary 4D visualization system featuring real-time polytope rendering, holographic effects, and interactive parameter control. Demonstrates practical applications of polytopal projection technology.</p>
-            <div class="tech-stack">
-              <span class="tech-tag">WebGL</span>
-              <span class="tech-tag">4D Mathematics</span>
-              <span class="tech-tag">Real-time Rendering</span>
-              <span class="tech-tag">Interactive Controls</span>
-            </div>
-          </div>
-          <div class="card-depth-highlight"></div>
-          <div class="card-depth-accent"></div>
-        </article>
-        
-        <!-- Parserator -->
-        <article class="portfolio-item" data-category="ai-systems">
-          <div class="item-visual">
-            <div class="portfolio-canvas parserator-bg"></div>
-            <div class="item-overlay">
-              <div class="overlay-content">
-                <h3>Parserator</h3>
-                <p>AI-powered parsing tool with 95% accuracy guarantee</p>
-                <div class="item-links">
-                  <a href="https://parserator.com" target="_blank" class="link-btn">
-                    <span>Visit Site</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="item-content">
-            <div class="item-meta">
-              <span class="meta-tag">AI Systems</span>
-              <span class="meta-date">2024</span>
-            </div>
-            <h3>Parserator</h3>
-            <p>Advanced parsing and data extraction platform that converts unstructured input into agent-ready JSON with industry-leading accuracy. Integrates with major AI frameworks including Google MCP and LangChain.</p>
-            <div class="tech-stack">
-              <span class="tech-tag">Machine Learning</span>
-              <span class="tech-tag">Natural Language Processing</span>
-              <span class="tech-tag">JSON Processing</span>
-              <span class="tech-tag">API Integration</span>
-            </div>
-          </div>
-        </article>
-        
-        <!-- FLOWT Maritime Platform -->
-        <article class="portfolio-item" data-category="ai-systems robotics">
-          <div class="item-visual">
-            <div class="portfolio-canvas flowt-bg"></div>
-            <div class="item-overlay">
-              <div class="overlay-content">
-                <h3>FLOWT Maritime Platform</h3>
-                <p>Maritime ride-sharing platform with autonomous navigation</p>
-                <div class="item-links">
-                  <a href="#" class="link-btn">
-                    <span>View Details</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="item-content">
-            <div class="item-meta">
-              <span class="meta-tag">AI Systems</span>
-              <span class="meta-tag">Robotics</span>
-              <span class="meta-date">2024-2025</span>
-            </div>
-            <h3>FLOWT Maritime Platform</h3>
-            <p>Comprehensive maritime ride-sharing platform featuring autonomous vessel navigation, weather integration, and polytopal projection-based sensor fusion for safe water transportation.</p>
-            <div class="tech-stack">
-              <span class="tech-tag">Maritime Systems</span>
-              <span class="tech-tag">Autonomous Navigation</span>
-              <span class="tech-tag">Sensor Fusion</span>
-              <span class="tech-tag">Real-time Processing</span>
-            </div>
-          </div>
-        </article>
-        
-        <!-- Robotics Perception System -->
-        <article class="portfolio-item" data-category="robotics research">
-          <div class="item-visual">
-            <div class="portfolio-canvas robotics-bg"></div>
-            <div class="item-overlay">
-              <div class="overlay-content">
-                <h3>Robotics Perception System</h3>
-                <p>Real-time sensor fusion using polytopal encoding</p>
-                <div class="item-links">
-                  <a href="#" class="link-btn">
-                    <span>Research Paper</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="item-content">
-            <div class="item-meta">
-              <span class="meta-tag">Robotics</span>
-              <span class="meta-tag">Research</span>
-              <span class="meta-date">2025</span>
-            </div>
-            <h3>Robotics Perception System</h3>
-            <p>Proof-of-concept implementation demonstrating polytopal projection for real-time robotics sensor fusion, enabling 60+ FPS processing of complex environmental data for autonomous navigation.</p>
-            <div class="tech-stack">
-              <span class="tech-tag">Computer Vision</span>
-              <span class="tech-tag">Sensor Fusion</span>
-              <span class="tech-tag">Real-time Processing</span>
-              <span class="tech-tag">Autonomous Systems</span>
-            </div>
-          </div>
-        </article>
-      </div>
-      
-      <!-- Portfolio Metrics -->
-      <div class="portfolio-metrics">
-        <div class="metric-card">
-          <div class="metric-value">4+</div>
-          <div class="metric-label">Active Projects</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value">60+</div>
-          <div class="metric-label">FPS Performance</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value">95%</div>
-          <div class="metric-label">Accuracy Rate</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value">Open</div>
-          <div class="metric-label">Source Available</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Research & Publications Section -->
-  <section id="research" class="research-section zone-section scroll-reactive energy-reactive" data-theme="holographic" data-scene="research" data-visualizer-system="holographic">
-    <div class="section-container">
-      <header class="section-header">
-        <h2 class="section-title">Research & Publications</h2>
-        <p class="section-subtitle">
-          Academic research, technical papers, and insights into polytopal projection 
-          technology and its applications in machine intelligence
-        </p>
-      </header>
-      
-      <div class="research-nav">
-        <button class="research-tab active" data-tab="papers">Research Papers</button>
-        <button class="research-tab" data-tab="blog">Technical Blog</button>
-        <button class="research-tab" data-tab="presentations">Presentations</button>
-      </div>
-      
-      <!-- Research Papers -->
-      <div class="research-content active" data-content="papers">
-        <div class="papers-grid">
-          <article class="paper-card reactive-element" data-interaction-type="analytical">
-            <div class="paper-visual">
-              <canvas class="paper-canvas" data-paper="polytopal-projection"></canvas>
-            </div>
-            <div class="paper-content">
-              <div class="paper-meta">
-                <span class="paper-type">Technical Paper</span>
-                <span class="paper-date">2025</span>
-                <span class="paper-status">In Review</span>
-              </div>
-              <h3>Polytopal Shadow Projections for Machine-Oriented Data Visualization</h3>
-              <p>Comprehensive analysis of polytopal projection techniques for encoding high-dimensional sensor data, demonstrating superior performance over traditional dimensionality reduction methods for real-time robotics applications.</p>
-              <div class="paper-authors">
-                <span class="author">Paul Phillips</span>
-                <span class="affiliation">Clear Seas Solutions LLC</span>
-              </div>
-              <div class="paper-actions">
-                <button class="paper-btn" data-action="download">
-                  <span>Download PDF</span>
-                </button>
-                <button class="paper-btn" data-action="cite">
-                  <span>Cite</span>
-                </button>
-                <button class="paper-btn" data-action="abstract">
-                  <span>Abstract</span>
-                </button>
-              </div>
-            </div>
-          </article>
-          
-          <article class="paper-card reactive-element" data-interaction-type="analytical">
-            <div class="paper-visual">
-              <canvas class="paper-canvas" data-paper="gpu-acceleration"></canvas>
-            </div>
-            <div class="paper-content">
-              <div class="paper-meta">
-                <span class="paper-type">Conference Paper</span>
-                <span class="paper-date">2024</span>
-                <span class="paper-status">Published</span>
-              </div>
-              <h3>GPU Acceleration of High-Dimensional Geometric Transformations</h3>
-              <p>Performance analysis of WebGL and WebGPU implementations for real-time polytopal computations, achieving 60+ FPS processing rates suitable for robotics and autonomous systems applications.</p>
-              <div class="paper-authors">
-                <span class="author">Paul Phillips</span>
-                <span class="affiliation">Clear Seas Solutions LLC</span>
-              </div>
-              <div class="paper-actions">
-                <button class="paper-btn" data-action="download">
-                  <span>Download PDF</span>
-                </button>
-                <button class="paper-btn" data-action="cite">
-                  <span>Cite</span>
-                </button>
-                <button class="paper-btn" data-action="abstract">
-                  <span>Abstract</span>
-                </button>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-      
-      <!-- Technical Blog -->
-      <div class="research-content" data-content="blog">
-        <div class="blog-grid">
-          <article class="blog-post">
-            <div class="post-visual">
-              <canvas class="blog-canvas" data-blog="4d-mathematics"></canvas>
-            </div>
-            <div class="post-content">
-              <div class="post-meta">
-                <span class="post-category">Technical Deep Dive</span>
-                <span class="post-date">March 2025</span>
-                <span class="read-time">8 min read</span>
-              </div>
-              <h3>Understanding 4D Mathematics in Practical Applications</h3>
-              <p>Demystifying four-dimensional geometry and its practical applications in machine learning and robotics. Learn how polytopal projections enable new approaches to data visualization and sensor fusion.</p>
-              <div class="post-tags">
-                <span class="tag">4D Mathematics</span>
-                <span class="tag">Visualization</span>
-                <span class="tag">Machine Learning</span>
-              </div>
-              <a href="#" class="read-more">Read Full Article →</a>
-            </div>
-          </article>
-          
-          <article class="blog-post">
-            <div class="post-visual">
-              <canvas class="blog-canvas" data-blog="gpu-shaders"></canvas>
-            </div>
-            <div class="post-content">
-              <div class="post-meta">
-                <span class="post-category">Implementation Guide</span>
-                <span class="post-date">February 2025</span>
-                <span class="read-time">12 min read</span>
-              </div>
-              <h3>Building Real-time GPU Shaders for Geometric Processing</h3>
-              <p>Step-by-step guide to implementing high-performance GPU shaders for polytopal transformations using WebGL and WebGPU. Includes code examples and performance optimization techniques.</p>
-              <div class="post-tags">
-                <span class="tag">WebGL</span>
-                <span class="tag">GPU Programming</span>
-                <span class="tag">Performance</span>
-              </div>
-              <a href="#" class="read-more">Read Full Article →</a>
-            </div>
-          </article>
-        </div>
-      </div>
-      
-      <!-- Presentations -->
-      <div class="research-content" data-content="presentations">
-        <div class="presentations-grid">
-          <article class="presentation-card">
-            <div class="presentation-visual">
-              <canvas class="presentation-canvas" data-presentation="nsf-sbir"></canvas>
-            </div>
-            <div class="presentation-content">
-              <div class="presentation-meta">
-                <span class="presentation-type">NSF SBIR Proposal</span>
-                <span class="presentation-date">2025</span>
-              </div>
-              <h3>Polytopal Projection Engine for Machine-Oriented Data Encoding</h3>
-              <p>Technical presentation and business case for NSF SBIR Phase I funding, demonstrating market opportunity and technical feasibility of polytopal projection technology.</p>
-              <div class="presentation-actions">
-                <button class="presentation-btn">View Slides</button>
-                <button class="presentation-btn">Download PDF</button>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="about-section" data-theme="teal">
-    <div class="section-container">
-      <div class="about-content">
-        <div class="about-text">
-          <header class="section-header">
-            <h2 class="section-title">About Clear Seas Solutions</h2>
-            <p class="section-subtitle">
-              Bridging interdisciplinary expertise in international business, 
-              philosophy, and cutting-edge technology development
-            </p>
-          </header>
-          
-          <div class="about-story">
-            <p>Clear Seas Solutions LLC represents a unique convergence of practical business experience and theoretical innovation. Founded by Paul Phillips, the company brings together 14+ years of international seafood development expertise with self-taught mastery of advanced programming, high-dimensional geometry, and AI systems.</p>
-            
-            <p>Our journey from transforming global seafood markets to pioneering polytopal projection technology demonstrates the power of interdisciplinary thinking. Just as we once elevated yellowfin tuna from bycatch to premium product, we now transform complex mathematical concepts into practical solutions for robotics and distributed AI.</p>
-            
-            <p>The philosophical foundation of our work—rooted in linguistic theory and symbolic representation—informs our approach to designing agentic architectures that bridge numerical optimization with human-interpretable intelligence.</p>
-          </div>
-          
-          <div class="expertise-areas">
-            <div class="expertise-card">
-              <div class="expertise-icon">
-                <svg viewBox="0 0 64 64">
-                  <rect x="8" y="16" width="48" height="32" rx="4"/>
-                  <circle cx="32" cy="32" r="8"/>
-                </svg>
-              </div>
-              <h4>International Business</h4>
-              <p>14+ years scaling seafood markets across multiple continents, building complex supply chains and cross-cultural partnerships.</p>
-            </div>
-            
-            <div class="expertise-card">
-              <div class="expertise-icon">
-                <svg viewBox="0 0 64 64">
-                  <path d="M32,8 L56,24 L56,56 L8,56 L8,24 Z"/>
-                  <circle cx="32" cy="32" r="4"/>
-                </svg>
-              </div>
-              <h4>Technical Innovation</h4>
-              <p>Self-taught expertise across multiple programming languages, GPU computing, and high-dimensional mathematical systems.</p>
-            </div>
-            
-            <div class="expertise-card">
-              <div class="expertise-icon">
-                <svg viewBox="0 0 64 64">
-                  <circle cx="32" cy="32" r="24"/>
-                  <path d="M16,32 Q32,16 48,32 Q32,48 16,32"/>
-                </svg>
-              </div>
-              <h4>Philosophical Foundation</h4>
-              <p>Deep understanding of linguistic philosophy and symbolic representation, informing our approach to AI system design.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="about-visual">
-          <div class="founder-profile">
-            <div class="profile-image">
-              <canvas id="founder-canvas" class="founder-visualization"></canvas>
-            </div>
-            <div class="profile-info">
-              <h3>Paul Phillips</h3>
-              <p class="title">Founder & Technical Lead</p>
-              <p class="subtitle">"General, Admiral, Cuddie, Astrofunkulous"</p>
-              <div class="profile-details">
-                <div class="detail-item">
-                  <span class="label">Experience:</span>
-                  <span class="value">14+ years international business</span>
-                </div>
-                <div class="detail-item">
-                  <span class="label">Specialization:</span>
-                  <span class="value">Polytopal projection technology</span>
-                </div>
-                <div class="detail-item">
-                  <span class="label">Philosophy:</span>
-                  <span class="value">Interdisciplinary innovation</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="contact-section" data-theme="red">
-    <div class="section-container">
-      <header class="section-header">
-        <h2 class="section-title">Contact</h2>
-        <p class="section-subtitle">
-          Ready to explore polytopal projection technology for your robotics 
-          or AI applications? Let's discuss your project requirements.
-        </p>
-      </header>
-      
-      <div class="contact-content">
-        <div class="contact-info">
-          <div class="contact-card">
-            <div class="card-visual">
-              <canvas class="contact-canvas" data-contact="primary"></canvas>
-            </div>
-            <div class="card-content">
-              <h3>Paul Phillips</h3>
-              <p class="role">Founder & Technical Lead</p>
-              <p class="company">Clear Seas Solutions LLC</p>
-              
-              <div class="contact-details">
-                <div class="contact-item">
-                  <div class="contact-icon">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                    </svg>
-                  </div>
-                  <div class="contact-text">
-                    <span class="contact-label">Email:</span>
-                    <a href="mailto:paul@clearseassolutions.com" class="contact-value">
-                      paul@clearseassolutions.com
-                    </a>
-                  </div>
-                </div>
-                
-                <div class="contact-item">
-                  <div class="contact-icon">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                    </svg>
-                  </div>
-                  <div class="contact-text">
-                    <span class="contact-label">Location:</span>
-                    <span class="contact-value">New York City, NY</span>
-                  </div>
-                </div>
-                
-                <div class="contact-item">
-                  <div class="contact-icon">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                  </div>
-                  <div class="contact-text">
-                    <span class="contact-label">GitHub:</span>
-                    <a href="https://github.com/Domusgpt" target="_blank" class="contact-value">
-                      github.com/Domusgpt
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="contact-cta">
-            <h3>Ready to Transform Your Data Processing?</h3>
-            <p>Whether you're developing autonomous robotics systems, implementing distributed AI, or exploring new approaches to sensor fusion, polytopal projection technology can revolutionize your applications.</p>
-            
-            <div class="cta-buttons">
-              <a href="mailto:paul@clearseassolutions.com?subject=Polytopal Projection Technology Inquiry" class="btn btn-primary">
-                <span>Start a Conversation</span>
-                <div class="btn-bg"></div>
-              </a>
-              <a href="#portfolio" class="btn btn-secondary">
-                <span>View Our Work</span>
-                <div class="btn-bg"></div>
-              </a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Real-time System Status -->
-        <div class="system-status">
-          <h3>System Status</h3>
-          <div class="status-grid">
-            <div class="status-item">
-              <div class="status-indicator active"></div>
-              <span class="status-label">Polytopal Engine</span>
-              <span class="status-value">Online</span>
-            </div>
-            <div class="status-item">
-              <div class="status-indicator active"></div>
-              <span class="status-label">GPU Acceleration</span>
-              <span class="status-value" id="gpu-status">60 FPS</span>
-            </div>
-            <div class="status-item">
-              <div class="status-indicator active"></div>
-              <span class="status-label">Agentic Systems</span>
-              <span class="status-value">Ready</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="footer-content">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <canvas id="footer-logo-canvas" class="footer-logo-canvas"></canvas>
-        </div>
-        <div class="footer-text">
-          <h3>Clear Seas Solutions LLC</h3>
-          <p>Polytopal projection technology for the future of machine intelligence</p>
-        </div>
-      </div>
-      
-      <div class="footer-links">
-        <div class="link-group">
-          <h4>Technology</h4>
-          <ul>
-            <li><a href="#technology">Core Technology</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#research">Research</a></li>
-          </ul>
-        </div>
-        <div class="link-group">
-          <h4>Company</h4>
-          <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="mailto:paul@clearseassolutions.com">Email</a></li>
-          </ul>
-        </div>
-        <div class="link-group">
-          <h4>Projects</h4>
-          <ul>
-            <li><a href="https://github.com/Domusgpt/vib34d-holographic-engine" target="_blank">VIB34D Engine</a></li>
-            <li><a href="https://parserator.com" target="_blank">Parserator</a></li>
-            <li><a href="https://github.com/Domusgpt" target="_blank">GitHub</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    
-    <div class="footer-bottom">
-      <div class="footer-legal">
-        <p>&copy; <span id="footer-year"></span> Clear Seas Solutions LLC. All rights reserved.</p>
-        <p class="footer-tagline">Transforming data into intelligence through geometric innovation.</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Performance Monitor (Development) -->
-  <div id="performance-monitor" class="performance-monitor">
-    <div class="monitor-header">
-      <span>System Monitor</span>
-      <button id="monitor-toggle" class="monitor-toggle">−</button>
-    </div>
-    <div class="monitor-content">
-      <div class="monitor-item">
-        <span class="monitor-label">FPS:</span>
-        <span class="monitor-value" id="monitor-fps">--</span>
-      </div>
-      <div class="monitor-item">
-        <span class="monitor-label">GPU:</span>
-        <span class="monitor-value" id="monitor-gpu">--</span>
-      </div>
-      <div class="monitor-item">
-        <span class="monitor-label">Memory:</span>
-        <span class="monitor-value" id="monitor-memory">--</span>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Initialize Unified Experience Engine when DOM is loaded
-    document.addEventListener('DOMContentLoaded', () => {
-      console.log('🎯 Initializing Unified Experience Engine...');
-      
-      // Check if Unified Experience Engine is available
-      if (typeof UnifiedExperienceEngine !== 'undefined') {
-        console.log('✅ Unified Experience Engine available - coordinated system ready!');
-        
-        // The engine initializes itself, just confirm it's working
-        setTimeout(() => {
-          if (window.unifiedEngine) {
-            console.log('🚀 Unified Experience Engine successfully initialized!');
-          } else {
-            console.warn('⚠️ Unified Engine may still be initializing...');
-          }
-        }, 200);
-        
-      } else {
-        console.error('❌ Unified Experience Engine not available - check script loading');
-        
-        // Fallback: Try to initialize any remaining legacy systems
-        if (typeof SmoothSnapController !== 'undefined') {
-          window.smoothSnapController = new SmoothSnapController();
-          console.log('📌 Fallback: SmoothSnapController initialized');
+    <style>
+        :root {
+            --primary-blue: #003366;
+            --accent-cyan: #00d4ff;
+            --dark-blue: #001a33;
+            --light-gray: #f8f9fa;
+            --text-dark: #2c3e50;
+            --gradient-primary: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            --gradient-accent: linear-gradient(135deg, var(--accent-cyan), #0099cc);
         }
-      }
-    });
-  </script>
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* NAVIGATION */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 51, 102, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(0, 51, 102, 0.98);
+            padding: 0.5rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, white, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--gradient-accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        /* VIB34D EMBEDDED VISUALIZER FOR CTA BUTTON */
+        .cta-button .button-visualizer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+            pointer-events: none;
+            border-radius: 50px;
+        }
+
+        /* SERVICES SECTION */
+        .services {
+            padding: 5rem 2rem;
+            background: var(--light-gray);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--primary-blue);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* VIB34D EMBEDDED VISUALIZER FOR SERVICE CARDS */
+        .service-card .card-visualizer {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            opacity: 0.6;
+            border-radius: 0 15px 0 15px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* PROJECTS SECTION */
+        .projects {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+        }
+
+        /* VIB34D EMBEDDED VISUALIZER FOR PROJECT CARDS */
+        .project-card .project-visualizer {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            opacity: 0.4;
+            border-radius: 15px 0 15px 0;
+        }
+
+        .project-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .project-link {
+            display: inline-block;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid var(--accent-cyan);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: var(--accent-cyan);
+            color: var(--primary-blue);
+        }
+
+        /* CONTACT SECTION */
+        .contact {
+            padding: 5rem 2rem;
+            background: var(--dark-blue);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            background: var(--gradient-accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+        }
+
+        /* VIB34D EMBEDDED VISUALIZER FOR CONTACT BUTTON */
+        .contact-button .contact-visualizer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.2;
+            pointer-events: none;
+            border-radius: 50px;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* SCROLL ANIMATIONS */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .services-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">CLEAR SEAS</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Clear Seas Solutions</h1>
+            <p>Advanced Maritime Intelligence & Consulting Services</p>
+            <a href="#services" class="cta-button">
+                <div class="holographic-layers button-visualizer" id="heroButtonVisualizer"></div>
+                Explore Our Services
+            </a>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title scroll-animate">Our Expertise</h2>
+            <div class="services-grid">
+                <div class="service-card scroll-animate">
+                    <div class="holographic-layers card-visualizer" id="serviceCard1"></div>
+                    <h3>Maritime Data Analytics</h3>
+                    <p>Advanced analytics and intelligence solutions for maritime operations, utilizing cutting-edge algorithms to process and interpret complex oceanographic data.</p>
+                </div>
+                
+                <div class="service-card scroll-animate">
+                    <div class="holographic-layers card-visualizer" id="serviceCard2"></div>
+                    <h3>Fleet Optimization</h3>
+                    <p>Comprehensive fleet management solutions that optimize routing, fuel efficiency, and operational performance through advanced mathematical modeling.</p>
+                </div>
+                
+                <div class="service-card scroll-animate">
+                    <div class="holographic-layers card-visualizer" id="serviceCard3"></div>
+                    <h3>Risk Assessment</h3>
+                    <p>Sophisticated risk analysis and mitigation strategies for maritime operations, incorporating real-time environmental and operational data.</p>
+                </div>
+                
+                <div class="service-card scroll-animate">
+                    <div class="holographic-layers card-visualizer" id="serviceCard4"></div>
+                    <h3>AI-Driven Insights</h3>
+                    <p>Machine learning and artificial intelligence solutions that transform maritime data into actionable business intelligence and strategic insights.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title scroll-animate">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card scroll-animate">
+                    <div class="holographic-layers project-visualizer" id="projectCard1"></div>
+                    <h3>VIB34D Holographic Engine</h3>
+                    <p>Advanced 4D visualization system for maritime data analysis with real-time holographic rendering capabilities.</p>
+                    <a href="https://domusgpt.github.io/vib34d-holographic-engine/" class="project-link" target="_blank">View Project →</a>
+                </div>
+                
+                <div class="project-card scroll-animate">
+                    <div class="holographic-layers project-visualizer" id="projectCard2"></div>
+                    <h3>FLOWT Maritime Platform</h3>
+                    <p>Revolutionary ride-sharing platform for maritime transportation with advanced fleet management and real-time tracking.</p>
+                    <a href="#" class="project-link">Coming Soon →</a>
+                </div>
+                
+                <div class="project-card scroll-animate">
+                    <div class="holographic-layers project-visualizer" id="projectCard3"></div>
+                    <h3>Quantum Analytics Suite</h3>
+                    <p>Quantum-enhanced analytics platform for complex maritime optimization problems and predictive modeling.</p>
+                    <a href="#" class="project-link">In Development →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Ready to Navigate Forward?</h2>
+            <p>Let's discuss how Clear Seas Solutions can transform your maritime operations</p>
+            <a href="mailto:contact@clearseas.solutions" class="contact-button">
+                <div class="holographic-layers contact-visualizer" id="contactButtonVisualizer"></div>
+                Get In Touch
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Clear Seas Solutions. Advanced Maritime Intelligence & Consulting.</p>
+        </div>
+    </footer>
+
+    <!-- VIB34D ENGINE INTEGRATION -->
+    <script type="module" src="js/core/url-params.js"></script>
+    <script type="module" src="js/audio/audio-engine.js"></script>
+    <script type="module" src="js/controls/ui-handlers.js"></script>
+    <script type="module" src="js/interactions/device-tilt.js"></script>
+
+    <!-- CLEAR SEAS CONSULTING SITE INTEGRATION -->
+    <script type="module">
+        let vib34dEngines = {};
+        let visualizerContainers = [];
+
+        // Initialize VIB34D systems for embedded visualizers
+        async function initializeVIB34DSystems() {
+            try {
+                console.log('🌊 Initializing VIB34D for Clear Seas consulting site...');
+                
+                // Import VIB34D engines
+                const [coreEngine, quantumEngine, holoSystem, polySystem, canvasManager] = await Promise.all([
+                    import('./src/core/Engine.js').catch(() => null),
+                    import('./src/quantum/QuantumEngine.js').catch(() => null),
+                    import('./src/holograms/RealHolographicSystem.js').catch(() => null),
+                    import('./src/core/PolychoraSystem.js').catch(() => null),
+                    import('./src/core/CanvasManager.js').catch(() => null)
+                ]);
+                
+                if (coreEngine) vib34dEngines.VIB34DIntegratedEngine = coreEngine.VIB34DIntegratedEngine;
+                if (quantumEngine) vib34dEngines.QuantumEngine = quantumEngine.QuantumEngine;
+                if (holoSystem) vib34dEngines.RealHolographicSystem = holoSystem.RealHolographicSystem;
+                if (polySystem) vib34dEngines.PolychoraSystem = polySystem.PolychoraSystem;
+                
+                if (canvasManager) {
+                    window.canvasManager = new canvasManager.CanvasManager();
+                }
+
+                // Initialize embedded visualizers
+                await initializeEmbeddedVisualizers();
+                console.log('✅ Clear Seas VIB34D integration complete');
+                
+            } catch (error) {
+                console.warn('⚠️ VIB34D systems not fully available:', error);
+            }
+        }
+
+        // Initialize small embedded visualizers
+        async function initializeEmbeddedVisualizers() {
+            const visualizerConfigs = [
+                { id: 'heroButtonVisualizer', system: 'faceted', size: 'small' },
+                { id: 'serviceCard1', system: 'quantum', size: 'small' },
+                { id: 'serviceCard2', system: 'holographic', size: 'small' },
+                { id: 'serviceCard3', system: 'polychora', size: 'small' },
+                { id: 'serviceCard4', system: 'faceted', size: 'small' },
+                { id: 'projectCard1', system: 'holographic', size: 'medium' },
+                { id: 'projectCard2', system: 'quantum', size: 'medium' },
+                { id: 'projectCard3', system: 'polychora', size: 'medium' },
+                { id: 'contactButtonVisualizer', system: 'quantum', size: 'small' }
+            ];
+
+            for (const config of visualizerConfigs) {
+                const container = document.getElementById(config.id);
+                if (container && window.canvasManager) {
+                    try {
+                        await window.canvasManager.createVisualizerInContainer(config.id, config.system, vib34dEngines);
+                        visualizerContainers.push({ container, config });
+                    } catch (error) {
+                        console.warn(`Failed to create visualizer for ${config.id}:`, error);
+                    }
+                }
+            }
+        }
+
+        // Scroll animations and visualizer morphing
+        function setupScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // Morph visualizers when elements come into view
+                        const visualizer = entry.target.querySelector('.holographic-layers');
+                        if (visualizer) {
+                            morphVisualizer(visualizer);
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all scroll-animate elements
+            document.querySelectorAll('.scroll-animate').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Morph visualizers based on scroll position
+        function morphVisualizer(visualizerElement) {
+            const scrollProgress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+            
+            // Send morph parameters to VIB34D visualizer
+            if (window.currentEngine && typeof window.currentEngine.updateParameters === 'function') {
+                window.currentEngine.updateParameters({
+                    morphFactor: 1 + scrollProgress * 2,
+                    chaos: 0.2 + scrollProgress * 0.3,
+                    speed: 0.8 + scrollProgress * 0.7,
+                    hue: Math.floor(180 + scrollProgress * 180)
+                });
+            }
+        }
+
+        // Navbar scroll effect
+        function setupNavbarScroll() {
+            window.addEventListener('scroll', () => {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', async () => {
+            setupNavbarScroll();
+            setupSmoothScrolling();
+            setupScrollAnimations();
+            await initializeVIB34DSystems();
+        });
+    </script>
 </body>
 </html>
